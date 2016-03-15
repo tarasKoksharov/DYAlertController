@@ -8,12 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		B4C3ED351C97FCED0063C5A6 /* DYAlertController.h in Headers */ = {isa = PBXBuildFile; fileRef = B4C3ED341C97FCED0063C5A6 /* DYAlertController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B4C3ED411C97FD2D0063C5A6 /* DYAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C3ED3C1C97FD2D0063C5A6 /* DYAlertViewController.swift */; };
+		B4C3ED421C97FD2D0063C5A6 /* DYAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4C3ED3D1C97FD2D0063C5A6 /* DYAlertViewController.xib */; };
+		B4C3ED431C97FD2D0063C5A6 /* DYActionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4C3ED3E1C97FD2D0063C5A6 /* DYActionCell.xib */; };
+		B4C3ED441C97FD2D0063C5A6 /* DYActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C3ED3F1C97FD2D0063C5A6 /* DYActionCell.swift */; };
+		B4C3ED451C97FD2D0063C5A6 /* DYAlertSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C3ED401C97FD2D0063C5A6 /* DYAlertSettings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B4C3ED311C97FCED0063C5A6 /* DYAlertController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DYAlertController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4C3ED341C97FCED0063C5A6 /* DYAlertController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DYAlertController.h; sourceTree = "<group>"; };
 		B4C3ED361C97FCED0063C5A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B4C3ED3C1C97FD2D0063C5A6 /* DYAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DYAlertViewController.swift; sourceTree = "<group>"; };
+		B4C3ED3D1C97FD2D0063C5A6 /* DYAlertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DYAlertViewController.xib; sourceTree = "<group>"; };
+		B4C3ED3E1C97FD2D0063C5A6 /* DYActionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DYActionCell.xib; sourceTree = "<group>"; };
+		B4C3ED3F1C97FD2D0063C5A6 /* DYActionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DYActionCell.swift; sourceTree = "<group>"; };
+		B4C3ED401C97FD2D0063C5A6 /* DYAlertSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DYAlertSettings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +58,11 @@
 			children = (
 				B4C3ED341C97FCED0063C5A6 /* DYAlertController.h */,
 				B4C3ED361C97FCED0063C5A6 /* Info.plist */,
+				B4C3ED3C1C97FD2D0063C5A6 /* DYAlertViewController.swift */,
+				B4C3ED3D1C97FD2D0063C5A6 /* DYAlertViewController.xib */,
+				B4C3ED3E1C97FD2D0063C5A6 /* DYActionCell.xib */,
+				B4C3ED3F1C97FD2D0063C5A6 /* DYActionCell.swift */,
+				B4C3ED401C97FD2D0063C5A6 /* DYAlertSettings.swift */,
 			);
 			path = DYAlertController;
 			sourceTree = "<group>";
@@ -120,6 +135,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4C3ED431C97FD2D0063C5A6 /* DYActionCell.xib in Resources */,
+				B4C3ED421C97FD2D0063C5A6 /* DYAlertViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,6 +147,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4C3ED441C97FD2D0063C5A6 /* DYActionCell.swift in Sources */,
+				B4C3ED411C97FD2D0063C5A6 /* DYAlertViewController.swift in Sources */,
+				B4C3ED451C97FD2D0063C5A6 /* DYAlertSettings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,28 +248,35 @@
 		B4C3ED3A1C97FCED0063C5A6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = DYAlertController/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.duoyun.DYAlertController;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		B4C3ED3B1C97FCED0063C5A6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = DYAlertController/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.duoyun.DYAlertController;
 				PRODUCT_NAME = "$(TARGET_NAME)";
