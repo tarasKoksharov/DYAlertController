@@ -10,7 +10,7 @@ import UIKit
 
 public class AlertAction {
     
-    public enum Style {
+    public enum ActionStyle {
         case Default
         case Destructive
         case Disabled
@@ -21,9 +21,9 @@ public class AlertAction {
 
     var selected:Bool
     var handler: ((AlertAction) -> Void)?
-    var style:Style = .Default
+    var style:ActionStyle = .Default
     
-    init(title:String, style:Style?, iconImage:UIImage?, setSelected:Bool, handler: ((AlertAction) -> Void)?) {
+   public init(title:String, style:ActionStyle?, iconImage:UIImage?, setSelected:Bool, handler: ((AlertAction) -> Void)?) {
         
         
         if let _ = style {
@@ -51,8 +51,8 @@ public class TapView: UIView {
 public class DYAlertViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     public enum Style {
-        case alert
-        case actionSheet
+        case Alert
+        case ActionSheet
     }
     
     public enum EffectViewMode {
@@ -94,7 +94,7 @@ public class DYAlertViewController: UIViewController, UITableViewDelegate, UITab
     
     @IBOutlet weak var okButtonToMainViewConstraint: NSLayoutConstraint?
     
-    internal var handleOKAction: (()->Void)?
+    public var handleOKAction: (()->Void)?
     
     @IBOutlet weak var buttonSeparatorLine: UIView?
     
@@ -109,7 +109,7 @@ public class DYAlertViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var cancelButtonWidthConstraint: NSLayoutConstraint!
     
     
-    internal var handleCancelAction: (()->Void)?
+    public var handleCancelAction: (()->Void)?
     
     @IBOutlet weak var topSeparatorLine: UIView!
 
@@ -132,7 +132,7 @@ public class DYAlertViewController: UIViewController, UITableViewDelegate, UITab
     
     var shouldAllowMultipleSelection = false
 
-    var style:Style = .alert
+    var style:Style = .Alert
     
     var backgroundEffectViewMode:EffectViewMode = .dim
     
@@ -145,12 +145,12 @@ public class DYAlertViewController: UIViewController, UITableViewDelegate, UITab
     var contentViewSettings = DYAlertSettings.ContentViewSettings()
     
     // add title, title icon?, cancel button title, ok button title?
-    internal convenience init() {
+    public convenience init() {
         
         self.init(nibName: "DYAlertViewController", bundle: NSBundle(forClass: DYAlertViewController.self))
     }
     
-    internal convenience init(style:Style, title:String?, titleIconImage:UIImage?, message:String?, cancelButtonTitle:String, okButtonTitle:String?, multipleSelection:Bool, customFrameWidth:CGFloat?, backgroundEffect: EffectViewMode) {
+    public convenience init(style:Style, title:String?, titleIconImage:UIImage?, message:String?, cancelButtonTitle:String, okButtonTitle:String?, multipleSelection:Bool, customFrameWidth:CGFloat?, backgroundEffect: EffectViewMode) {
         
        self.init()
     
@@ -172,7 +172,7 @@ public class DYAlertViewController: UIViewController, UITableViewDelegate, UITab
     }
 
  
-    internal override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         //super.init()
         modalPresentationStyle = .Custom
@@ -234,7 +234,7 @@ public class DYAlertViewController: UIViewController, UITableViewDelegate, UITab
             return
         }
 
-        if self.style == .actionSheet { // change layout constraint for Action Sheet: move content view down to bottom
+        if self.style == .ActionSheet { // change layout constraint for Action Sheet: move content view down to bottom
             self.contentViewCenterYtoSuperviewConstraint.constant = self.contentView.superview!.frame.size.height / 2.0 - self.contentView.frame.size.height / 2.0  - 10.0
         }
 
@@ -270,7 +270,7 @@ public class DYAlertViewController: UIViewController, UITableViewDelegate, UITab
         mainView.clipsToBounds = true
         mainView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
         mainView.backgroundColor = contentViewSettings.mainViewBackgroundColor
-        if style == .actionSheet {
+        if style == .ActionSheet {
             bottomSeparatorLine.removeFromSuperview()
         }
 
@@ -391,16 +391,12 @@ public class DYAlertViewController: UIViewController, UITableViewDelegate, UITab
             
             okButton!.setTitle(okButtonTitle!, forState: UIControlState.Normal)
             okButton!.setTitleColor(buttonSettings.okButtonTintColor, forState: UIControlState.Normal)
-                        
-            if let _ = contentViewCustomWidth {
-                print("has custom width!")
-                if style == .alert {
+
+                if style == .Alert {
                     cancelButtonWidthConstraint.constant = contentViewWidthConstraint.constant / 2.0
                 } else { // Action Sheet
                     cancelButtonWidthConstraint.constant = contentViewWidthConstraint.constant / 2.0  -  8.0
                 }
-   
-            }
 
             
         } else {
@@ -408,15 +404,14 @@ public class DYAlertViewController: UIViewController, UITableViewDelegate, UITab
             okButton?.removeFromSuperview()
             buttonSeparatorLine?.removeFromSuperview()
             cancelButtonWidthConstraint.constant = contentViewWidthConstraint.constant
-          //  cancelButtonTrailingConstraint.constant = 0
+
             
         }
         
         cancelButton.setTitle(cancelButtonTitle, forState: UIControlState.Normal)
         
-        if self.style == .alert {
+        if self.style == .Alert {
             
-           // cancelButtonToOKButtonConstraint?.constant = 3
             cancelButtonToMainViewConstraint.constant = 0
             okButtonToMainViewConstraint?.constant = 0
             
@@ -461,16 +456,16 @@ public class DYAlertViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     
-    func addAction(action: AlertAction) {
+   public func addAction(action: AlertAction) {
         
         self.alertActions.append(action)
         
     }
     
     
-    func addTextField(text: String?)  {
+    public func addTextField(text: String?)  {
         
-        if style == .actionSheet {
+        if style == .ActionSheet {
           assertionFailure("Action sheet does not support text fields. Change style to .alert instead!")
 
         }
@@ -733,7 +728,7 @@ extension DYAlertViewController: UIViewControllerAnimatedTransitioning {
         
         if isPresenting == true {
             
-            if style == .alert {
+            if style == .Alert {
                 self.presentAlertAnimation(container, fromView: fromVC.view, toView: toVC.view, completion: { (_) -> Void in
                      transitionContext.completeTransition(true)
                 })
@@ -751,7 +746,7 @@ extension DYAlertViewController: UIViewControllerAnimatedTransitioning {
             
         } else {
             
-            if style == .alert {
+            if style == .Alert {
                 
                 self.dismissAlertAnimation(fromVC.view, completion: { (_) -> Void in
                     transitionContext.completeTransition(true)

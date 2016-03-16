@@ -20,7 +20,7 @@ public class DYActionCell: UITableViewCell {
 
     var hasAccessoryView = false
     
-    var style: AlertAction.Style = .Default
+    var style = AlertAction.ActionStyle.Default
     
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -110,7 +110,7 @@ public class DYActionCell: UITableViewCell {
 
 //    }
     
-    private func getColour(style:AlertAction.Style, selected:Bool)->UIColor {
+    private func getColour(style:AlertAction.ActionStyle, selected:Bool)->UIColor {
         
         switch style {
         case .Disabled:
