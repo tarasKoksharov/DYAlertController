@@ -10,7 +10,7 @@ import UIKit
 
 public class AlertAction {
     
-    internal enum Style {
+    public enum Style {
         case Default
         case Destructive
         case Disabled
@@ -50,12 +50,12 @@ public class TapView: UIView {
 
 public class DYAlertViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    internal enum Style {
+    public enum Style {
         case alert
         case actionSheet
     }
     
-    internal enum EffectViewMode {
+    public enum EffectViewMode {
         
         case blur, dim
     }
@@ -78,7 +78,7 @@ public class DYAlertViewController: UIViewController, UITableViewDelegate, UITab
     
     var animationEffectView:UIView?
     
-    var textField:UITextField?
+    public var textField:UITextField?
     
     @IBOutlet weak var titleView: UIView!
     @IBOutlet weak var titleViewHeightConstraint: NSLayoutConstraint!
