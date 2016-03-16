@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DYActionCell: UITableViewCell {
+public class DYActionCell: UITableViewCell {
 
    @IBOutlet weak var actionTitleLabel: UILabel!
     
@@ -28,12 +28,12 @@ class DYActionCell: UITableViewCell {
 
     }
     
-    override func awakeFromNib() {
+    override public func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override public func setSelected(selected: Bool, animated: Bool) {
 
         if self.selected == selected {
             print("already selected or deselcted, returning")
@@ -66,7 +66,7 @@ class DYActionCell: UITableViewCell {
 
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
     }

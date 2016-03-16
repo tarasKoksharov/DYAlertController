@@ -17,13 +17,13 @@
 
 /* Begin PBXFileReference section */
 		B4C3ED311C97FCED0063C5A6 /* DYAlertController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DYAlertController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B4C3ED341C97FCED0063C5A6 /* DYAlertController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DYAlertController.h; sourceTree = "<group>"; };
-		B4C3ED361C97FCED0063C5A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B4C3ED3C1C97FD2D0063C5A6 /* DYAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DYAlertViewController.swift; sourceTree = "<group>"; };
-		B4C3ED3D1C97FD2D0063C5A6 /* DYAlertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DYAlertViewController.xib; sourceTree = "<group>"; };
-		B4C3ED3E1C97FD2D0063C5A6 /* DYActionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DYActionCell.xib; sourceTree = "<group>"; };
-		B4C3ED3F1C97FD2D0063C5A6 /* DYActionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DYActionCell.swift; sourceTree = "<group>"; };
-		B4C3ED401C97FD2D0063C5A6 /* DYAlertSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DYAlertSettings.swift; sourceTree = "<group>"; };
+		B4C3ED341C97FCED0063C5A6 /* DYAlertController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DYAlertController.h; path = DYAlertController/DYAlertController.h; sourceTree = "<group>"; };
+		B4C3ED361C97FCED0063C5A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = DYAlertController/Info.plist; sourceTree = "<group>"; };
+		B4C3ED3C1C97FD2D0063C5A6 /* DYAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DYAlertViewController.swift; path = DYAlertController/DYAlertViewController.swift; sourceTree = "<group>"; };
+		B4C3ED3D1C97FD2D0063C5A6 /* DYAlertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DYAlertViewController.xib; path = DYAlertController/DYAlertViewController.xib; sourceTree = "<group>"; };
+		B4C3ED3E1C97FD2D0063C5A6 /* DYActionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DYActionCell.xib; path = DYAlertController/DYActionCell.xib; sourceTree = "<group>"; };
+		B4C3ED3F1C97FD2D0063C5A6 /* DYActionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DYActionCell.swift; path = DYAlertController/DYActionCell.swift; sourceTree = "<group>"; };
+		B4C3ED401C97FD2D0063C5A6 /* DYAlertSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DYAlertSettings.swift; path = DYAlertController/DYAlertSettings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,7 +40,13 @@
 		B4C3ED271C97FCED0063C5A6 = {
 			isa = PBXGroup;
 			children = (
-				B4C3ED331C97FCED0063C5A6 /* DYAlertController */,
+				B4C3ED341C97FCED0063C5A6 /* DYAlertController.h */,
+				B4C3ED361C97FCED0063C5A6 /* Info.plist */,
+				B4C3ED3C1C97FD2D0063C5A6 /* DYAlertViewController.swift */,
+				B4C3ED3D1C97FD2D0063C5A6 /* DYAlertViewController.xib */,
+				B4C3ED3E1C97FD2D0063C5A6 /* DYActionCell.xib */,
+				B4C3ED3F1C97FD2D0063C5A6 /* DYActionCell.swift */,
+				B4C3ED401C97FD2D0063C5A6 /* DYAlertSettings.swift */,
 				B4C3ED321C97FCED0063C5A6 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -51,20 +57,6 @@
 				B4C3ED311C97FCED0063C5A6 /* DYAlertController.framework */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		B4C3ED331C97FCED0063C5A6 /* DYAlertController */ = {
-			isa = PBXGroup;
-			children = (
-				B4C3ED341C97FCED0063C5A6 /* DYAlertController.h */,
-				B4C3ED361C97FCED0063C5A6 /* Info.plist */,
-				B4C3ED3C1C97FD2D0063C5A6 /* DYAlertViewController.swift */,
-				B4C3ED3D1C97FD2D0063C5A6 /* DYAlertViewController.xib */,
-				B4C3ED3E1C97FD2D0063C5A6 /* DYActionCell.xib */,
-				B4C3ED3F1C97FD2D0063C5A6 /* DYActionCell.swift */,
-				B4C3ED401C97FD2D0063C5A6 /* DYAlertSettings.swift */,
-			);
-			path = DYAlertController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -303,6 +295,7 @@
 				B4C3ED3B1C97FCED0063C5A6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

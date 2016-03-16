@@ -8,8 +8,6 @@
 
 import UIKit
 
-
-
 public class AlertAction {
     
     internal enum Style {
@@ -50,7 +48,7 @@ public class TapView: UIView {
 
 
 
-class DYAlertViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+public class DYAlertViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     internal enum Style {
         case alert
@@ -184,12 +182,12 @@ class DYAlertViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
     }
 
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         
         layoutSubviews()
@@ -198,7 +196,7 @@ class DYAlertViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     
-    override func viewWillAppear(animated: Bool) {
+    override public func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
         if titleText != nil && titleIconImage == nil && messageText == nil {
@@ -218,7 +216,7 @@ class DYAlertViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     
-    override func viewDidAppear(animated: Bool) {
+    override public func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
         if let _ = textField {
@@ -229,7 +227,7 @@ class DYAlertViewController: UIViewController, UITableViewDelegate, UITableViewD
     
 
     
-    override func viewDidLayoutSubviews() {
+    override public func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
         if self.animationEffectView == nil {
@@ -250,7 +248,7 @@ class DYAlertViewController: UIViewController, UITableViewDelegate, UITableViewD
  
     }
 
-    override func didReceiveMemoryWarning() {
+    override public func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
         
@@ -506,19 +504,19 @@ class DYAlertViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         self.adjustTableViewHeight()
 
         return alertActions.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         print("cell for row at... called")
         let cell = tableView.dequeueReusableCellWithIdentifier("DYActionCell") as?
@@ -535,7 +533,7 @@ class DYAlertViewController: UIViewController, UITableViewDelegate, UITableViewD
     
 
   
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         print("did select...")
         
@@ -568,8 +566,7 @@ class DYAlertViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
 
-    
-    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+  public  func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
         
        print("did deselect row... called")
         
@@ -588,7 +585,7 @@ class DYAlertViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    public func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         print("height for row at.. called")
 
         return self.getCellHeight()
@@ -659,14 +656,14 @@ class DYAlertViewController: UIViewController, UITableViewDelegate, UITableViewD
 
 extension DYAlertViewController: UIViewControllerTransitioningDelegate {
 
-    internal func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    public func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
 
         self.isPresenting = true
         
         return self
     }
     
-    internal  func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    public  func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         self.isPresenting = false
         return self
     }
@@ -715,11 +712,11 @@ extension DYAlertViewController: UIViewControllerAnimatedTransitioning {
     }
     
     
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
+    public func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
         return self.animationDuration()
     }
     
-    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
+   public func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
         
         
         guard let container = transitionContext.containerView() else {
