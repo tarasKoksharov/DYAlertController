@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		B4C3ED351C97FCED0063C5A6 /* DYAlertController.h in Headers */ = {isa = PBXBuildFile; fileRef = B4C3ED341C97FCED0063C5A6 /* DYAlertController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B4C3ED411C97FD2D0063C5A6 /* DYAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C3ED3C1C97FD2D0063C5A6 /* DYAlertViewController.swift */; };
-		B4C3ED421C97FD2D0063C5A6 /* DYAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4C3ED3D1C97FD2D0063C5A6 /* DYAlertViewController.xib */; };
+		B4C3ED411C97FD2D0063C5A6 /* DYAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C3ED3C1C97FD2D0063C5A6 /* DYAlertController.swift */; };
+		B4C3ED421C97FD2D0063C5A6 /* DYAlertController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4C3ED3D1C97FD2D0063C5A6 /* DYAlertController.xib */; };
 		B4C3ED431C97FD2D0063C5A6 /* DYActionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4C3ED3E1C97FD2D0063C5A6 /* DYActionCell.xib */; };
 		B4C3ED441C97FD2D0063C5A6 /* DYActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C3ED3F1C97FD2D0063C5A6 /* DYActionCell.swift */; };
 		B4C3ED451C97FD2D0063C5A6 /* DYAlertSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C3ED401C97FD2D0063C5A6 /* DYAlertSettings.swift */; };
@@ -19,8 +19,8 @@
 		B4C3ED311C97FCED0063C5A6 /* DYAlertController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DYAlertController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4C3ED341C97FCED0063C5A6 /* DYAlertController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DYAlertController.h; path = DYAlertController/DYAlertController.h; sourceTree = "<group>"; };
 		B4C3ED361C97FCED0063C5A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = DYAlertController/Info.plist; sourceTree = "<group>"; };
-		B4C3ED3C1C97FD2D0063C5A6 /* DYAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DYAlertViewController.swift; path = DYAlertController/DYAlertViewController.swift; sourceTree = "<group>"; };
-		B4C3ED3D1C97FD2D0063C5A6 /* DYAlertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DYAlertViewController.xib; path = DYAlertController/DYAlertViewController.xib; sourceTree = "<group>"; };
+		B4C3ED3C1C97FD2D0063C5A6 /* DYAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DYAlertController.swift; path = DYAlertController/DYAlertController.swift; sourceTree = "<group>"; };
+		B4C3ED3D1C97FD2D0063C5A6 /* DYAlertController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DYAlertController.xib; path = DYAlertController/DYAlertController.xib; sourceTree = "<group>"; };
 		B4C3ED3E1C97FD2D0063C5A6 /* DYActionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DYActionCell.xib; path = DYAlertController/DYActionCell.xib; sourceTree = "<group>"; };
 		B4C3ED3F1C97FD2D0063C5A6 /* DYActionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DYActionCell.swift; path = DYAlertController/DYActionCell.swift; sourceTree = "<group>"; };
 		B4C3ED401C97FD2D0063C5A6 /* DYAlertSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DYAlertSettings.swift; path = DYAlertController/DYAlertSettings.swift; sourceTree = "<group>"; };
@@ -42,8 +42,8 @@
 			children = (
 				B4C3ED341C97FCED0063C5A6 /* DYAlertController.h */,
 				B4C3ED361C97FCED0063C5A6 /* Info.plist */,
-				B4C3ED3C1C97FD2D0063C5A6 /* DYAlertViewController.swift */,
-				B4C3ED3D1C97FD2D0063C5A6 /* DYAlertViewController.xib */,
+				B4C3ED3C1C97FD2D0063C5A6 /* DYAlertController.swift */,
+				B4C3ED3D1C97FD2D0063C5A6 /* DYAlertController.xib */,
 				B4C3ED3E1C97FD2D0063C5A6 /* DYActionCell.xib */,
 				B4C3ED3F1C97FD2D0063C5A6 /* DYActionCell.swift */,
 				B4C3ED401C97FD2D0063C5A6 /* DYAlertSettings.swift */,
@@ -129,7 +129,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4C3ED431C97FD2D0063C5A6 /* DYActionCell.xib in Resources */,
-				B4C3ED421C97FD2D0063C5A6 /* DYAlertViewController.xib in Resources */,
+				B4C3ED421C97FD2D0063C5A6 /* DYAlertController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,7 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4C3ED441C97FD2D0063C5A6 /* DYActionCell.swift in Sources */,
-				B4C3ED411C97FD2D0063C5A6 /* DYAlertViewController.swift in Sources */,
+				B4C3ED411C97FD2D0063C5A6 /* DYAlertController.swift in Sources */,
 				B4C3ED451C97FD2D0063C5A6 /* DYAlertSettings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

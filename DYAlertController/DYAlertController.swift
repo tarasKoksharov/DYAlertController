@@ -48,7 +48,7 @@ public class TapView: UIView {
 
 
 
-public class DYAlertViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+public class DYAlertController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     public enum Style {
         case Alert
@@ -147,7 +147,7 @@ public class DYAlertViewController: UIViewController, UITableViewDelegate, UITab
     // add title, title icon?, cancel button title, ok button title?
     public convenience init() {
         
-        self.init(nibName: "DYAlertViewController", bundle: NSBundle(forClass: DYAlertViewController.self))
+        self.init(nibName: "DYAlertController", bundle: NSBundle(forClass: DYAlertController.self))
     }
     
     public convenience init(style:Style, title:String?, titleIconImage:UIImage?, message:String?, cancelButtonTitle:String, okButtonTitle:String?, multipleSelection:Bool, customFrameWidth:CGFloat?, backgroundEffect: EffectViewMode) {
@@ -649,7 +649,7 @@ public class DYAlertViewController: UIViewController, UITableViewDelegate, UITab
 
 //MARK: Extensions - Animated Transitioning
 
-extension DYAlertViewController: UIViewControllerTransitioningDelegate {
+extension DYAlertController: UIViewControllerTransitioningDelegate {
 
     public func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
 
@@ -666,7 +666,7 @@ extension DYAlertViewController: UIViewControllerTransitioningDelegate {
 }
 
 
-extension DYAlertViewController: UIViewControllerAnimatedTransitioning {
+extension DYAlertController: UIViewControllerAnimatedTransitioning {
     
     private func animationDuration()->NSTimeInterval {
         return 0.5
