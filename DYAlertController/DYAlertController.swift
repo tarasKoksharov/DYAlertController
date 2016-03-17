@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class AlertAction {
+public class DYAlertAction {
     
     public enum ActionStyle {
         case Default
@@ -20,10 +20,10 @@ public class AlertAction {
     var iconImage: UIImage?
 
     var selected:Bool
-    var handler: ((AlertAction) -> Void)?
+    var handler: ((DYAlertAction) -> Void)?
     var style:ActionStyle = .Default
     
-   public init(title:String, style:ActionStyle?, iconImage:UIImage?, setSelected:Bool, handler: ((AlertAction) -> Void)?) {
+   public init(title:String, style:ActionStyle?, iconImage:UIImage?, setSelected:Bool, handler: ((DYAlertAction) -> Void)?) {
         
         
         if let _ = style {
@@ -122,7 +122,7 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     
     
-    var alertActions:[AlertAction] = []
+    var alertActions:[DYAlertAction] = []
     
     var titleText:String?
     var messageText:String?
@@ -456,7 +456,7 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     
-   public func addAction(action: AlertAction) {
+   public func addAction(action: DYAlertAction) {
         
         self.alertActions.append(action)
         

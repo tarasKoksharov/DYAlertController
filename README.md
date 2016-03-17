@@ -34,13 +34,14 @@ As alternative to UIAlertController, DYAlertController has the following additio
 
 
 ## Usage
-The usage is very similar to UIAlertController. 
+The usage is very similar to UIAlertController. See an alert example below. 
+Before you can access the 
 
 ###Code example: Creating an alert
 
 ```Swift
 let titleImage = UIImage(named: "shareIcon")
-let alert = DYAlertViewController(style: .Alert, title: "Doing stuff", titleIconImage: titleImage, message:"Select one option", cancelButtonTitle: "Cancel", okButtonTitle: nil, multipleSelection: false, customFrameWidth:200, backgroundEffect: .blur)
+let alert = DYAlertController(style: .Alert, title: "Doing stuff", titleIconImage: titleImage, message:"Select one option", cancelButtonTitle: "Cancel", okButtonTitle: nil, multipleSelection: false, customFrameWidth:200, backgroundEffect: .blur)
 
 alert.addAction(AlertAction(title: "Do stuff 1", style:.Default, iconImage: UIImage(named: "editIcon"), setSelected:false, handler: { (alertAction) -> Void in
 
