@@ -88,7 +88,7 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
 
     @IBOutlet weak var messageLabel: UILabel?
     
-    @IBOutlet weak var okButton: UIButton?
+    @IBOutlet public weak var okButton: UIButton?
     
     @IBOutlet weak var okButtonHeightConstraint: NSLayoutConstraint?
     
@@ -138,11 +138,11 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
     
     var isPresenting = false
     
-    var titleViewSettings = DYAlertSettings.TitleViewSettings()
-    var buttonSettings = DYAlertSettings.ButtonSettings()
-    var textFieldSettings = DYAlertSettings.TextFieldSettings()
-    var actionCellSettings = DYAlertSettings.ActionCellSettings()
-    var contentViewSettings = DYAlertSettings.ContentViewSettings()
+    public var titleViewSettings = DYAlertSettings.TitleViewSettings()
+    public var buttonSettings = DYAlertSettings.ButtonSettings()
+    public var textFieldSettings = DYAlertSettings.TextFieldSettings()
+    public var actionCellSettings = DYAlertSettings.ActionCellSettings()
+    public var contentViewSettings = DYAlertSettings.ContentViewSettings()
     
     // add title, title icon?, cancel button title, ok button title?
     public convenience init() {

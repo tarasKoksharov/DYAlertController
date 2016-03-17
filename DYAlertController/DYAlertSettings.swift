@@ -12,7 +12,7 @@ import UIKit
 public struct DYAlertSettings {
     
 
-    struct TitleViewSettings {
+    public struct TitleViewSettings {
         var titleTextColor = UIColor.darkGrayColor()
         var messageTextColor = UIColor.grayColor()
         var titleTextFont =  UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
@@ -20,7 +20,7 @@ public struct DYAlertSettings {
         var backgroundColor = UIColor.clearColor()
     }
     
-    struct ActionCellSettings {
+    public struct ActionCellSettings {
         var deselectedTintColor = UIColor.grayColor()
         var defaultTintColor = UIColor(red: 0/255.0, green: 122.0/255.0, blue: 255.0/255.0, alpha: 1)
         var destructiveTintColor = UIColor.redColor()
@@ -28,14 +28,14 @@ public struct DYAlertSettings {
         var actionCellFont = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
     }
     
-    struct TextFieldSettings {
+   public struct TextFieldSettings {
         var backgroundColor = UIColor.lightGrayColor()
         var textColor = UIColor.whiteColor()
         var textFont = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
         
     }
     
-    struct ButtonSettings {
+    public struct ButtonSettings {
         var cancelButtonTintColor = UIColor(red: 0/255.0, green: 122.0/255.0, blue: 255.0/255.0, alpha: 1)
         var okButtonTintColor = UIColor(red: 0/255.0, green: 122.0/255.0, blue: 255.0/255.0, alpha: 1)
         var okButtonBackgroundColor = UIColor.whiteColor()
@@ -44,7 +44,7 @@ public struct DYAlertSettings {
         var cornerRadius:CGFloat = 5.0
     }
     
-    struct ContentViewSettings {
+    public struct ContentViewSettings {
         
         var cornerRadius:CGFloat = 8.0
         var mainViewBackgroundColor = UIColor.whiteColor()
