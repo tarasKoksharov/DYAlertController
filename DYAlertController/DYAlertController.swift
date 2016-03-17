@@ -344,9 +344,11 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
         if let _ = titleText {
 
             titleLabel!.text = titleText
-            titleViewHeight += titleLabel!.frame.size.height
+       
             titleLabel!.textColor = self.titleViewSettings.titleTextColor
             titleLabel!.font = self.titleViewSettings.titleTextFont
+            titleLabel!.sizeToFit()
+            titleViewHeight += titleLabel!.frame.size.height
             
         } else {
 
@@ -359,9 +361,11 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
         if let _ = messageText {
 
             messageLabel!.text = messageText!
-            titleViewHeight += messageLabel!.frame.size.height
             messageLabel!.textColor = self.titleViewSettings.messageTextColor
             messageLabel!.font = self.titleViewSettings.messageTextFont
+            messageLabel!.sizeToFit()
+            titleViewHeight += messageLabel!.frame.size.height
+            
         } else {
             messageLabel?.removeFromSuperview()
             messageLabel = nil
