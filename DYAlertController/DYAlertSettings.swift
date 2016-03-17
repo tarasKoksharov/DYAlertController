@@ -13,41 +13,41 @@ public struct DYAlertSettings {
     
 
     public struct TitleViewSettings {
-        var titleTextColor = UIColor.darkGrayColor()
-        var messageTextColor = UIColor.grayColor()
-        var titleTextFont =  UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
-        var messageTextFont = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
-        var backgroundColor = UIColor.clearColor()
+        public var titleTextColor = UIColor.darkGrayColor()
+        public var messageTextColor = UIColor.grayColor()
+        public var titleTextFont =  UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+        public var messageTextFont = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
+        public var backgroundColor = UIColor.clearColor()
     }
     
     public struct ActionCellSettings {
-        var deselectedTintColor = UIColor.grayColor()
-        var defaultTintColor = UIColor(red: 0/255.0, green: 122.0/255.0, blue: 255.0/255.0, alpha: 1)
-        var destructiveTintColor = UIColor.redColor()
-        var disabledTintColor = UIColor.lightGrayColor().colorWithAlphaComponent(0.5)
-        var actionCellFont = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+        public var deselectedTintColor = UIColor.grayColor()
+        public var defaultTintColor = UIColor(red: 0/255.0, green: 122.0/255.0, blue: 255.0/255.0, alpha: 1)
+        public var destructiveTintColor = UIColor.redColor()
+        public var disabledTintColor = UIColor.lightGrayColor().colorWithAlphaComponent(0.5)
+        public var actionCellFont = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
     }
     
    public struct TextFieldSettings {
-        var backgroundColor = UIColor.lightGrayColor()
-        var textColor = UIColor.whiteColor()
-        var textFont = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+        public var backgroundColor = UIColor.lightGrayColor()
+        public var textColor = UIColor.whiteColor()
+        public var textFont = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
         
     }
     
     public struct ButtonSettings {
-        var cancelButtonTintColor = UIColor(red: 0/255.0, green: 122.0/255.0, blue: 255.0/255.0, alpha: 1)
-        var okButtonTintColor = UIColor(red: 0/255.0, green: 122.0/255.0, blue: 255.0/255.0, alpha: 1)
-        var okButtonBackgroundColor = UIColor.whiteColor()
-        var cancelButtonBackgroundColor = UIColor.whiteColor()
-        var buttonFont = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
-        var cornerRadius:CGFloat = 5.0
+        public var cancelButtonTintColor = UIColor(red: 0/255.0, green: 122.0/255.0, blue: 255.0/255.0, alpha: 1)
+        public var okButtonTintColor = UIColor(red: 0/255.0, green: 122.0/255.0, blue: 255.0/255.0, alpha: 1)
+        public var okButtonBackgroundColor = UIColor.whiteColor()
+        public var cancelButtonBackgroundColor = UIColor.whiteColor()
+        public var buttonFont = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+        public var cornerRadius:CGFloat = 5.0
     }
     
     public struct ContentViewSettings {
         
-        var cornerRadius:CGFloat = 8.0
-        var mainViewBackgroundColor = UIColor.whiteColor()
+        public var cornerRadius:CGFloat = 8.0
+        public var mainViewBackgroundColor = UIColor.whiteColor()
     }
 
     
