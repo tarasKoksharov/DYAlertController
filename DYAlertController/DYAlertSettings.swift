@@ -29,7 +29,7 @@ public struct DYAlertSettings {
     }
     
    public struct TextFieldSettings {
-        public var backgroundColor = UIColor.lightGrayColor()
+        public var backgroundColor = UIColor.lightGrayColor().colorWithAlphaComponent(0.7)
         public var textColor = UIColor.whiteColor()
         public var textFont = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
         
