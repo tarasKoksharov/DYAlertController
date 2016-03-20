@@ -140,7 +140,7 @@ public class DYActionCell: UITableViewCell {
             
             let labelWidth = self.actionTitleLabel.frame.size.width
 
-          self.contentView.constraints[0].constant =  self.contentView.frame.size.width / 2 - labelWidth / 2 - self.contentView.constraints[2].constant - actionImageView!.frame.size.width
+          self.contentView.constraints[0].constant =  self.contentView.frame.size.width / 2.0 - labelWidth / 2.0 - self.contentView.constraints[2].constant - actionImageView!.frame.size.width
             
 
         }   else {

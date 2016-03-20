@@ -340,7 +340,6 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
            
         }
         
-     
         if let _ = titleText {
 
             titleLabel!.text = titleText
@@ -355,7 +354,6 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
             titleLabel?.removeFromSuperview()
 
         }
-        
         
         if let _ = messageText {
 
@@ -378,7 +376,7 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
         }
         
         else if viewElementsCounter == 1 {
-            titleViewHeightConstraint.constant += 10.0
+            titleViewHeightConstraint.constant += 10
         }
 
         
