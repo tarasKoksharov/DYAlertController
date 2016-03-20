@@ -100,8 +100,6 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
     
     @IBOutlet weak var cancelButton: UIButton!
     
- //   @IBOutlet weak var cancelButtonTrailingConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var cancelButtonToMainViewConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var cancelButtonHeightConstraint: NSLayoutConstraint!
@@ -145,7 +143,7 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
     public var contentViewSettings = DYAlertSettings.ContentViewSettings()
     public var effectViewSettings  = DYAlertSettings.EffectViewSettings()
     
-    // add title, title icon?, cancel button title, ok button title?
+
     public convenience init() {
         
         self.init(nibName: "DYAlertController", bundle: NSBundle(forClass: DYAlertController.self))
@@ -243,8 +241,7 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
         if let _ = textField {
             // correct textfield positioning
            textField!.frame = CGRectMake(20.0, 5.0, tableView.tableHeaderView!.bounds.size.width - 40.0, 30.0)
-            
-            
+
         }
         
  
@@ -323,8 +320,6 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
     
         self.tableViewHeightConstraint.constant = height
     }
-    
-    
     
     private func layoutTitleView() {
         

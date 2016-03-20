@@ -15,9 +15,7 @@ public class DYActionCell: UITableViewCell {
     @IBOutlet weak var actionImageView: UIImageView?
     
     var settings:DYAlertSettings.ActionCellSettings!
-    
- //   var actionItemSelected = false
-
+ 
     var hasAccessoryView = false
     
     var style = DYAlertAction.ActionStyle.Default
@@ -30,7 +28,7 @@ public class DYActionCell: UITableViewCell {
     
     override public func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+   
     }
 
     override public func setSelected(selected: Bool, animated: Bool) {
@@ -54,12 +52,11 @@ public class DYActionCell: UITableViewCell {
             } else {
                 self.accessoryType = .None
                 self.tintColor = self.getColour(self.style, selected: false)
-//                self.actionTitleLabel.textColor = colour
-//                self.actionImageView?.tintColor = colour
+
             }
 
             self.actionTitleLabel.textColor = self.tintColor
-           //self.toggleSelectedState(selected)
+
 
         } 
 
@@ -110,7 +107,7 @@ public class DYActionCell: UITableViewCell {
     }
     
 
-//    }
+
     
     private func getColour(style:DYAlertAction.ActionStyle, selected:Bool)->UIColor {
         
@@ -134,8 +131,6 @@ public class DYActionCell: UITableViewCell {
     }
     
 
-    
-//
     private func centerViewElements() {
         
     
@@ -152,8 +147,7 @@ public class DYActionCell: UITableViewCell {
             actionImageView?.removeFromSuperview()
         }
         
-  
-        
+
         let centerLabelConstraint = NSLayoutConstraint(item: self.contentView, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: actionTitleLabel, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0.0)
   
         self.contentView.addConstraint(centerLabelConstraint)
