@@ -49,6 +49,13 @@ public struct DYAlertSettings {
         public var cornerRadius:CGFloat = 8.0
         public var mainViewBackgroundColor = UIColor.whiteColor()
     }
+    
+    
+    public struct EffectViewSettings {
+        
+        public var blurViewStyle: UIBlurEffectStyle = .Dark
+        public var dimViewColor = UIColor.blackColor().colorWithAlphaComponent(0.6)
+    }
 
     
     

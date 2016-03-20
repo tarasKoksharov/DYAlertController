@@ -143,6 +143,7 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
     public var textFieldSettings = DYAlertSettings.TextFieldSettings()
     public var actionCellSettings = DYAlertSettings.ActionCellSettings()
     public var contentViewSettings = DYAlertSettings.ContentViewSettings()
+    public var effectViewSettings  = DYAlertSettings.EffectViewSettings()
     
     // add title, title icon?, cancel button title, ok button title?
     public convenience init() {
@@ -224,6 +225,7 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
         }
         
     }
+    
     
 
     
@@ -328,33 +330,35 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
         
         titleView.backgroundColor = titleViewSettings.backgroundColor
         
+        var viewElementsCounter = 0
+        
         var titleViewHeight:CGFloat = 5.0
 
         if let _ = titleIconImage {
             titleImageView?.image = self.titleIconImage
-            titleImageView?.contentMode = .Center
+            titleImageView?.contentMode = .ScaleAspectFit
             titleViewHeight += titleImageView!.frame.size.height
+            viewElementsCounter += 1
         } else {
             
             titleImageView?.removeFromSuperview()
-            titleImageView = nil
+           
         }
         
      
         if let _ = titleText {
 
             titleLabel!.text = titleText
-       
             titleLabel!.textColor = self.titleViewSettings.titleTextColor
             titleLabel!.font = self.titleViewSettings.titleTextFont
             titleLabel!.sizeToFit()
             titleViewHeight += titleLabel!.frame.size.height
+            viewElementsCounter += 1
             
         } else {
 
             titleLabel?.removeFromSuperview()
-            titleLabel = nil
-    
+
         }
         
         
@@ -365,20 +369,23 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
             messageLabel!.font = self.titleViewSettings.messageTextFont
             messageLabel!.sizeToFit()
             titleViewHeight += messageLabel!.frame.size.height
+            viewElementsCounter += 1
             
         } else {
             messageLabel?.removeFromSuperview()
-            messageLabel = nil
-            
+
         }
         
         titleViewHeightConstraint.constant = titleViewHeight
         
-        if titleIconImage == nil && titleText == nil && messageText == nil {
-            topSeparatorLine.removeFromSuperview()
-
+        if viewElementsCounter == 0 {
+             topSeparatorLine.removeFromSuperview()
         }
         
+        else if viewElementsCounter == 1 {
+            titleViewHeightConstraint.constant += 10.0
+        }
+
         
     }
     
@@ -408,8 +415,7 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
             okButton?.removeFromSuperview()
             buttonSeparatorLine?.removeFromSuperview()
             cancelButtonWidthConstraint.constant = contentViewWidthConstraint.constant
-
-            
+  
         }
         
         cancelButton.setTitle(cancelButtonTitle, forState: UIControlState.Normal)
@@ -679,14 +685,14 @@ extension DYAlertController: UIViewControllerAnimatedTransitioning {
     private func createDimView(frame: CGRect) -> UIView {
         
         let dimView = UIView(frame: frame)
-        dimView.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.4)
+        dimView.backgroundColor = self.effectViewSettings.dimViewColor
         dimView.alpha = 0
         dimView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         return dimView
     }
     
     private func createBlurView(frame:CGRect)->UIView{
-        let blurEffect = UIBlurEffect(style: .Dark)
+        let blurEffect = UIBlurEffect(style: self.effectViewSettings.blurViewStyle)
         let blurredView = UIVisualEffectView(effect: blurEffect)
         blurredView.frame = frame
         blurredView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
