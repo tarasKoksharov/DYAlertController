@@ -16,12 +16,12 @@ public class DYAlertAction {
         case Disabled
     }
     
-    var title:String
-    var iconImage: UIImage?
+    public var title:String
+    public var iconImage: UIImage?
 
-    var selected:Bool
-    var handler: ((DYAlertAction) -> Void)?
-    var style:ActionStyle = .Default
+    public var selected:Bool
+    public var handler: ((DYAlertAction) -> Void)?
+    public var style:ActionStyle = .Default
     
    public init(title:String, style:ActionStyle?, iconImage:UIImage?, setSelected:Bool, handler: ((DYAlertAction) -> Void)?) {
         

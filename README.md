@@ -12,7 +12,7 @@ Check out the example project here:
 ## Installation
 
 
-Install DYAlertController through Cocoapods. Enter the following information into your Podfile:
+Install DYAlertController through Cocoapods. Enter the following information into your Podfile (see current version in header):
 
 ```Ruby
 platform :ios, '8.0'
@@ -20,7 +20,7 @@ platform :ios, '8.0'
 use_frameworks!
 
 target '[Your app project title]' do
-pod 'DYAlertController', '~> 0.3.2'
+pod 'DYAlertController', '~> 0.3.3'
 end
 
 ```
