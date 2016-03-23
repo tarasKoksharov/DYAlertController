@@ -127,6 +127,7 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
     var titleIconImage:UIImage?
     var cancelButtonTitle:String?
     var okButtonTitle:String?
+    var okButtonTitleHightlighted:String?
     
     var shouldAllowMultipleSelection = false
 
@@ -136,33 +137,27 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
     
     var isPresenting = false
     
-    public var titleViewSettings = DYAlertSettings.TitleViewSettings()
-    public var buttonSettings = DYAlertSettings.ButtonSettings()
-    public var textFieldSettings = DYAlertSettings.TextFieldSettings()
+    public var settings = DYAlertSettings()
     public var actionCellSettings = DYAlertSettings.ActionCellSettings()
-    public var contentViewSettings = DYAlertSettings.ContentViewSettings()
-    public var effectViewSettings  = DYAlertSettings.EffectViewSettings()
-    
 
+    
+    
+    
     public convenience init() {
         
         self.init(nibName: "DYAlertController", bundle: NSBundle(forClass: DYAlertController.self))
     }
     
-    public convenience init(style:Style, title:String?, titleIconImage:UIImage?, message:String?, cancelButtonTitle:String, okButtonTitle:String?, multipleSelection:Bool, customFrameWidth:CGFloat?, backgroundEffect: EffectViewMode) {
+    public convenience init(style:Style, title:String?, titleIconImage:UIImage?, message:String?, cancelButtonTitle:String,  customFrameWidth:CGFloat?, backgroundEffect: EffectViewMode) {
         
        self.init()
-    
+        
         self.style = style
         self.titleText = title
         self.messageText = message
         self.titleIconImage = titleIconImage
         self.cancelButtonTitle = cancelButtonTitle
-        self.okButtonTitle = okButtonTitle
-        if let _ = self.okButtonTitle {
-            self.shouldAllowMultipleSelection = multipleSelection
-        }
-        
+
         self.contentViewCustomWidth = customFrameWidth
         
         self.backgroundEffectViewMode = backgroundEffect
@@ -260,7 +255,7 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
     private func layoutSubviews() {
         
         contentView.autoresizingMask = .FlexibleHeight
-        contentView.layer.cornerRadius = contentViewSettings.cornerRadius
+        contentView.layer.cornerRadius = settings.contentViewCornerRadius
         contentView.autoresizesSubviews = true
         if let _ = contentViewCustomWidth {
             contentViewWidthConstraint.constant =   contentViewCustomWidth! 
@@ -268,7 +263,7 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
         }
         mainView.clipsToBounds = true
         mainView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
-        mainView.backgroundColor = contentViewSettings.mainViewBackgroundColor
+        mainView.backgroundColor = settings.mainViewBackgroundColor
         if style == .ActionSheet {
             bottomSeparatorLine.removeFromSuperview()
         }
@@ -323,15 +318,15 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
     
     private func layoutTitleView() {
         
-        titleView.backgroundColor = titleViewSettings.backgroundColor
+        titleView.backgroundColor = settings.titleViewBackgroundColor
         
         var viewElementsCounter = 0
         
         var titleViewHeight:CGFloat = 5.0
 
         if let _ = titleIconImage {
-            titleImageView?.image = self.titleIconImage
-            titleImageView?.contentMode = .ScaleAspectFit
+            titleImageView!.image = self.titleIconImage
+            titleImageView!.contentMode = .ScaleAspectFit
             titleViewHeight += titleImageView!.frame.size.height
             viewElementsCounter += 1
         } else {
@@ -343,8 +338,8 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
         if let _ = titleText {
 
             titleLabel!.text = titleText
-            titleLabel!.textColor = self.titleViewSettings.titleTextColor
-            titleLabel!.font = self.titleViewSettings.titleTextFont
+            titleLabel!.textColor = settings.titleTextColor
+            titleLabel!.font = settings.titleTextFont
             titleLabel!.sizeToFit()
             titleViewHeight += titleLabel!.frame.size.height
             viewElementsCounter += 1
@@ -358,8 +353,8 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
         if let _ = messageText {
 
             messageLabel!.text = messageText!
-            messageLabel!.textColor = self.titleViewSettings.messageTextColor
-            messageLabel!.font = self.titleViewSettings.messageTextFont
+            messageLabel!.textColor = settings.messageTextColor
+            messageLabel!.font = settings.messageTextFont
             messageLabel!.sizeToFit()
             titleViewHeight += messageLabel!.frame.size.height
             viewElementsCounter += 1
@@ -386,15 +381,18 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
     
     private func layoutButtons() {
         
-        okButton?.backgroundColor = buttonSettings.okButtonBackgroundColor
+        okButton?.backgroundColor = settings.okButtonBackgroundColor
         
-        cancelButton.backgroundColor = buttonSettings.cancelButtonBackgroundColor
-        cancelButton.setTitleColor(buttonSettings.cancelButtonTintColor, forState: UIControlState.Normal)
+        cancelButton.backgroundColor = settings.cancelButtonBackgroundColor
+        cancelButton.setTitleColor(settings.cancelButtonTintColorNormal, forState: UIControlState.Normal)
+        cancelButton.setTitleColor(settings.cancelButtonTintColorHightlighted, forState: UIControlState.Highlighted)
         
         if let _ = okButtonTitle {
             
             okButton!.setTitle(okButtonTitle!, forState: UIControlState.Normal)
-            okButton!.setTitleColor(buttonSettings.okButtonTintColor, forState: UIControlState.Normal)
+            okButton!.setTitle(okButtonTitleHightlighted, forState: .Highlighted)
+            okButton!.setTitleColor(settings.okButtonTintColorNormal, forState: UIControlState.Normal)
+            okButton!.setTitleColor(settings.okButtonTintColorHighlighted, forState: UIControlState.Highlighted)
 
                 if style == .Alert {
                     cancelButtonWidthConstraint.constant = contentViewWidthConstraint.constant / 2.0
@@ -423,13 +421,13 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
             
         } else {
             // Action sheet!
-            okButton?.layer.cornerRadius = buttonSettings.cornerRadius
+            okButton?.layer.cornerRadius = settings.buttonCornerRadius
             okButtonHeightConstraint?.constant = 30.0
             
-            cancelButton.layer.cornerRadius = buttonSettings.cornerRadius
+            cancelButton.layer.cornerRadius = settings.buttonCornerRadius
             cancelButtonHeightConstraint.constant = 30.0
 
-           mainView.layer.cornerRadius = contentViewSettings.cornerRadius
+           mainView.layer.cornerRadius = settings.contentViewCornerRadius
             
             buttonSeparatorLine?.removeFromSuperview()
             
@@ -450,18 +448,28 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
         let textFieldFrame = CGRectMake(20.0, 5.0, headerView.bounds.size.width - 40.0, 30.0)
         textField!.frame = textFieldFrame
         textField!.borderStyle = .RoundedRect
-        textField!.font = textFieldSettings.textFont
-        textField!.backgroundColor = textFieldSettings.backgroundColor
-        textField!.textColor = textFieldSettings.textColor
+        textField!.font = settings.textFieldFont
+        textField!.backgroundColor = settings.textFieldBackgroundColor
+        textField!.textColor = settings.textFieldTextColor
         headerView.addSubview(textField!)
         tableView.tableHeaderView = headerView
         
     }
     
     
+    //MARK: Actions and Textfield
+    
    public func addAction(action: DYAlertAction) {
         
         self.alertActions.append(action)
+        
+    }
+    
+    public func addOKButton(title:String, highlightedTitle:String?, multipleSelection:Bool, okbuttonAction:(()->Void)?) {
+        self.okButtonTitle = title
+        self.okButtonTitleHightlighted = highlightedTitle
+        self.handleOKAction = okbuttonAction
+        self.shouldAllowMultipleSelection = multipleSelection
         
     }
     
@@ -678,14 +686,14 @@ extension DYAlertController: UIViewControllerAnimatedTransitioning {
     private func createDimView(frame: CGRect) -> UIView {
         
         let dimView = UIView(frame: frame)
-        dimView.backgroundColor = self.effectViewSettings.dimViewColor
+        dimView.backgroundColor = settings.dimViewColor
         dimView.alpha = 0
         dimView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         return dimView
     }
     
     private func createBlurView(frame:CGRect)->UIView{
-        let blurEffect = UIBlurEffect(style: self.effectViewSettings.blurViewStyle)
+        let blurEffect = UIBlurEffect(style: settings.blurViewStyle)
         let blurredView = UIVisualEffectView(effect: blurEffect)
         blurredView.frame = frame
         blurredView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
