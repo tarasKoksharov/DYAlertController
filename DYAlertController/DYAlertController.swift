@@ -148,7 +148,7 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
         self.init(nibName: "DYAlertController", bundle: NSBundle(forClass: DYAlertController.self))
     }
     
-    public convenience init(style:Style, title:String?, titleIconImage:UIImage?, message:String?, cancelButtonTitle:String,  customFrameWidth:CGFloat?, backgroundEffect: EffectViewMode) {
+    public convenience init(style:Style, title:String?, titleIconImage:UIImage?, message:String?, cancelButtonTitle:String,  multipleSelection:Bool, customFrameWidth:CGFloat?, backgroundEffect: EffectViewMode) {
         
        self.init()
         
@@ -157,7 +157,9 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
         self.messageText = message
         self.titleIconImage = titleIconImage
         self.cancelButtonTitle = cancelButtonTitle
-
+        
+        self.shouldAllowMultipleSelection = multipleSelection
+        
         self.contentViewCustomWidth = customFrameWidth
         
         self.backgroundEffectViewMode = backgroundEffect
@@ -465,11 +467,11 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
         
     }
     
-    public func addOKButton(title:String, highlightedTitle:String?, multipleSelection:Bool, okbuttonAction:(()->Void)?) {
+    public func addOKButton(title:String, highlightedTitle:String?, okbuttonAction:(()->Void)?) {
         self.okButtonTitle = title
         self.okButtonTitleHightlighted = highlightedTitle
         self.handleOKAction = okbuttonAction
-        self.shouldAllowMultipleSelection = multipleSelection
+
         
     }
     
