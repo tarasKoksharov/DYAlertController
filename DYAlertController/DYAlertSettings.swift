@@ -21,20 +21,22 @@ public struct DYAlertSettings {
     
 //MARK: text field settings
 
-        public var textFieldBackgroundColor = UIColor.lightGrayColor().colorWithAlphaComponent(0.7)
+        public var textFieldBackgroundColor = UIColor.paleGrayColor()
         public var textFieldTextColor = UIColor.whiteColor()
         public var textFieldFont = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+        public var textFieldTextAlignment = NSTextAlignment.Center
+
     
     //MARK: button settings
 
-        public var cancelButtonTintColorNormal = UIColor(red: 0/255.0, green: 122.0/255.0, blue: 255.0/255.0, alpha: 1)
-        public var cancelButtonTintColorHightlighted = UIColor.redColor()
-    
-        public var okButtonTintColorNormal = UIColor(red: 0/255.0, green: 122.0/255.0, blue: 255.0/255.0, alpha: 1)
         public var okButtonBackgroundColor = UIColor.whiteColor()
-        public var okButtonTintColorHighlighted = UIColor.redColor()
+        public var okButtonTintColorDefault = UIColor.defaultBlueTintColor()
+        public var okButtonTintColorDestructive = UIColor.redColor()
+        public var okButtonTintColorDisabled = UIColor.paleGrayColor()
     
+        public var cancelButtonTintColorDefault = UIColor.defaultBlueTintColor()
         public var cancelButtonBackgroundColor = UIColor.whiteColor()
+    
         public var buttonFont = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
         public var buttonCornerRadius:CGFloat = 5.0
 
@@ -47,14 +49,58 @@ public struct DYAlertSettings {
         public var blurViewStyle: UIBlurEffectStyle = .Dark
         public var dimViewColor = UIColor.blackColor().colorWithAlphaComponent(0.6)
     
-//MARK: action cell settings  - separate struct
+//MARK: action cell settings
     public struct ActionCellSettings {
         public var deselectedTintColor = UIColor.grayColor()
-        public var defaultTintColor = UIColor(red: 0/255.0, green: 122.0/255.0, blue: 255.0/255.0, alpha: 1)
+        public var defaultTintColor = UIColor.defaultBlueTintColor()
         public var destructiveTintColor = UIColor.redColor()
-        public var disabledTintColor = UIColor.lightGrayColor().colorWithAlphaComponent(0.5)
+        public var disabledTintColor = UIColor.paleGrayColor()
         public var actionCellFont = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
     }
     
+    
+}
+
+
+public extension UIButton {
+    
+    public func setDefaultStyle(title:String, titleColor:UIColor) {
+        
+        self.setNormalState(title, titleColor: titleColor)
+    }
+    
+    public func setDestructiveStyle(title:String, titleColor:UIColor) {
+        
+        self.setNormalState(title, titleColor: titleColor)
+    }
+    
+    public func setDisabledStyle(title:String, titleColor:UIColor) {
+        
+        self.setTitleColor(titleColor, forState: .Disabled)
+        self.setTitle(title, forState: .Disabled)
+        self.enabled = false
+    }
+    
+    private func setNormalState(title:String, titleColor:UIColor) {
+        self.setTitleColor(titleColor, forState: .Normal)
+        self.setTitle(title, forState: .Normal)
+        self.enabled = true
+        
+    }
+    
+}
+
+
+public extension UIColor {
+    
+    public class func defaultBlueTintColor()->UIColor {
+        
+        return UIColor(red: 0/255.0, green: 122.0/255.0, blue: 255.0/255.0, alpha: 1)
+    }
+    
+    public class func paleGrayColor()->UIColor{
+        
+        return UIColor.lightGrayColor().colorWithAlphaComponent(0.6)
+    }
     
 }

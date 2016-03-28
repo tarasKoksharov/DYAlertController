@@ -18,7 +18,7 @@ public class DYActionCell: UITableViewCell {
  
     var hasAccessoryView = false
     
-    var style = DYAlertAction.ActionStyle.Default
+    var style = ActionStyle.Default
     
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -34,13 +34,13 @@ public class DYActionCell: UITableViewCell {
     override public func setSelected(selected: Bool, animated: Bool) {
 
         if self.selected == selected {
-            print("already selected or deselcted, returning")
+           // print("already selected or deselcted, returning")
             return
         }
         
         super.setSelected(selected, animated: animated)
 
-        print("set selected called")
+       // print("set selected called")
 
         if hasAccessoryView {
             // has ok button!
@@ -109,7 +109,7 @@ public class DYActionCell: UITableViewCell {
 
 
     
-    private func getColour(style:DYAlertAction.ActionStyle, selected:Bool)->UIColor {
+    private func getColour(style:ActionStyle, selected:Bool)->UIColor {
         
         switch style {
         case .Disabled:
@@ -132,8 +132,7 @@ public class DYActionCell: UITableViewCell {
     
 
     private func centerViewElements() {
-        
-    
+ 
         if let _ = actionImageView?.image {
 
             self.contentView.constraints[2].constant = 5.0
