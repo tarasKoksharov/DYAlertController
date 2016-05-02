@@ -1,0 +1,14 @@
+PODS:
+  - DYAlertController (0.5.2)
+
+DEPENDENCIES:
+  - DYAlertController (from `../`)
+
+EXTERNAL SOURCES:
+  DYAlertController:
+    :path: ../
+
+SPEC CHECKSUMS:
+  DYAlertController: 34cd8e767adbb20cf2057b6dcac95d4b662b0f06
+
+COCOAPODS: 0.39.0
