@@ -1,4 +1,4 @@
-[![Cocoapods](https://img.shields.io/cocoapods/v/DYAlertController.svg)](http://cocoadocs.org/docsets/DYAlertController)
+[![CocoaPods](https://img.shields.io/cocoapods/v/DYAlertController.svg)](http://cocoadocs.org/docsets/DYAlertController)
 [![license](https://img.shields.io/github/license/mashape/DYAlertController.svg)](http://cocoadocs.org/docsets/DYAlertController)
 
 
