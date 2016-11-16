@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class DYActionCell: UITableViewCell {
+class DYActionCell: UITableViewCell {
 
    @IBOutlet weak var actionTitleLabel: UILabel!
     
@@ -18,7 +18,7 @@ public class DYActionCell: UITableViewCell {
  
     var hasAccessoryView = false
     
-    var style = ActionStyle.Default
+    var style = ActionStyle.normal
     
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -26,14 +26,14 @@ public class DYActionCell: UITableViewCell {
 
     }
     
-    override public func awakeFromNib() {
+    override func awakeFromNib() {
         super.awakeFromNib()
    
     }
 
-    override public func setSelected(selected: Bool, animated: Bool) {
+    override  func setSelected(_ selected: Bool, animated: Bool) {
 
-        if self.selected == selected {
+        if self.isSelected == selected  {
            // print("already selected or deselcted, returning")
             return
         }
@@ -46,11 +46,11 @@ public class DYActionCell: UITableViewCell {
             // has ok button!
 
             if selected {
-                self.accessoryType = .Checkmark
+                self.accessoryType = UITableViewCellAccessoryType.checkmark
                 self.tintColor = self.getColour(self.style, selected:  true)
       
             } else {
-                self.accessoryType = .None
+                self.accessoryType = .none
                 self.tintColor = self.getColour(self.style, selected: false)
 
             }
@@ -69,7 +69,7 @@ public class DYActionCell: UITableViewCell {
     }
     
     
-    func configureCell(actionItem:DYAlertAction, hasAccessoryView:Bool, settings:DYAlertSettings.ActionCellSettings) {
+    func configureCell(_ actionItem:DYAlertAction, hasAccessoryView:Bool, settings:DYAlertSettings.ActionCellSettings) {
         
         print("configure cell called")
         
@@ -77,10 +77,10 @@ public class DYActionCell: UITableViewCell {
        self.actionTitleLabel.font = settings.actionCellFont
         
         let iconImage = actionItem.iconImage
-        self.actionImageView!.image = iconImage?.imageWithRenderingMode(.AlwaysTemplate)
-       self.actionImageView!.contentMode = .ScaleAspectFit
+        self.actionImageView!.image = iconImage?.withRenderingMode(.alwaysTemplate)
+       self.actionImageView!.contentMode = .scaleAspectFit
         
-        self.userInteractionEnabled = (actionItem.style != .Disabled)
+        self.isUserInteractionEnabled = (actionItem.style != .disabled)
         self.hasAccessoryView = hasAccessoryView
         self.style = actionItem.style
         
@@ -88,14 +88,14 @@ public class DYActionCell: UITableViewCell {
 
         if hasAccessoryView {
             //has ok button!
-             self.selectionStyle = .None
+             self.selectionStyle = .none
 
             self.tintColor = self.getColour(self.style, selected:  actionItem.selected)
 
             
         } else {
             // no ok button, no checkmarks
-            self.selectionStyle = .Gray
+            self.selectionStyle = .gray
             self.tintColor = self.getColour(self.style, selected: true)
            self.centerViewElements()
 
@@ -109,18 +109,18 @@ public class DYActionCell: UITableViewCell {
 
 
     
-    private func getColour(style:ActionStyle, selected:Bool)->UIColor {
+    fileprivate func getColour(_ style:ActionStyle, selected:Bool)->UIColor {
         
         switch style {
-        case .Disabled:
+        case .disabled:
             return settings.disabledTintColor
-        case .Default:
+        case .normal:
             if selected {
                 return settings.defaultTintColor
             } else {
                 return settings.deselectedTintColor
             }
-        case .Destructive:
+        case .destructive:
             if selected {
                 return settings.destructiveTintColor
             } else {
@@ -131,7 +131,7 @@ public class DYActionCell: UITableViewCell {
     }
     
 
-    private func centerViewElements() {
+    fileprivate func centerViewElements() {
  
         if let _ = actionImageView?.image {
 
@@ -147,7 +147,7 @@ public class DYActionCell: UITableViewCell {
         }
         
 
-        let centerLabelConstraint = NSLayoutConstraint(item: self.contentView, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: actionTitleLabel, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0.0)
+        let centerLabelConstraint = NSLayoutConstraint(item: self.contentView, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: actionTitleLabel, attribute: NSLayoutAttribute.centerX, multiplier: 1.0, constant: 0.0)
   
         self.contentView.addConstraint(centerLabelConstraint)
 

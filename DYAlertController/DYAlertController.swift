@@ -8,14 +8,19 @@
 
 import UIKit
 
-public class DYAlertAction {
+open class DYAlertAction {
     
-    public var title:String
-    public var iconImage: UIImage?
+    open var title:String
+    
+    open var iconImage: UIImage?
+    
 
-    public var selected:Bool
-    public var handler: ((DYAlertAction) -> Void)?
-    public var style:ActionStyle = .Default
+    open var selected:Bool
+    
+    open var handler: ((DYAlertAction) -> Void)?
+    
+    open var style:ActionStyle = .normal
+    
     
    public init(title:String, style:ActionStyle?, iconImage:UIImage?, setSelected:Bool, handler: ((DYAlertAction) -> Void)?) {
         
@@ -33,18 +38,18 @@ public class DYAlertAction {
 }
 
 public enum ActionStyle {
-    case Default
-    case Destructive
-    case Disabled
+    case normal
+    case destructive
+    case disabled
 }
 
-public class TapView: UIView {
+open class TapView: UIView {
     var touchHandler: ((UIView) -> Void)?
-    override public func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesEnded(touches, withEvent: event)
+    override open func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
         let touch = touches.first!
-        let touchLocation = touch.locationInView(self)
-        guard CGRectContainsPoint(self.subviews[0].frame, touchLocation) else {
+        let touchLocation = touch.location(in: self)
+        guard self.subviews[0].frame.contains(touchLocation) else {
             
              touchHandler?(self)
             return
@@ -55,11 +60,11 @@ public class TapView: UIView {
 
 
 
-public class DYAlertController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+open class DYAlertController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     public enum Style {
-        case Alert
-        case ActionSheet
+        case alert
+        case actionSheet
     }
     
     public enum EffectViewMode {
@@ -85,7 +90,7 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
     
     var animationEffectView:UIView?
     
-    public var textField:UITextField?
+    open var textField:UITextField?
     
     @IBOutlet weak var titleView: UIView!
     @IBOutlet weak var titleViewHeightConstraint: NSLayoutConstraint!
@@ -95,7 +100,7 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
 
     @IBOutlet weak var messageLabel: UILabel?
     
-    @IBOutlet public weak var okButton: UIButton?
+    @IBOutlet open weak var okButton: UIButton?
     
     @IBOutlet weak var okButtonHeightConstraint: NSLayoutConstraint?
     
@@ -105,7 +110,7 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
     
     @IBOutlet weak var buttonSeparatorLine: UIView?
     
-    @IBOutlet public weak var cancelButton: UIButton!
+    @IBOutlet open weak var cancelButton: UIButton!
     
     @IBOutlet weak var cancelButtonToMainViewConstraint: NSLayoutConstraint!
     
@@ -113,7 +118,7 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
     
     @IBOutlet weak var cancelButtonWidthConstraint: NSLayoutConstraint!
     
-    public var handleCancelAction: (()->Void)?
+    open var handleCancelAction: (()->Void)?
     
     @IBOutlet weak var topSeparatorLine: UIView!
 
@@ -126,7 +131,7 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     
     
-    public var alertActions:[DYAlertAction] = []
+    open var alertActions:[DYAlertAction] = []
     
     var titleText:String?
     var messageText:String?
@@ -138,26 +143,28 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
     
     var shouldAllowMultipleSelection = false
 
-    var style:Style = .Alert
+    var style:Style = .alert
     
     var backgroundEffectViewMode:EffectViewMode = .dim
     
     var isPresenting = false
     
-    public var settings = DYAlertSettings()
-    public var actionCellSettings = DYAlertSettings.ActionCellSettings()
+    open var settings = DYAlertSettings()
+    open var actionCellSettings = DYAlertSettings.ActionCellSettings()
 
     
     
     
     public convenience init() {
         
-        self.init(nibName: "DYAlertController", bundle: NSBundle(forClass: DYAlertController.self))
+        self.init(nibName: "DYAlertController", bundle: Bundle(for: DYAlertController.self))
     }
     
     public convenience init(style:Style, title:String?, titleIconImage:UIImage?, message:String?, cancelButtonTitle:String,  multipleSelection:Bool, customFrameWidth:CGFloat?, backgroundEffect: EffectViewMode) {
         
-       self.init()
+   //   type(of: self).init()
+        
+        self.init()
         
         self.style = style
         self.titleText = title
@@ -175,11 +182,11 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
     }
 
  
-    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         //super.init()
-        modalPresentationStyle = .Custom
-        modalTransitionStyle = .CrossDissolve
+        modalPresentationStyle = .custom
+        modalTransitionStyle = .crossDissolve
         transitioningDelegate = self
         
 
@@ -191,10 +198,10 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
         
         layoutSubviews()
@@ -203,19 +210,19 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     
-    override public func viewWillAppear(animated: Bool) {
+    override open func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         if titleText != nil && titleIconImage == nil && messageText == nil {
             
-            let titleLabelYPositionConstraint = NSLayoutConstraint(item: titleView, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: titleLabel, attribute: NSLayoutAttribute.CenterY, multiplier: 1.0, constant: 0.0)
+            let titleLabelYPositionConstraint = NSLayoutConstraint(item: titleView, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: titleLabel, attribute: NSLayoutAttribute.centerY, multiplier: 1.0, constant: 0.0)
             
             titleView.addConstraint(titleLabelYPositionConstraint)
         }
         
-        if style == .ActionSheet {
+        if style == .actionSheet {
             backgroundView.touchHandler = { [weak self] view in
-                self?.dismissViewControllerAnimated(true, completion: nil)
+                self?.dismiss(animated: true, completion: nil)
             }
         }
         
@@ -225,7 +232,7 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     
-    override public func viewDidAppear(animated: Bool) {
+    override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         if let _ = textField {
@@ -236,30 +243,27 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
     
     
 
-    
-    override public func viewDidLayoutSubviews() {
+    override open func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
         if self.animationEffectView == nil {
             return
         }
 
-        if self.style == .ActionSheet { // change layout constraint for Action Sheet: move content view down to bottom
+        if self.style == .actionSheet { // change layout constraint for Action Sheet: move content view down to bottom
             self.contentViewCenterYtoSuperviewConstraint.constant = self.contentView.superview!.frame.size.height / 2.0 - self.contentView.frame.size.height / 2.0  - 10.0
         }
 
         if let _ = textField {
             // correct textfield positioning
-           textField!.frame = CGRectMake(20.0, 5.0, tableView.tableHeaderView!.bounds.size.width - 40.0, 30.0)
+           textField!.frame = CGRect(x: 20.0, y: 5.0, width: tableView.tableHeaderView!.bounds.size.width - 40.0, height: 30.0)
 
         }
         
 
-        
- 
     }
 
-    override public func didReceiveMemoryWarning() {
+    override open func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
         
@@ -269,10 +273,10 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
     //MARK: UI Setup
         
     
-    private func layoutSubviews() {
+    fileprivate func layoutSubviews() {
         
         
-        contentView.autoresizingMask = .FlexibleHeight
+        contentView.autoresizingMask = .flexibleHeight
         contentView.layer.cornerRadius = settings.contentViewCornerRadius
         contentView.autoresizesSubviews = true
         if let _ = contentViewCustomWidth {
@@ -280,9 +284,9 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
            
         }
         mainView.clipsToBounds = true
-        mainView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
+        mainView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         mainView.backgroundColor = settings.mainViewBackgroundColor
-        if style == .ActionSheet  {
+        if style == .actionSheet  {
             bottomSeparatorLine.removeFromSuperview()
         }
         if alertActions.isEmpty {
@@ -291,13 +295,13 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
 
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.registerNib(UINib(nibName: "DYActionCell", bundle: NSBundle(forClass: DYActionCell.self)), forCellReuseIdentifier: "DYActionCell")
+        tableView.register(UINib(nibName: "DYActionCell", bundle: Bundle(for: DYActionCell.self)), forCellReuseIdentifier: "DYActionCell")
         
         if let _ = okButtonTitle {
             tableView.allowsMultipleSelection = self.shouldAllowMultipleSelection
         }
-        tableView.separatorStyle = .SingleLineEtched
-        tableView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
+        tableView.separatorStyle = .singleLineEtched
+        tableView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     
 
         layoutTitleView()
@@ -306,13 +310,13 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
         
         if let _ = textField {
             layoutTextField()
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DYAlertController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(DYAlertController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         }
         
     }
     
     
-    private func adjustTableViewHeight() {
+    fileprivate func adjustTableViewHeight() {
         
         var height:CGFloat = 0.0
         
@@ -337,7 +341,7 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
         self.tableViewHeightConstraint.constant = height
     }
     
-    private func layoutTitleView() {
+    fileprivate func layoutTitleView() {
         
         titleView.backgroundColor = settings.titleViewBackgroundColor
         
@@ -349,7 +353,7 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
 
         if let _ = titleIconImage {
             titleImageView!.image = self.titleIconImage
-            titleImageView!.contentMode = .ScaleAspectFit
+            titleImageView!.contentMode = .scaleAspectFit
             titleViewHeight += titleImageView!.frame.size.height + padding
             viewElementsCounter += 1
         } else {
@@ -402,30 +406,30 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
     
 
     
-    private func layoutButtons() {
+    fileprivate func layoutButtons() {
 
         
         cancelButton.backgroundColor = settings.cancelButtonBackgroundColor
         
-        cancelButton.setTitleColor(settings.cancelButtonTintColorDefault, forState: .Normal)
-        cancelButton.setTitle(cancelButtonTitle, forState: .Normal)
+        cancelButton.setTitleColor(settings.cancelButtonTintColorDefault, for: UIControlState())
+        cancelButton.setTitle(cancelButtonTitle, for: UIControlState())
         
         
         if let _ = okButtonTitle {
             
             okButton?.backgroundColor = settings.okButtonBackgroundColor
             
-            okButton?.setTitle(okButtonTitle!, forState: .Normal)
-            okButton?.setTitleColor(settings.okButtonTintColorDefault, forState: .Normal)
+            okButton?.setTitle(okButtonTitle!, for: UIControlState())
+            okButton?.setTitleColor(settings.okButtonTintColorDefault, for: UIControlState())
             
             if okButtonDisabled {
-                okButton?.setTitle(okButtonTitle!, forState: .Disabled)
-                okButton?.setTitleColor(settings.okButtonTintColorDisabled, forState: .Disabled)
-                okButton?.enabled = false
+                okButton?.setTitle(okButtonTitle!, for: .disabled)
+                okButton?.setTitleColor(settings.okButtonTintColorDisabled, for: .disabled)
+                okButton?.isEnabled = false
             }
             
             
-            if style == .Alert {
+            if style == .alert {
                 cancelButtonWidthConstraint.constant = contentViewWidthConstraint.constant / 2.0
             } else { // Action Sheet
                 cancelButtonWidthConstraint.constant = contentViewWidthConstraint.constant / 2.0  -  8.0
@@ -440,14 +444,14 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
   
         }
         
-        cancelButton.setTitle(cancelButtonTitle, forState: UIControlState.Normal)
+        cancelButton.setTitle(cancelButtonTitle, for: UIControlState())
         
-        if self.style == .Alert {
+        if self.style == .alert {
             
             cancelButtonToMainViewConstraint.constant = 0
             okButtonToMainViewConstraint?.constant = 0
             
-            contentView.backgroundColor = UIColor.whiteColor()
+            contentView.backgroundColor = UIColor.white
             contentView.clipsToBounds = true
             
         } else {
@@ -468,15 +472,15 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
 
     }
     
-    private func layoutTextField() {
+    fileprivate func layoutTextField() {
         
         self.topSeparatorLine.removeFromSuperview()
         
-        let rect = CGRectMake(00.0, 0.0, tableView.frame.size.width, 40.0)
+        let rect = CGRect(x: 00.0, y: 0.0, width: tableView.frame.size.width, height: 40.0)
         let headerView = UIView(frame: rect)
-        let textFieldFrame = CGRectMake(20.0, 0.0, headerView.bounds.size.width - 40.0, 30.0)
+        let textFieldFrame = CGRect(x: 20.0, y: 0.0, width: headerView.bounds.size.width - 40.0, height: 30.0)
         textField!.frame = textFieldFrame
-        textField!.borderStyle = .RoundedRect
+        textField!.borderStyle = .roundedRect
         textField!.font = settings.textFieldFont
         textField!.backgroundColor = settings.textFieldBackgroundColor
         textField!.textColor = settings.textFieldTextColor
@@ -489,7 +493,7 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
     
     //MARK: Actions and Textfield
     
-   public func addAction(action: DYAlertAction) {
+   public func addAction(_ action: DYAlertAction) {
         
         self.alertActions.append(action)
         
@@ -527,7 +531,7 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
         return true
     }
     
-    public func addOKButtonAction(title:String, setDisabled:Bool, okbuttonAction:(()->Void)?) {
+    public func addOKButtonAction(_ title:String, setDisabled:Bool, okbuttonAction:(()->Void)?) {
      
         self.okButtonTitle = title
         self.okButtonDisabled = setDisabled
@@ -536,9 +540,9 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     
-    public func addTextField(text: String?)  {
+    public func addTextField(_ text: String?)  {
         
-        if style == .ActionSheet {
+        if style == .actionSheet {
           assertionFailure("Action sheet does not support text fields. Change style to .alert instead!")
 
         }
@@ -557,7 +561,7 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
     //MARK: Table view data source and delegate
     
     
-    private func setCellSelectedIfNeeded() {
+    fileprivate func setCellSelectedIfNeeded() {
         
         if let _ =  self.okButtonTitle{
             
@@ -565,31 +569,31 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
             for actionItem in alertActions {
                 indexCounter += 1
                 if actionItem.selected == true {
-                    tableView.selectRowAtIndexPath(NSIndexPath(forRow: indexCounter, inSection: 0), animated: false, scrollPosition: UITableViewScrollPosition.None)
+                    tableView.selectRow(at: IndexPath(row: indexCounter, section: 0), animated: false, scrollPosition: UITableViewScrollPosition.none)
                     
                 }
             }
         }
     }
     
-    public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    public func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     
-    public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         self.adjustTableViewHeight()
 
         return alertActions.count
     }
     
-    public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("DYActionCell") as?
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DYActionCell") as?
         DYActionCell
         
-        let actionItem = alertActions[indexPath.row]
+        let actionItem = alertActions[(indexPath as NSIndexPath).row]
 
         cell!.configureCell(actionItem, hasAccessoryView: (okButtonTitle != nil), settings:actionCellSettings)
 
@@ -600,15 +604,15 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
     
 
   
-    public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         print("did select...")
         
-        let action = alertActions[indexPath.row]
+        let action = alertActions[(indexPath as NSIndexPath).row]
 
         if self.okButtonTitle == nil {
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
-            self.dismissViewControllerAnimated(true, completion: nil)
+            tableView.deselectRow(at: indexPath, animated: true)
+            self.dismiss(animated: true, completion: nil)
             action.selected = true
     
         }  else {
@@ -616,9 +620,9 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
             action.selected = action.selected ? false : true
             
             if action.selected {
-                tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: .Middle)
+                tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
             } else {
-                tableView.deselectRowAtIndexPath(indexPath, animated: true)
+                tableView.deselectRow(at: indexPath, animated: true)
             }
             
    
@@ -633,12 +637,12 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
     }
     
 
-  public  func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+  public  func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
 
         if let _ = self.okButtonTitle {
 
-            let action = alertActions[indexPath.row]
-     //       print("deselecting... seting action.selected to false")
+            let action = alertActions[(indexPath as NSIndexPath).row]
+
             action.selected = false
             if action.handler != nil {
                 action.handler!(action)
@@ -650,16 +654,16 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     
-    public func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 
         return self.getCellHeight()
         
     }
     
     
-    private func getCellHeight()->CGFloat {
+    fileprivate func getCellHeight()->CGFloat {
         
-        let heightLabelFrame = CGRectMake(0, 0, 100.0, 44.0)
+        let heightLabelFrame = CGRect(x: 0, y: 0, width: 100.0, height: 44.0)
         
         let heightLabel = UILabel(frame: heightLabelFrame)
         heightLabel.font = actionCellSettings.actionCellFont
@@ -671,42 +675,39 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
     //MARK: Actions
     
     
-    @IBAction func cancelButtonTapped(sender: UIButton) {
+    @IBAction func cancelButtonTapped(_ sender: UIButton) {
        // print("cancel button tapped")
         handleCancelAction?()
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     
-    @IBAction func okButtonTapped(sender: UIButton) {
+    @IBAction func okButtonTapped(_ sender: UIButton) {
 
         handleOKAction?()
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
-//    func didTapBackground(recognizer: UITapGestureRecognizer) {
-//        
-//        dismissViewControllerAnimated(true, completion: nil)
-//    }
+
 
     //MARK: notifications
     
-    func keyboardWillShow(notification: NSNotification) {
+    func keyboardWillShow(_ notification: Notification) {
 
-        let info = notification.userInfo!
-        let value: AnyObject = info[UIKeyboardFrameEndUserInfoKey]!
+        let info = (notification as NSNotification).userInfo!
+        let value: AnyObject = info[UIKeyboardFrameEndUserInfoKey]! as AnyObject
     
-        let rawFrame = value.CGRectValue
+        let rawFrame = value.cgRectValue
         
-        let keyboardFrame = view.convertRect(rawFrame, fromView: nil)
+        let keyboardFrame = view.convert(rawFrame!, from: nil)
         
         self.contentViewCenterYtoSuperviewConstraint.constant = self.contentView.superview!.frame.size.height / 2.0 - self.contentView.frame.size.height / 2.0  - keyboardFrame.size.height - 10.0
         
-        UIView.animateWithDuration(0.25) { () -> Void in
+        UIView.animate(withDuration: 0.25, animations: { () -> Void in
           
             self.backgroundView.layoutIfNeeded()
           
-        }
+        }) 
         
     
 
@@ -720,15 +721,16 @@ public class DYAlertController: UIViewController, UITableViewDelegate, UITableVi
 
 extension DYAlertController: UIViewControllerTransitioningDelegate {
 
-    public func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
 
         self.isPresenting = true
         
         return self
     }
     
-    public  func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    public  func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         self.isPresenting = false
+        
         return self
     }
     
@@ -737,30 +739,30 @@ extension DYAlertController: UIViewControllerTransitioningDelegate {
 
 extension DYAlertController: UIViewControllerAnimatedTransitioning {
     
-    private func animationDuration()->NSTimeInterval {
+    fileprivate func animationDuration()->TimeInterval {
         return 0.5
     }
     
-    private func createDimView(frame: CGRect) -> UIView {
+    fileprivate func createDimView(_ frame: CGRect) -> UIView {
         
         let dimView = UIView(frame: frame)
         dimView.backgroundColor = settings.dimViewColor
         dimView.alpha = 0
-        dimView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+       dimView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         return dimView
     }
     
-    private func createBlurView(frame:CGRect)->UIView{
+    fileprivate func createBlurView(_ frame:CGRect)->UIView{
         let blurEffect = UIBlurEffect(style: settings.blurViewStyle)
         let blurredView = UIVisualEffectView(effect: blurEffect)
         blurredView.frame = frame
-        blurredView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        blurredView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         blurredView.alpha = 0
         return blurredView
         
     }
     
-    private func getbackgroundEffectView(frame:CGRect)->UIView {
+    fileprivate func getbackgroundEffectView(_ frame:CGRect)->UIView {
         
         var effectView:UIView = UIView()
         
@@ -776,35 +778,36 @@ extension DYAlertController: UIViewControllerAnimatedTransitioning {
     }
     
     
-    public func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
+    public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return self.animationDuration()
     }
     
-   public func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
+   public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         
-        guard let container = transitionContext.containerView() else {
+//        guard let container = transitionContext.containerView else {
+//            return transitionContext.completeTransition(false)
+//        }
+    
+        guard let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) else {
             return transitionContext.completeTransition(false)
         }
         
-        guard let toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey) else {
-            return transitionContext.completeTransition(false)
-        }
-        
-        guard let fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey) else {
+        guard let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from) else {
             return transitionContext.completeTransition(false)
         }
         
         if isPresenting == true {
             
-            if style == .Alert {
-                self.presentAlertAnimation(container, fromView: fromVC.view, toView: toVC.view, completion: { (_) -> Void in
+            if style == .alert {
+                self.presentAlertAnimation(transitionContext.containerView, fromView: fromVC.view, toView: toVC.view, completion: { (_) -> Void in
                      transitionContext.completeTransition(true)
                 })
                 
             } else {
                 //style Action Sheet
                 
-                self.presentActionSheetAnimation(container, fromView: fromVC.view, toView: toVC.view, completion: { (_) -> Void in
+                self.presentActionSheetAnimation(transitionContext.containerView, fromView: fromVC.view, toView: toVC.view, completion: { (_) -> Void in
+                    
                     transitionContext.completeTransition(true)
                 })
                 
@@ -814,7 +817,7 @@ extension DYAlertController: UIViewControllerAnimatedTransitioning {
             
         } else {
             
-            if style == .Alert {
+            if style == .alert {
                 
                 self.dismissAlertAnimation(fromVC.view, completion: { (_) -> Void in
                     transitionContext.completeTransition(true)
@@ -824,7 +827,7 @@ extension DYAlertController: UIViewControllerAnimatedTransitioning {
             
             else {
                 // Action Sheet
-                self.dismissActionSheetAnimation(container, toView: toVC.view, completion: { (_) -> Void in
+                self.dismissActionSheetAnimation(transitionContext.containerView, toView: toVC.view, completion: { (_) -> Void in
                     transitionContext.completeTransition(true)
                 })
             }
@@ -836,7 +839,7 @@ extension DYAlertController: UIViewControllerAnimatedTransitioning {
     }
     
     
-    private func presentAlertAnimation(container: UIView, fromView: UIView, toView:UIView, completion: (Bool)->Void) {
+    fileprivate func presentAlertAnimation(_ container: UIView, fromView: UIView, toView:UIView, completion: @escaping (Bool)->Void) {
        
    
         let dimView = self.getbackgroundEffectView(container.bounds)
@@ -845,14 +848,14 @@ extension DYAlertController: UIViewControllerAnimatedTransitioning {
         
         toView.frame = container.bounds
         // starting transform:
-        toView.transform = CGAffineTransformConcat(fromView.transform, CGAffineTransformMakeScale(0.0, 1.0))
+        toView.transform = fromView.transform.concatenating(CGAffineTransform(scaleX: 0.0, y: 1.0))
         // this works, too
         //CGAffineTransformConcat(CGAffineTransformMakeScale(1.0, 1.0), CGAffineTransformMakeScale(0.0, 1.0))
         container.addSubview(toView)
         
         self.animationEffectView = dimView
         
-        UIView.animateWithDuration(animationDuration(), animations: { () -> Void in
+        UIView.animate(withDuration: animationDuration(), animations: { () -> Void in
             toView.transform = fromView.transform // set to original transform !
             dimView.alpha = 1.0
             }, completion: completion)
@@ -861,11 +864,11 @@ extension DYAlertController: UIViewControllerAnimatedTransitioning {
     
 
     
-    private func dismissAlertAnimation(fromView:UIView, completion: (Bool)->Void) {
+    fileprivate func dismissAlertAnimation(_ fromView:UIView, completion: @escaping (Bool)->Void) {
         
-        UIView.animateWithDuration(animationDuration(), animations: { () -> Void in
+        UIView.animate(withDuration: animationDuration(), animations: { () -> Void in
             
-            fromView.transform = CGAffineTransformMakeScale(0.01, 1.0)
+            fromView.transform = CGAffineTransform(scaleX: 0.01, y: 1.0)
             self.animationEffectView?.alpha = 0
             self.animationEffectView = nil
             
@@ -874,7 +877,7 @@ extension DYAlertController: UIViewControllerAnimatedTransitioning {
     }
     
     
-    private func presentActionSheetAnimation(container: UIView, fromView:UIView, toView:UIView, completion: (Bool)->Void) {
+    fileprivate func presentActionSheetAnimation(_ container: UIView, fromView:UIView, toView:UIView, completion: @escaping (Bool)->Void) {
         
         let effectView = self.getbackgroundEffectView(container.bounds)
   
@@ -883,38 +886,45 @@ extension DYAlertController: UIViewControllerAnimatedTransitioning {
         toView.frame = container.bounds
 
         container.addSubview(toView)
-  
-        backgroundViewBottomConstraint.constant = -toView.bounds.height
-        backgroundViewTopConstraint.constant = toView.bounds.height
- 
-        backgroundView.layoutIfNeeded()
-        
-        self.backgroundViewTopConstraint.constant = 0.0
-        self.backgroundViewBottomConstraint.constant = 0.0
-        
-        self.animationEffectView = effectView
+
+            self.animationEffectView = effectView
+
+        self.backgroundView.center.y = 3 * toView.center.y
+        self.backgroundView.center.x = toView.center.x
 
         
-        UIView.animateWithDuration(animationDuration(), delay: 0.0, options: .CurveEaseIn, animations: { () -> Void in
+           self.backgroundView.layoutIfNeeded()
+        
+  
+
+        
+        
+        UIView.animate(withDuration: animationDuration(), delay: 0.0, options: .curveEaseIn, animations: { () -> Void in
+    
+
+            self.backgroundView.center = toView.center
             
+
+        
             self.backgroundView.layoutIfNeeded()
-            
-            effectView.alpha = 1.0
+
+              effectView.alpha = 1.0
             
             }, completion: completion)
 
         
-        
     }
     
-    private func dismissActionSheetAnimation(container:UIView, toView: UIView, completion:  (Bool)->Void)  {
+    fileprivate func dismissActionSheetAnimation(_ container:UIView, toView: UIView, completion:  @escaping (Bool)->Void)  {
         
         
-        backgroundViewTopConstraint.constant = toView.bounds.height
-        backgroundViewBottomConstraint.constant = -toView.bounds.height
-        
-        UIView.animateWithDuration(animationDuration(), animations: { () -> Void in
+        UIView.animate(withDuration: animationDuration(), delay: 0.0, options: .curveEaseOut, animations: { () -> Void in
           
+
+            
+            self.backgroundView.center.y = 3 * toView.center.y
+            self.backgroundView.center.x = toView.center.x
+            
             self.backgroundView.layoutIfNeeded()
             self.animationEffectView?.alpha = 0
             self.animationEffectView = nil

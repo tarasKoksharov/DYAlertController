@@ -9,6 +9,7 @@
 import UIKit
 import DYAlertController
 
+
 class ViewController: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
@@ -22,27 +23,27 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-        @IBAction func alertExample1Tapped(sender: UIButton) {
+        @IBAction func alertExample1Tapped(_ sender: UIButton) {
     
     
             let titleImage = UIImage(named: "shareIcon")
-            let alert = DYAlertController(style: .Alert, title: "Doing stuff", titleIconImage: titleImage, message:"Select one option", cancelButtonTitle: "Cancel", multipleSelection: false, customFrameWidth:200, backgroundEffect: DYAlertController.EffectViewMode.blur)
+            let alert = DYAlertController(style: .alert, title: "Doing stuff", titleIconImage: titleImage, message:"Select one option", cancelButtonTitle: "Cancel", multipleSelection: false, customFrameWidth:200, backgroundEffect: DYAlertController.EffectViewMode.blur)
 
     
-            alert.addAction(DYAlertAction(title: "Do stuff 1", style:.Default, iconImage: nil, setSelected:false, handler: { (alertAction) -> Void in
+            alert.addAction(DYAlertAction(title: "Do stuff 1", style:.normal, iconImage: nil, setSelected:false, handler: { (alertAction) -> Void in
     
                print("executing first action! selected: \(alertAction.selected)")
                 
             }))
     
-            alert.addAction(DYAlertAction(title: "Do stuff 2", style:.Default, iconImage: nil, setSelected:false, handler: { (alertAction) -> Void in
+            alert.addAction(DYAlertAction(title: "Do stuff 2", style:.normal, iconImage: nil, setSelected:false, handler: { (alertAction) -> Void in
     
                print("executing 2nd action! selected: \(alertAction.selected)")
     
             }))
     
     
-            alert.addAction(DYAlertAction(title: "Beware!", style:.Destructive, iconImage: nil, setSelected:true, handler: { (alertAction) -> Void in
+            alert.addAction(DYAlertAction(title: "Beware!", style:.destructive, iconImage: nil, setSelected:true, handler: { (alertAction) -> Void in
     
     
                print("executing 3rd action! selected: \(alertAction.selected)")
@@ -55,16 +56,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
     
 
-            self.presentViewController(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: nil)
     
         }
     
     
     
-        @IBAction func alertExample2Tapped(sender: UIButton) {
+        @IBAction func alertExample2Tapped(_ sender: UIButton) {
     
             let titleImage = UIImage(named: "shareIcon")
-            let alert = DYAlertController(style: .Alert, title: "Edit Title", titleIconImage: titleImage, message: "Type in a new title", cancelButtonTitle: "Cancel", multipleSelection: false, customFrameWidth:180.0, backgroundEffect: DYAlertController.EffectViewMode.dim)
+            let alert = DYAlertController(style: .alert, title: "Edit Title", titleIconImage: titleImage, message: "Type in a new title", cancelButtonTitle: "Cancel", multipleSelection: false, customFrameWidth:180.0, backgroundEffect: DYAlertController.EffectViewMode.dim)
     
             alert.addTextField(nil)
             alert.textField!.delegate = self
@@ -81,15 +82,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
             
             
     
-            self.presentViewController(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: nil)
     
         }
     
     
-        @IBAction func actionSheetExample1Tapped(sender: UIButton) {
+        @IBAction func actionSheetExample1Tapped(_ sender: UIButton) {
     
             let titleImage = UIImage(named: "shareIcon")
-            let actionSheet = DYAlertController(style: .ActionSheet, title: "Doing stuff", titleIconImage: titleImage, message:"Select one option", cancelButtonTitle: "Cancel", multipleSelection: false, customFrameWidth:nil, backgroundEffect:.dim)
+            let actionSheet = DYAlertController(style: .actionSheet, title: "Doing stuff", titleIconImage: titleImage, message:"Select one option", cancelButtonTitle: "Cancel", multipleSelection: false, customFrameWidth:nil, backgroundEffect:.dim)
     
             enum SelectedOption: String {
                 case firstOption = "First Option"
@@ -100,11 +101,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
             
             var selected:SelectedOption = .firstOption
             
-            actionSheet.addAction(DYAlertAction(title: "Option 1", style:.Default, iconImage: UIImage(named: "eyeIcon"), setSelected:true, handler: { (action) -> Void in
+            actionSheet.addAction(DYAlertAction(title: "Option 1", style:.normal, iconImage: UIImage(named: "eyeIcon"), setSelected:true, handler: { (action) -> Void in
     
                 if action.selected {
                     selected = .firstOption
-                    actionSheet.okButton!.setDefaultStyle("OK", titleColor: actionSheet.settings.okButtonTintColorDefault)
+                    actionSheet.okButton!.setNormalStyle("OK", titleColor: actionSheet.settings.okButtonTintColorDefault)
 
                 } else {
                     // deselected
@@ -119,11 +120,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 print("changing stat of first option.  selected: \(action.selected)")
             }))
     
-            actionSheet.addAction(DYAlertAction(title: "Option 2", style:.Default, iconImage: UIImage(named: "locationIcon"), setSelected:false, handler: { (action) -> Void in
+            actionSheet.addAction(DYAlertAction(title: "Option 2", style:.normal, iconImage: UIImage(named: "locationIcon"), setSelected:false, handler: { (action) -> Void in
     
                 if action.selected {
                     selected = .secondOption
-                    actionSheet.okButton!.setDefaultStyle("OK", titleColor: actionSheet.settings.okButtonTintColorDefault)
+                    actionSheet.okButton!.setNormalStyle("OK", titleColor: actionSheet.settings.okButtonTintColorDefault)
                 } else {
                     // deselected
                     if actionSheet.allActionsDeselected() {
@@ -134,11 +135,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 }
                 
                print("changing state of 2nd option. selected: \(action.selected)")
+                
+                
     
             }))
     
     
-            actionSheet.addAction(DYAlertAction(title: "Option 3 - risky", style: .Destructive, iconImage: UIImage(named: "eyeIcon"), setSelected:false, handler: { (action) -> Void in
+            actionSheet.addAction(DYAlertAction(title: "Option 3 - risky", style: .destructive, iconImage: UIImage(named: "eyeIcon"), setSelected:false, handler: { (action) -> Void in
                 
                 if action.selected {
                     selected = .thirdOption
@@ -167,21 +170,21 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
     
     
-            self.presentViewController(actionSheet, animated: true, completion: nil)
+            self.present(actionSheet, animated: true, completion: nil)
         }
     
     
     
-        @IBAction func actionSheetExample2Tapped(sender: UIButton) {
+        @IBAction func actionSheetExample2Tapped(_ sender: UIButton) {
     
     
-            let actionSheet = DYAlertController(style: .ActionSheet, title: "Doing stuff", titleIconImage: nil, message:"Select one or several options", cancelButtonTitle: "Cancel", multipleSelection: true, customFrameWidth:200.0, backgroundEffect: .blur)
+            let actionSheet = DYAlertController(style: .actionSheet, title: "Doing stuff", titleIconImage: nil, message:"Select one or several options", cancelButtonTitle: "Cancel", multipleSelection: true, customFrameWidth:200.0, backgroundEffect: .blur)
     
     
-            actionSheet.addAction(DYAlertAction(title: "Option 1", style:.Default, iconImage: UIImage(named: "editIcon"), setSelected:false, handler: { (action) -> Void in
+            actionSheet.addAction(DYAlertAction(title: "Option 1", style:.normal, iconImage: UIImage(named: "editIcon"), setSelected:false, handler: { (action) -> Void in
                 
                 if action.selected {
-                    actionSheet.okButton!.setDefaultStyle("OK", titleColor: actionSheet.settings.okButtonTintColorDefault)
+                    actionSheet.okButton!.setNormalStyle("OK", titleColor: actionSheet.settings.okButtonTintColorDefault)
 
                 } else {
                 
@@ -194,11 +197,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
             }))
     
-            actionSheet.addAction(DYAlertAction(title: "Option 2", style:.Default, iconImage: UIImage(named: "locationIcon"), setSelected:false, handler: { (action) -> Void in
+            actionSheet.addAction(DYAlertAction(title: "Option 2", style:.normal, iconImage: UIImage(named: "locationIcon"), setSelected:false, handler: { (action) -> Void in
     
                 print("changing state of 2nd option. selected: \(action.selected), activating OK button")
                 if action.selected {
-                  actionSheet.okButton!.setDefaultStyle("OK", titleColor: actionSheet.settings.okButtonTintColorDefault)
+                  actionSheet.okButton!.setNormalStyle("OK", titleColor: actionSheet.settings.okButtonTintColorDefault)
              
                 } else {
                    if actionSheet.allActionsDeselected() {
@@ -209,7 +212,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }))
     
     
-            actionSheet.addAction(DYAlertAction(title: "Risky", style:.Destructive, iconImage: UIImage(named: "eyeIcon"), setSelected:false, handler: { (action) -> Void in
+            actionSheet.addAction(DYAlertAction(title: "Risky", style:.destructive, iconImage: UIImage(named: "eyeIcon"), setSelected:false, handler: { (action) -> Void in
                 
                 if action.selected {
                     actionSheet.okButton!.setDestructiveStyle("Beware!", titleColor:actionSheet.settings.okButtonTintColorDestructive)
@@ -217,6 +220,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 } else {
                      if actionSheet.allActionsDeselected() {
                         actionSheet.okButton!.setDisabledStyle("Disabled", titleColor: actionSheet.settings.okButtonTintColorDisabled)
+                     } else {
+                        actionSheet.okButton!.setNormalStyle("OK", titleColor: actionSheet.settings.okButtonTintColorDefault)
                     }
                 }
              
@@ -234,12 +239,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
             
             
-            self.presentViewController(actionSheet, animated: true, completion: nil)
+            self.present(actionSheet, animated: true, completion: nil)
             
         }
     
 
-    func textFieldDidBeginEditing(textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         print("began editing!")
     }
 

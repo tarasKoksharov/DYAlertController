@@ -14,7 +14,7 @@ Pull the framework and checkout the example project in the subfolder.
 Install DYAlertController through Cocoapods. Enter the following information into your Podfile (see current version in header):
 
 ```Ruby
-platform :ios, '8.0'
+platform :ios, '10.0'
 
 use_frameworks!
 
@@ -38,6 +38,7 @@ Alternatively, you can pull this framework and copy the DYAlertController folder
 
 As alternative to UIAlertController, DYAlertController has the following additional features:
 
+* updated to the latest **Swift 3** syntax!
 * Add an icon image to the title view right above the title
 * Add an icon image to an action
 * If you add an ok button action (which is optional), clicking on an action will not dismiss the alert or action sheet but will toggle a checkmark instead. You can also set the controller to multiple selection. If you don’t add an ok button action, the alert or action sheet will be dismissed when tapping an action
@@ -50,30 +51,30 @@ As alternative to UIAlertController, DYAlertController has the following additio
 
 ## Usage
 
-The usage is very similar to UIAlertController. See the following example.
+The usage is similar to UIAlertController. See the following example.
 
 
 ###Code example: Creating an alert
 
 ```Swift
 let titleImage = UIImage(named: "shareIcon")
-let alert = DYAlertController(style: .Alert, title: "Doing stuff", titleIconImage: titleImage, message:"Select one option", cancelButtonTitle: "Cancel", multipleSelection: false, customFrameWidth:200, backgroundEffect: DYAlertController.EffectViewMode.blur)
+let alert = DYAlertController(style: .alert, title: "Doing stuff", titleIconImage: titleImage, message:"Select one option", cancelButtonTitle: "Cancel", multipleSelection: false, customFrameWidth:200, backgroundEffect: DYAlertController.EffectViewMode.blur)
 
     
-alert.addAction(DYAlertAction(title: "Do stuff 1", style:.Default, iconImage: nil, setSelected:false, handler: { (alertAction) -> Void in
+alert.addAction(DYAlertAction(title: "Do stuff 1", style:.normal, iconImage: nil, setSelected:false, handler: { (alertAction) -> Void in
     
   print("executing first action! selected: \(alertAction.selected)")
                 
 }))
     
-alert.addAction(DYAlertAction(title: "Do stuff 2", style:.Default, iconImage: nil, setSelected:false, handler: { (alertAction) -> Void in
+alert.addAction(DYAlertAction(title: "Do stuff 2", style:.normal, iconImage: nil, setSelected:false, handler: { (alertAction) -> Void in
     
   print("executing 2nd action! selected: \(alertAction.selected)")
     
 }))
     
     
-alert.addAction(DYAlertAction(title: "Beware!", style:.Destructive, iconImage: nil, setSelected:true, handler: { (alertAction) -> Void in
+alert.addAction(DYAlertAction(title: "Beware!", style:.destructive, iconImage: nil, setSelected:true, handler: { (alertAction) -> Void in
  
     print("executing 3rd action! selected: \(alertAction.selected)")
 }))
@@ -83,7 +84,7 @@ alert.handleCancelAction = {
     print("cancel tapped")
 }
     
-self.presentViewController(alert, animated: true, completion: nil)
+self.present(alert, animated: true, completion: nil)
     
 
 
@@ -121,7 +122,7 @@ The button style can be changed in the action handlers. For example:
 
 ```Swift
 
-let actionSheet = DYAlertController(style: .ActionSheet, title: "Doing stuff", titleIconImage: nil, message:"Select one option", cancelButtonTitle: "Cancel", multipleSelection: false, customFrameWidth:nil, backgroundEffect:.dim)
+let actionSheet = DYAlertController(style: .actionSheet, title: "Doing stuff", titleIconImage: nil, message:"Select one option", cancelButtonTitle: "Cancel", multipleSelection: false, customFrameWidth:nil, backgroundEffect:.dim)
     
 enum SelectedOption: String {
  case firstOption = "First Option"
@@ -132,13 +133,13 @@ enum SelectedOption: String {
   
 var selected:SelectedOption = .firstOption
             
-actionSheet.addAction(DYAlertAction(title: "Option 1", style:.Default, iconImage: UIImage(named: "eyeIcon"), setSelected:true, handler: { (action) -> Void in
+actionSheet.addAction(DYAlertAction(title: "Option 1", style:.normal, iconImage: UIImage(named: "eyeIcon"), setSelected:true, handler: { (action) -> Void in
     
 	if action.selected {
 	//selected
 		selected = .firstOption
 		// this function call changes the ok button style when the user selects this action: 
-		actionSheet.okButton!.setDefaultStyle("OK", titleColor: 			actionSheet.settings.okButtonTintColorDefault)
+		actionSheet.okButton!.setNormalStyle("OK", titleColor: 			actionSheet.settings.okButtonTintColorDefault)
 	
 	} else {
 	// deselected
@@ -186,7 +187,7 @@ If you intend to create several alerts or action sheets with the same fonts and 
 
 alert.settings.contentViewCornerRadius = 2.0
 
-alert.settings.titleTextColor = UIColor.blackColor()
+alert.settings.titleTextColor = UIColor.black
 
 ```
 
