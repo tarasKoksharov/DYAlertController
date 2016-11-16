@@ -1,6 +1,7 @@
-[![Version](https://img.shields.io/cocoapods/v/DYAlertController.svg](http://cocoadocs.org/docsets/DYAlertController)
-[![License](https://img.shields.io/cocoapods/l/DYAlertController.svg](http://cocoadocs.org/docsets/DYAlertController)
-[![Platform](https://img.shields.io/cocoapods/p/DYAlertController.svg](http://cocoadocs.org/docsets/DYAlertController)
+[![Version](https://img.shields.io/cocoapods/v/DYAlertController.svg)](http://cocoadocs.org/docsets/DYAlertController)
+[![License](https://img.shields.io/cocoapods/l/DYAlertController.svg)](http://cocoadocs.org/docsets/DYAlertController)
+[![Platform](https://img.shields.io/cocoapods/p/DYAlertController.svg)](http://cocoadocs.org/docsets/DYAlertController)
+
 
 # DYAlertController
 
