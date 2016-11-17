@@ -33,14 +33,6 @@
                                     <action selector="alertExample1Tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Sgl-41-XyU"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rho-V4-KK0">
-                                <rect key="frame" x="101" y="53" width="108" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Alert Example 2"/>
-                                <connections>
-                                    <action selector="alertExample2Tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WOH-Hk-fNb"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nFT-J4-1fV">
                                 <rect key="frame" x="101" y="91" width="161" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -55,6 +47,14 @@
                                 <state key="normal" title="Action Sheet Example 2"/>
                                 <connections>
                                     <action selector="actionSheetExample2Tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NtV-VC-6fr"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rho-V4-KK0">
+                                <rect key="frame" x="101" y="53" width="167" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Alert Example text fields"/>
+                                <connections>
+                                    <action selector="alertExample2Tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WOH-Hk-fNb"/>
                                 </connections>
                             </button>
                         </subviews>

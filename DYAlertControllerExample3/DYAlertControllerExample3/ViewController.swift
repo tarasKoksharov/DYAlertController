@@ -65,19 +65,42 @@ class ViewController: UIViewController, UITextFieldDelegate {
         @IBAction func alertExample2Tapped(_ sender: UIButton) {
     
             let titleImage = UIImage(named: "shareIcon")
-            let alert = DYAlertController(style: .alert, title: "Edit Title", titleIconImage: titleImage, message: "Type in a new title", cancelButtonTitle: "Cancel", multipleSelection: false, customFrameWidth:180.0, backgroundEffect: DYAlertController.EffectViewMode.dim)
+            let alert = DYAlertController(style: .alert, title: "Login", titleIconImage: titleImage, message: "Enter your login data", cancelButtonTitle: "Cancel", multipleSelection: false, customFrameWidth:180.0, backgroundEffect: DYAlertController.EffectViewMode.dim)
     
-            alert.addTextField(nil)
-            alert.textField!.delegate = self
-    
+            
+            
+            let textfield1 = UITextField()
+            textfield1.placeholder = "username"
+            textfield1.autocorrectionType = UITextAutocorrectionType.no
+            
+            let textfield2 = UITextField()
+            textfield2.placeholder = "password"
+            textfield2.isSecureTextEntry = true
+            
+            let textfield3 = UITextField()
+            textfield3.placeholder = "hostname"
+            textfield3.autocorrectionType = UITextAutocorrectionType.no
+            
+            textfield1.delegate = self
+            textfield2.delegate = self
+            textfield3.delegate = self
+            
+            alert.addTextField(textField: textfield1)
+            alert.addTextField(textField: textfield2)
+            alert.addTextField(textField: textfield3)
     
             alert.handleCancelAction = {
     
                 print("cancel tapped")
             }
     
-            alert.addOKButtonAction("OK", setDisabled: false) { 
+            alert.addOKButtonAction("OK", setDisabled: false) {
+                
+                
                  print("ok button with title \(alert.okButton?.titleLabel?.text) tapped")
+                print("uername: \(alert.textFields[0].text!)")
+                print("password: \(alert.textFields[1].text!)")
+                print("hostname:\(alert.textFields[2].text!)")
             }
             
             
@@ -246,6 +269,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
         print("began editing!")
+        
+        if textField.placeholder == "username" {
+            print("editing username field!")
+        }
     }
 
 

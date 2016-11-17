@@ -75,9 +75,6 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
 
     @IBOutlet weak var backgroundView: TapView!
     
-    @IBOutlet weak var backgroundViewTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var backgroundViewBottomConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var contentView: UIView!
     
     @IBOutlet weak var contentViewCenterYtoSuperviewConstraint: NSLayoutConstraint!
@@ -90,7 +87,7 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
     
     var animationEffectView:UIView?
     
-    open var textField:UITextField?
+    open var textFields:[UITextField] = []
     
     @IBOutlet weak var titleView: UIView!
     @IBOutlet weak var titleViewHeightConstraint: NSLayoutConstraint!
@@ -235,9 +232,11 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
     override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if let _ = textField {
-            textField!.becomeFirstResponder()
+        
+        if self.textFields.count > 0 {
+             self.textFields[0].becomeFirstResponder()
         }
+
         
     }
     
@@ -254,12 +253,11 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
             self.contentViewCenterYtoSuperviewConstraint.constant = self.contentView.superview!.frame.size.height / 2.0 - self.contentView.frame.size.height / 2.0  - 10.0
         }
 
-        if let _ = textField {
-            // correct textfield positioning
-           textField!.frame = CGRect(x: 20.0, y: 5.0, width: tableView.tableHeaderView!.bounds.size.width - 40.0, height: 30.0)
-
-        }
-        
+       
+        if self.textFields.count > 0 {
+                    layoutTextFields()
+                    NotificationCenter.default.addObserver(self, selector: #selector(DYAlertController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+            }
 
     }
 
@@ -308,10 +306,7 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
 
         layoutButtons()
         
-        if let _ = textField {
-            layoutTextField()
-            NotificationCenter.default.addObserver(self, selector: #selector(DYAlertController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        }
+        // text fields (if any) layout only in the didLayoutSubviews method!
         
     }
     
@@ -320,10 +315,10 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
         
         var height:CGFloat = 0.0
         
-        if let _ = textField {
-            
-            height = height + textField!.frame.size.height
-            
+        if self.textFields.count > 0 {
+            print("there are text fields, adjusting TV height")
+            height = height + (CGFloat(self.textFields.count) * self.textFields[0].frame.size.height + 10.0)
+        
             if alertActions.count == 0 {
                 height = height + 30.0
             } else {
@@ -472,20 +467,29 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
 
     }
     
-    fileprivate func layoutTextField() {
+    fileprivate func layoutTextFields() {
         
         self.topSeparatorLine.removeFromSuperview()
         
-        let rect = CGRect(x: 00.0, y: 0.0, width: tableView.frame.size.width, height: 40.0)
+        let rect = CGRect(x: 00.0, y: 0.0, width: Double(tableView.frame.size.width), height: 40.0 * Double(textFields.count))
         let headerView = UIView(frame: rect)
-        let textFieldFrame = CGRect(x: 20.0, y: 0.0, width: headerView.bounds.size.width - 40.0, height: 30.0)
-        textField!.frame = textFieldFrame
-        textField!.borderStyle = .roundedRect
-        textField!.font = settings.textFieldFont
-        textField!.backgroundColor = settings.textFieldBackgroundColor
-        textField!.textColor = settings.textFieldTextColor
-        textField!.textAlignment = settings.textFieldTextAlignment
-        headerView.addSubview(textField!)
+        
+        var y = 0.0
+        
+        for textfield in textFields {
+            print("there are text fields")
+            let textFieldFrame = CGRect(x: 20.0, y: y, width: Double(headerView.bounds.size.width - 40.0), height: 30.0)
+            textfield.frame = textFieldFrame
+            textfield.borderStyle = .roundedRect
+            textfield.font = settings.textFieldFont
+            textfield.backgroundColor = settings.textFieldBackgroundColor
+            textfield.textColor = settings.textFieldTextColor
+            textfield.textAlignment = settings.textFieldTextAlignment
+            headerView.addSubview(textfield)
+            
+            y += 40.0
+        }
+        
         tableView.tableHeaderView = headerView
         
     }
@@ -540,22 +544,16 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
     }
     
     
-    public func addTextField(_ text: String?)  {
+    public func addTextField(textField: UITextField)  {
         
         if style == .actionSheet {
           assertionFailure("Action sheet does not support text fields. Change style to .alert instead!")
 
         }
         
-        guard let _ = textField else {
-            
-         textField = UITextField()
-        textField!.text = text
-            
-            return
-        }
+       self.textFields.append(textField)
         
-        
+        print("counting text fields: \(self.textFields.count)")
     }
     
     //MARK: Table view data source and delegate
@@ -892,12 +890,8 @@ extension DYAlertController: UIViewControllerAnimatedTransitioning {
         self.backgroundView.center.y = 3 * toView.center.y
         self.backgroundView.center.x = toView.center.x
 
-        
            self.backgroundView.layoutIfNeeded()
-        
-  
 
-        
         
         UIView.animate(withDuration: animationDuration(), delay: 0.0, options: .curveEaseIn, animations: { () -> Void in
     
@@ -919,9 +913,7 @@ extension DYAlertController: UIViewControllerAnimatedTransitioning {
         
         
         UIView.animate(withDuration: animationDuration(), delay: 0.0, options: .curveEaseOut, animations: { () -> Void in
-          
 
-            
             self.backgroundView.center.y = 3 * toView.center.y
             self.backgroundView.center.x = toView.center.x
             

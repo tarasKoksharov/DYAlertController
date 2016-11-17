@@ -12,8 +12,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DYAlertController" customModule="DYAlertController" customModuleProvider="target">
             <connections>
                 <outlet property="backgroundView" destination="dI6-AZ-JqX" id="4fm-Iy-Tya"/>
-                <outlet property="backgroundViewBottomConstraint" destination="TZm-oF-At7" id="88O-BX-ewR"/>
-                <outlet property="backgroundViewTopConstraint" destination="zfN-1X-CwB" id="I3G-V5-8HE"/>
                 <outlet property="bottomSeparatorLine" destination="cuL-GW-re2" id="zqO-Wr-zlE"/>
                 <outlet property="buttonSeparatorLine" destination="r5R-2x-dD6" id="rDa-9D-TwY"/>
                 <outlet property="cancelButton" destination="QXD-Pd-uIg" id="Rgm-sF-rWr"/>

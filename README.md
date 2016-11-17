@@ -1,5 +1,5 @@
 [![CocoaPods](https://img.shields.io/cocoapods/v/DYAlertController.svg?style=flat)](http://cocoadocs.org/docsets/DYAlertController)
-[![license](https://img.shields.io/github/license/mashape/DYAlertController.svg?style=flat)](http://cocoadocs.org/docsets/DYAlertController)
+[![license](https://img.shields.io/github/license/DominikButz/DYAlertController.svg?style=flat)](http://cocoadocs.org/docsets/DYAlertController)
 
 
 
@@ -42,8 +42,9 @@ As alternative to UIAlertController, DYAlertController has the following additio
 * updated to the latest **Swift 3** syntax!
 * Add an icon image to the title view right above the title
 * Add an icon image to an action
-* If you add an ok button action (which is optional), clicking on an action will not dismiss the alert or action sheet but will toggle a checkmark instead. You can also set the controller to multiple selection. If you don’t add an ok button action, the alert or action sheet will be dismissed when tapping an action
-* change the ok button style (default, destructive, disabled) in your action item handlers
+* If you add an ok button (which is optional), clicking on an action will not dismiss the alert or action sheet but will toggle a checkmark instead. You can also set the controller to multiple selection. If you don’t add an ok button action, the alert or action sheet will be dismissed when tapping an action
+* change the ok button style (normal, destructive, disabled) in your action item handlers
+* Add several text fields
 * Choose from two background effect view styles, blur and dim
 * Set a custom width for the alert or action sheet (its height will be set automatically depending on the content view’s subviews)
 * Customise colours, fonts, corner radius etc.
@@ -96,16 +97,32 @@ self.present(alert, animated: true, completion: nil)
 
 
 
-### Adding a text field
+### Adding text fields
 ```Swift
-alert.addTextField(“Title")   // set parameter nil if the text field should be empty
+ 	let textfield1 = UITextField()
+	textfield1.placeholder = "username"
+	textfield1.autocorrectionType = UITextAutocorrectionType.no
+	  
+	let textfield2 = UITextField()
+	textfield2.placeholder = "password"
+	textfield2.isSecureTextEntry = true
+	  
+	let textfield3 = UITextField()
+	textfield3.placeholder = "hostname"
+	textfield3.autocorrectionType = UITextAutocorrectionType.no
+	  
+	textfield1.delegate = self
+	textfield2.delegate = self
+	textfield3.delegate = self
+	  
+	alert.addTextField(textField: textfield1)
+	alert.addTextField(textField: textfield2)
+	alert.addTextField(textField: textfield3)
 
-// simply access the textField instance variable of the alert you created. e.g.:
-alert.textField!.delegate = self
 ```
 
-Currently, only **one** text field is supported. 
-Make sure to only add a text field to an alert, not to an action sheet - just like UIAlertController, **your app will crash at runtime if you try to add a text field to an action sheet**.
+You can get the text input like so: alert.textFields[0].text etc. 
+Make sure to only add text fields to an alert, not to an action sheet - just like UIAlertController, **your app will crash at runtime if you try to add a text field to an action sheet**.
 
 ![Alert example 2](https://github.com/DominikButz/DYAlertController/blob/master/gitResources/AlertExample2.gif "Alert example 2")
 
