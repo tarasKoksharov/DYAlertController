@@ -257,9 +257,13 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
         if self.textFields.count > 0 {
                     layoutTextFields()
                     NotificationCenter.default.addObserver(self, selector: #selector(DYAlertController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+                    NotificationCenter.default.addObserver(self, selector: #selector(DYAlertController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+
             }
+        
 
     }
+    
 
     override open func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -710,6 +714,33 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
     
 
     }
+    
+
+    
+    func keyboardWillHide(_ notification:Notification) {
+        
+//        let info = (notification as NSNotification).userInfo!
+//        let value: AnyObject = info[UIKeyboardFrameEndUserInfoKey]! as AnyObject
+//        
+//        let rawFrame = value.cgRectValue
+//        
+//        let keyboardFrame = view.convert(rawFrame!, from: nil)
+        if self.isPresenting {
+            self.contentViewCenterYtoSuperviewConstraint.constant = 0
+            
+            UIView.animate(withDuration: 0.25, animations: { () -> Void in
+                
+                self.backgroundView.layoutIfNeeded()
+                
+            })
+
+        }
+        
+    }
+    
+    
+    
+    
 
 }
 
@@ -846,7 +877,7 @@ extension DYAlertController: UIViewControllerAnimatedTransitioning {
         
         toView.frame = container.bounds
         // starting transform:
-        toView.transform = fromView.transform.concatenating(CGAffineTransform(scaleX: 0.0, y: 1.0))
+        toView.transform = fromView.transform.concatenating(CGAffineTransform(scaleX: 1.0, y: 0.0))
         // this works, too
         //CGAffineTransformConcat(CGAffineTransformMakeScale(1.0, 1.0), CGAffineTransformMakeScale(0.0, 1.0))
         container.addSubview(toView)
