@@ -6,7 +6,8 @@
 
 # DYAlertController
 
-DYAlertController can be used as a replacement for Apple’s UIAlertController. DYAlertController also features two styles, alert and actionSheet. Tapping an action and tapping the ok or cancel button will trigger actions you define in the action item’s handler or in the cancel and ok button handlers, similar to UIAlertController.
+DYAlertController can be used as a replacement for Apple’s UIAlertController. 
+It supports checkmarks, single and multiple selection and icons. DYAlertController also features two styles, alert and actionSheet. Tapping an action and tapping the ok or cancel button will trigger actions you define in the action item’s handler or in the cancel and ok button handlers, similar to UIAlertController.
 Pull the framework and checkout the example project in the subfolder. 
 
 
