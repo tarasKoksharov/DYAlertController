@@ -22,6 +22,14 @@ open class DYAlertAction {
     open var style:ActionStyle = .normal
     
     
+   /// DYAlertAction. Add actions selectable in your alert or action sheet.
+   ///
+   /// - Parameters:
+   ///   - title: Add a title.
+   ///   - style: .normal (default blue colour), .destructive (red) or .disabled (gray and disabled!). The style colour will be the tint colour of the icon image, title and checkmark (if any).
+   ///   - iconImage: Add an icon that will appear left of the title.
+   ///   - setSelected: pre-set your action to selected. Setting this parameter to true will only have an effect if you add an OK button thus enabling checkmarks.
+   ///   - handler: handler colosure. Define what happens if the user taps the action.
    public init(title:String, style:ActionStyle?, iconImage:UIImage?, setSelected:Bool, handler: ((DYAlertAction) -> Void)?) {
         
         
@@ -37,13 +45,19 @@ open class DYAlertAction {
     
 }
 
+
+/// an enum for pre-setting the action style. See initializer.
+///
+/// - normal: default blue colour, always enabled.
+/// - destructive: red colour, always enabled.
+/// - disabled: gray colour, always disabled.
 public enum ActionStyle {
     case normal
     case destructive
     case disabled
 }
 
-open class TapView: UIView {
+internal class TapView: UIView {
     var touchHandler: ((UIView) -> Void)?
     override open func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
@@ -62,18 +76,26 @@ open class TapView: UIView {
 
 open class DYAlertController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    /// style - can be either alert or actionSheet
+    ///
+    /// - alert: appears in the center of your view. Can only be dimissed by tapping a custom action, the cancel button or OK button (if any).
+    /// - actionSheet: Slides in from below and stays at the bottom of your view. Does not support text fields. Can be dismissed by tapping a custom action, the cancel or OK button (if any). Additionally, a tap outside of the action sheet is detected and dismisses the action sheet.
     public enum Style {
         case alert
         case actionSheet
     }
     
+    /// An enum with values blur and dim.
+    ///
+    /// - blur: a UIVisualEffectView with a UIBlurEffect.
+    /// - dim: a view with translucent effect.
     public enum EffectViewMode {
         
         case blur, dim
     }
     
 
-    @IBOutlet weak var backgroundView: TapView!
+    @IBOutlet weak internal var backgroundView: TapView!
     
     @IBOutlet weak var contentView: UIView!
     
@@ -128,6 +150,7 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     
     
+    /// Array holding all custom alert actions.
     open var alertActions:[DYAlertAction] = []
     
     var titleText:String?
@@ -146,7 +169,10 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
     
     var isPresenting = false
     
+    /// a struct - see DYAlertControllerSettings for properties.
     open var settings = DYAlertSettings()
+    
+     /// a struct - see DYAlertControllerSettings for properties.
     open var actionCellSettings = DYAlertSettings.ActionCellSettings()
 
     
@@ -157,6 +183,17 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
         self.init(nibName: "DYAlertController", bundle: Bundle(for: DYAlertController.self))
     }
     
+    /// Initializer of a DYAlertController.
+    ///
+    /// - Parameters:
+    ///   - style: .alert or .actionSheet. The behavior, look and feel is similar to UIAlertController.
+    ///   - title: Ttile of your alert or action sheet. can be nil
+    ///   - titleIconImage: add an optional icon (UIImage)
+    ///   - message: Add a message below the title.
+    ///   - cancelButtonTitle: Custiomize the title of the cancel button.
+    ///   - multipleSelection: Setting this Boolean to true will allow setting checkmarks to several actions. Only works if you add an OK button action (see addOKButtonAction).
+    ///   - customFrameWidth: by default set to 267. Set a custom width, e.g. if your app is supposed to run on larger screens or your actions have very short titles.
+    ///   - backgroundEffect: .dim or .blur
     public convenience init(style:Style, title:String?, titleIconImage:UIImage?, message:String?, cancelButtonTitle:String,  multipleSelection:Bool, customFrameWidth:CGFloat?, backgroundEffect: EffectViewMode) {
         
    //   type(of: self).init()
@@ -174,6 +211,7 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
         self.contentViewCustomWidth = customFrameWidth
         
         self.backgroundEffectViewMode = backgroundEffect
+        
     
 
     }
@@ -501,12 +539,20 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
     
     //MARK: Actions and Textfield
     
+    
+   /// add a DYAlert action  instance to a DYAlertController instance
+   ///
+   /// - Parameter action: a DYAlertAction
    public func addAction(_ action: DYAlertAction) {
         
         self.alertActions.append(action)
         
     }
     
+
+    /// checks if all user defined actions have been deselected. Useful if you want to set the OK button disabled.
+    ///
+    /// - Returns: a Boolean
     public func allActionsDeselected()->Bool {
         
         var allDeselected = true
@@ -521,6 +567,10 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
         return allDeselected
     }
     
+    
+    /// Checks iff all actions are selected.
+    ///
+    /// - Returns: a Boolean.
     public func allActionsSelected()->Bool {
 
         if alertActions.isEmpty  {
@@ -539,6 +589,16 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
         return true
     }
     
+    /**
+     Add an OK button including a completion closure.
+
+     - Parameters:
+        - title: Add a title that will appear as button title
+     
+        - setDisabled: set the button initially disabled. Can be changed in the completion closure of your custom actions
+     
+        - okbuttonAction: completion closure -  add your own code to determine what should happen after the user tapped the OK button
+ */
     public func addOKButtonAction(_ title:String, setDisabled:Bool, okbuttonAction:(()->Void)?) {
      
         self.okButtonTitle = title
@@ -548,6 +608,9 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
     }
     
     
+    /// Create a UITextFiled instance and then add it to an alert. Don't try to add it to an action sheet, this will result in a crash.
+    ///
+    /// - Parameter textField: a UITextField instance you have to create yourself.
     public func addTextField(textField: UITextField)  {
         
         if style == .actionSheet {
@@ -719,12 +782,7 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
     
     func keyboardWillHide(_ notification:Notification) {
         
-//        let info = (notification as NSNotification).userInfo!
-//        let value: AnyObject = info[UIKeyboardFrameEndUserInfoKey]! as AnyObject
-//        
-//        let rawFrame = value.cgRectValue
-//        
-//        let keyboardFrame = view.convert(rawFrame!, from: nil)
+
         if self.isPresenting {
             self.contentViewCenterYtoSuperviewConstraint.constant = 0
             
@@ -737,9 +795,6 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
         }
         
     }
-    
-    
-    
     
 
 }
