@@ -805,7 +805,7 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
 
 extension DYAlertController: UIViewControllerTransitioningDelegate {
 
-    public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+   public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
 
         self.isPresenting = true
         

@@ -29,7 +29,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             let titleImage = UIImage(named: "shareIcon")
             let alert = DYAlertController(style: .alert, title: "Doing stuff", titleIconImage: titleImage, message:"Select one option", cancelButtonTitle: "Cancel", multipleSelection: false, customFrameWidth:nil, backgroundEffect: DYAlertController.EffectViewMode.blur)
 
-    
+        
             alert.addAction(DYAlertAction(title: "Do stuff 1", style:.normal, iconImage: nil, setSelected:false, handler: { (alertAction) -> Void in
     
                print("executing first action! selected: \(alertAction.selected)")
@@ -115,13 +115,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
             let titleImage = UIImage(named: "shareIcon")
             let actionSheet = DYAlertController(style: .actionSheet, title: "Doing stuff", titleIconImage: titleImage, message:"Select one option", cancelButtonTitle: "Cancel", multipleSelection: false, customFrameWidth:nil, backgroundEffect:.dim)
     
-
             
             actionSheet.addAction(DYAlertAction(title: "Option 1", style:.normal, iconImage: UIImage(named: "eyeIcon"), setSelected:true, handler: { (action) -> Void in
     
                 if action.selected {
 
                     actionSheet.okButton!.setNormalStyle("OK", titleColor: actionSheet.settings.okButtonTintColorDefault)
+      
 
                 } else {
                     // deselected
@@ -202,6 +202,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 print("cancel tapped")
             }
     
+          
     
             self.present(actionSheet, animated: true, completion: nil)
         }

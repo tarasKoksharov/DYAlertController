@@ -69,7 +69,7 @@ class DYActionCell: UITableViewCell {
     }
     
     
-    func configureCell(_ actionItem:DYAlertAction, hasAccessoryView:Bool, settings:DYAlertSettings.ActionCellSettings) {
+    internal func configureCell(_ actionItem:DYAlertAction, hasAccessoryView:Bool, settings:DYAlertSettings.ActionCellSettings) {
         
         print("configure cell called")
         

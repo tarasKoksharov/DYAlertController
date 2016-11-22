@@ -9,10 +9,10 @@
 import Foundation
 import UIKit
 
+/// alert and action sheet settings. override by resetting the values on your alert or action sheet instance. e.g. alert.settings.titleTextColor = UIColor.red
 public struct DYAlertSettings {
     
 //MARK: title view settings
-
         public var titleTextColor = UIColor.darkGray
         public var messageTextColor = UIColor.gray
         public var titleTextFont =  UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)
@@ -20,7 +20,6 @@ public struct DYAlertSettings {
         public var titleViewBackgroundColor = UIColor.clear
     
 //MARK: text field settings
-
         public var textFieldBackgroundColor = UIColor.paleGrayColor()
         public var textFieldTextColor = UIColor.white
         public var textFieldFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
@@ -28,7 +27,6 @@ public struct DYAlertSettings {
 
     
     //MARK: button settings
-
         public var okButtonBackgroundColor = UIColor.white
         public var okButtonTintColorDefault = UIColor.defaultBlueTintColor()
         public var okButtonTintColorDestructive = UIColor.red
@@ -50,6 +48,8 @@ public struct DYAlertSettings {
         public var dimViewColor = UIColor.black.withAlphaComponent(0.6)
     
 //MARK: action cell settings
+    
+    /// access and override the properties of action cells, like so: alert.actionCellSettings.defaultTintColor = UIColor.green
     public struct ActionCellSettings {
         public var deselectedTintColor = UIColor.gray
         public var defaultTintColor = UIColor.defaultBlueTintColor()
@@ -64,16 +64,31 @@ public struct DYAlertSettings {
 
 public extension UIButton {
     
+    /// Change the cancel button or OK button to normal style.  Only works within the completion closure of your custom actions!
+    /// To change the button style before runtime, see DYAlertSettings!
+    /// - Parameters:
+    ///   - title: set the new title.
+    ///   - titleColor: set the normal style title color.
     public func setNormalStyle(_ title:String, titleColor:UIColor) {
         
         self.setNormalState(title, titleColor: titleColor)
     }
     
+    /// Change the cancel button or OK button to destructive style.  Only works within the completion closure of your custom actions!
+    /// To change the button style before runtime, see DYAlertSettings!
+    /// - Parameters:
+    ///   - title: set the new title.
+    ///   - titleColor: set the destructive style title color.
     public func setDestructiveStyle(_ title:String, titleColor:UIColor) {
         
         self.setNormalState(title, titleColor: titleColor)
     }
     
+    /// Change the cancel button or OK button to disabled style. Will disable the button. Only works within the completion closure of your custom actions!
+    /// To change the button style before runtime, see DYAlertSettings!
+    /// - Parameters:
+    ///   - title: set the new title.
+    ///   - titleColor: set the disabled style title color.
     public func setDisabledStyle(_ title:String, titleColor:UIColor) {
         
         self.setTitleColor(titleColor, for: .disabled)
@@ -93,11 +108,17 @@ public extension UIButton {
 
 public extension UIColor {
     
+    /// default iOS blue color
+    ///
+    /// - Returns: the default Apple iOS blue color. UIColor(red: 0/255.0, green: 122.0/255.0, blue: 255.0/255.0, alpha: 1)
     public class func defaultBlueTintColor()->UIColor {
         
         return UIColor(red: 0/255.0, green: 122.0/255.0, blue: 255.0/255.0, alpha: 1)
     }
     
+    /// custom light gray color. 
+    ///
+    /// - Returns: UIColor.lightGray.withAlphaComponent(0.6)
     public class func paleGrayColor()->UIColor{
         
         return UIColor.lightGray.withAlphaComponent(0.6)

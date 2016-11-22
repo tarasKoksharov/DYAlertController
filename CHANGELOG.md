@@ -1,5 +1,8 @@
 # Change log
 
+## [Version 1.0.3](https://github.com/DominikButz/DYAlertController/releases/tag/1.0.3)
+Released on 2016-11-22.
+- adding quick help documentation (DYAlertSettings)
 
 ## [Version 1.0.2](https://github.com/DominikButz/DYAlertController/releases/tag/1.0.2)
 Released on 2016-11-21.
@@ -18,5 +21,6 @@ Released on 2016-11-17.
 
 ##[Version 0.6](https://github.com/DominikButz/DYAlertController/releases/tag/0.6)
 Released on 2016-11-16
+
 **Swift 3 support**
 
