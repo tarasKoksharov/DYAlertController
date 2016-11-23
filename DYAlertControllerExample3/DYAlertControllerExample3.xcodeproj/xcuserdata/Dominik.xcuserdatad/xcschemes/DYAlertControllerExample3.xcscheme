@@ -28,6 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B4487F3D1DE547940015E08E"
+               BuildableName = "DYAlertControllerExample3UITests.xctest"
+               BlueprintName = "DYAlertControllerExample3UITests"
+               ReferencedContainer = "container:DYAlertControllerExample3.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B4487F591DE54BA70015E08E"
+               BuildableName = "DYAlertControllerTesting.xctest"
+               BlueprintName = "DYAlertControllerTesting"
+               ReferencedContainer = "container:DYAlertControllerExample3.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

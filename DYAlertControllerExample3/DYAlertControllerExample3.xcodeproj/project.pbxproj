@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		ABA6EF7B01DF7767EC079C98 /* Pods_DYAlertControllerExample3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C97672B9945B2BDD864145A8 /* Pods_DYAlertControllerExample3.framework */; };
+		B4487F411DE547940015E08E /* DYAlertControllerExample3UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4487F401DE547940015E08E /* DYAlertControllerExample3UITests.swift */; };
+		B4487F5D1DE54BA70015E08E /* DYAlertControllerTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4487F5C1DE54BA70015E08E /* DYAlertControllerTesting.swift */; };
 		B45496D11C9959F300831F90 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45496D01C9959F300831F90 /* AppDelegate.swift */; };
 		B45496D31C9959F300831F90 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45496D21C9959F300831F90 /* ViewController.swift */; };
 		B45496D61C9959F300831F90 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B45496D41C9959F300831F90 /* Main.storyboard */; };
@@ -15,9 +17,33 @@
 		B45496DB1C9959F300831F90 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B45496D91C9959F300831F90 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		B4487F431DE547940015E08E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B45496C51C9959F300831F90 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B45496CC1C9959F300831F90;
+			remoteInfo = DYAlertControllerExample3;
+		};
+		B4487F5F1DE54BA70015E08E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B45496C51C9959F300831F90 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B45496CC1C9959F300831F90;
+			remoteInfo = DYAlertControllerExample3;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		05DD5E3AD3F89763E9273B28 /* Pods-DYAlertControllerExample3.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DYAlertControllerExample3.release.xcconfig"; path = "Pods/Target Support Files/Pods-DYAlertControllerExample3/Pods-DYAlertControllerExample3.release.xcconfig"; sourceTree = "<group>"; };
 		16B9B90BB43AEBAF96F3818A /* Pods-DYAlertControllerExample3.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DYAlertControllerExample3.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DYAlertControllerExample3/Pods-DYAlertControllerExample3.debug.xcconfig"; sourceTree = "<group>"; };
+		B4487F3E1DE547940015E08E /* DYAlertControllerExample3UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DYAlertControllerExample3UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B4487F401DE547940015E08E /* DYAlertControllerExample3UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DYAlertControllerExample3UITests.swift; sourceTree = "<group>"; };
+		B4487F421DE547940015E08E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B4487F481DE547D10015E08E /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		B4487F5A1DE54BA70015E08E /* DYAlertControllerTesting.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DYAlertControllerTesting.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B4487F5C1DE54BA70015E08E /* DYAlertControllerTesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DYAlertControllerTesting.swift; sourceTree = "<group>"; };
+		B4487F5E1DE54BA70015E08E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B45496CD1C9959F300831F90 /* DYAlertControllerExample3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DYAlertControllerExample3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B45496D01C9959F300831F90 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B45496D21C9959F300831F90 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -29,6 +55,20 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		B4487F3B1DE547940015E08E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B4487F571DE54BA70015E08E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B45496CA1C9959F300831F90 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -40,10 +80,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B4487F3F1DE547940015E08E /* DYAlertControllerExample3UITests */ = {
+			isa = PBXGroup;
+			children = (
+				B4487F401DE547940015E08E /* DYAlertControllerExample3UITests.swift */,
+				B4487F421DE547940015E08E /* Info.plist */,
+			);
+			path = DYAlertControllerExample3UITests;
+			sourceTree = "<group>";
+		};
+		B4487F5B1DE54BA70015E08E /* DYAlertControllerTesting */ = {
+			isa = PBXGroup;
+			children = (
+				B4487F5C1DE54BA70015E08E /* DYAlertControllerTesting.swift */,
+				B4487F5E1DE54BA70015E08E /* Info.plist */,
+			);
+			path = DYAlertControllerTesting;
+			sourceTree = "<group>";
+		};
 		B45496C41C9959F300831F90 = {
 			isa = PBXGroup;
 			children = (
 				B45496CF1C9959F300831F90 /* DYAlertControllerExample3 */,
+				B4487F3F1DE547940015E08E /* DYAlertControllerExample3UITests */,
+				B4487F5B1DE54BA70015E08E /* DYAlertControllerTesting */,
 				B45496CE1C9959F300831F90 /* Products */,
 				ECB5D5811D287EC565C3E11C /* Pods */,
 				E68156EB06FC3D2B3DCBC255 /* Frameworks */,
@@ -54,6 +114,8 @@
 			isa = PBXGroup;
 			children = (
 				B45496CD1C9959F300831F90 /* DYAlertControllerExample3.app */,
+				B4487F3E1DE547940015E08E /* DYAlertControllerExample3UITests.xctest */,
+				B4487F5A1DE54BA70015E08E /* DYAlertControllerTesting.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -74,6 +136,7 @@
 		E68156EB06FC3D2B3DCBC255 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B4487F481DE547D10015E08E /* XCTest.framework */,
 				C97672B9945B2BDD864145A8 /* Pods_DYAlertControllerExample3.framework */,
 			);
 			name = Frameworks;
@@ -91,6 +154,42 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		B4487F3D1DE547940015E08E /* DYAlertControllerExample3UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B4487F451DE547940015E08E /* Build configuration list for PBXNativeTarget "DYAlertControllerExample3UITests" */;
+			buildPhases = (
+				B4487F3A1DE547940015E08E /* Sources */,
+				B4487F3B1DE547940015E08E /* Frameworks */,
+				B4487F3C1DE547940015E08E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B4487F441DE547940015E08E /* PBXTargetDependency */,
+			);
+			name = DYAlertControllerExample3UITests;
+			productName = DYAlertControllerExample3UITests;
+			productReference = B4487F3E1DE547940015E08E /* DYAlertControllerExample3UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		B4487F591DE54BA70015E08E /* DYAlertControllerTesting */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B4487F611DE54BA70015E08E /* Build configuration list for PBXNativeTarget "DYAlertControllerTesting" */;
+			buildPhases = (
+				B4487F561DE54BA70015E08E /* Sources */,
+				B4487F571DE54BA70015E08E /* Frameworks */,
+				B4487F581DE54BA70015E08E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B4487F601DE54BA70015E08E /* PBXTargetDependency */,
+			);
+			name = DYAlertControllerTesting;
+			productName = DYAlertControllerTesting;
+			productReference = B4487F5A1DE54BA70015E08E /* DYAlertControllerTesting.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		B45496CC1C9959F300831F90 /* DYAlertControllerExample3 */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B45496DF1C9959F300831F90 /* Build configuration list for PBXNativeTarget "DYAlertControllerExample3" */;
@@ -117,10 +216,20 @@
 		B45496C51C9959F300831F90 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0720;
+				LastSwiftUpdateCheck = 0810;
 				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = Duoyun;
 				TargetAttributes = {
+					B4487F3D1DE547940015E08E = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = B45496CC1C9959F300831F90;
+					};
+					B4487F591DE54BA70015E08E = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = B45496CC1C9959F300831F90;
+					};
 					B45496CC1C9959F300831F90 = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = 76FXG652LY;
@@ -142,11 +251,27 @@
 			projectRoot = "";
 			targets = (
 				B45496CC1C9959F300831F90 /* DYAlertControllerExample3 */,
+				B4487F3D1DE547940015E08E /* DYAlertControllerExample3UITests */,
+				B4487F591DE54BA70015E08E /* DYAlertControllerTesting */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		B4487F3C1DE547940015E08E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B4487F581DE54BA70015E08E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B45496CB1C9959F300831F90 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -208,6 +333,22 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		B4487F3A1DE547940015E08E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B4487F411DE547940015E08E /* DYAlertControllerExample3UITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B4487F561DE54BA70015E08E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B4487F5D1DE54BA70015E08E /* DYAlertControllerTesting.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B45496C91C9959F300831F90 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -218,6 +359,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B4487F441DE547940015E08E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B45496CC1C9959F300831F90 /* DYAlertControllerExample3 */;
+			targetProxy = B4487F431DE547940015E08E /* PBXContainerItemProxy */;
+		};
+		B4487F601DE54BA70015E08E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B45496CC1C9959F300831F90 /* DYAlertControllerExample3 */;
+			targetProxy = B4487F5F1DE54BA70015E08E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		B45496D41C9959F300831F90 /* Main.storyboard */ = {
@@ -239,6 +393,72 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		B4487F461DE547940015E08E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				INFOPLIST_FILE = DYAlertControllerExample3UITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.duoyun.DYAlertControllerExample3UITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = DYAlertControllerExample3;
+			};
+			name = Debug;
+		};
+		B4487F471DE547940015E08E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				INFOPLIST_FILE = DYAlertControllerExample3UITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.duoyun.DYAlertControllerExample3UITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = DYAlertControllerExample3;
+			};
+			name = Release;
+		};
+		B4487F621DE54BA70015E08E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				INFOPLIST_FILE = DYAlertControllerTesting/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.duoyun.DYAlertControllerTesting;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = DYAlertControllerExample3;
+			};
+			name = Debug;
+		};
+		B4487F631DE54BA70015E08E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				INFOPLIST_FILE = DYAlertControllerTesting/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.duoyun.DYAlertControllerTesting;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = DYAlertControllerExample3;
+			};
+			name = Release;
+		};
 		B45496DD1C9959F300831F90 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -356,6 +576,22 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		B4487F451DE547940015E08E /* Build configuration list for PBXNativeTarget "DYAlertControllerExample3UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B4487F461DE547940015E08E /* Debug */,
+				B4487F471DE547940015E08E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		B4487F611DE54BA70015E08E /* Build configuration list for PBXNativeTarget "DYAlertControllerTesting" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B4487F621DE54BA70015E08E /* Debug */,
+				B4487F631DE54BA70015E08E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		B45496C81C9959F300831F90 /* Build configuration list for PBXProject "DYAlertControllerExample3" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -1,4 +1,7 @@
 # Change log
+## [Version 1.0.4](https://github.com/DominikButz/DYAlertController/releases/tag/1.0.4)
+Released on 2016-11-23.
+- added testing (experimental)
 
 ## [Version 1.0.3](https://github.com/DominikButz/DYAlertController/releases/tag/1.0.3)
 Released on 2016-11-22.

@@ -49,6 +49,8 @@
 		894034E98FA2A29A1D7A6426AF96AF09 /* DYActionCell.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; path = DYActionCell.xib; sourceTree = "<group>"; };
 		A6F074DD9183758CA8610A655589A116 /* DYAlertSettings.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DYAlertSettings.swift; sourceTree = "<group>"; };
 		AB23A6290C3C8F548300D725BACE3C5A /* DYAlertController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DYAlertController-prefix.pch"; sourceTree = "<group>"; };
+		B4487F501DE54B680015E08E /* DYAlertControllerUITesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DYAlertControllerUITesting.swift; sourceTree = "<group>"; };
+		B4487F521DE54B680015E08E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B7BB6FAC9D8C0628A996510A12849F7B /* Pods-DYAlertControllerExample3.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-DYAlertControllerExample3.debug.xcconfig"; sourceTree = "<group>"; };
 		B7C562A9639D52316D8104C2FEC8957E /* Pods-DYAlertControllerExample3-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-DYAlertControllerExample3-umbrella.h"; sourceTree = "<group>"; };
 		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -161,6 +163,7 @@
 			children = (
 				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
 				4A7D2F0AE8EADD6780D593CCDB33A0D6 /* Development Pods */,
+				B4487F4F1DE54B680015E08E /* DYAlertControllerUITesting */,
 				433CD3331B6C3787F473C941B61FC68F /* Frameworks */,
 				161A1D74A0D5DC96B5C18205B0E401E1 /* Products */,
 				9D3DD4A1CFB43127FEF2DAA994DA990D /* Targets Support Files */,
@@ -184,6 +187,15 @@
 				C886E2A97641FA88EC1D0E81F293A33E /* Pods-DYAlertControllerExample3 */,
 			);
 			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		B4487F4F1DE54B680015E08E /* DYAlertControllerUITesting */ = {
+			isa = PBXGroup;
+			children = (
+				B4487F501DE54B680015E08E /* DYAlertControllerUITesting.swift */,
+				B4487F521DE54B680015E08E /* Info.plist */,
+			);
+			path = DYAlertControllerUITesting;
 			sourceTree = "<group>";
 		};
 		C886E2A97641FA88EC1D0E81F293A33E /* Pods-DYAlertControllerExample3 */ = {
@@ -268,7 +280,7 @@
 		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0700;
+				LastSwiftUpdateCheck = 0810;
 				LastUpgradeCheck = 0810;
 				TargetAttributes = {
 					9412185857293ACAC79FCE0F45CA831D = {
@@ -346,6 +358,7 @@
 			baseConfigurationReference = C12F0F247A820593842F1D043C44AE8D /* Pods-DYAlertControllerExample3.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -408,6 +421,7 @@
 			baseConfigurationReference = B7BB6FAC9D8C0628A996510A12849F7B /* Pods-DYAlertControllerExample3.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
