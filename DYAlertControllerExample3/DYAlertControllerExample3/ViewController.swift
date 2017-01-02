@@ -124,18 +124,18 @@ class ViewController: UIViewController, UITextFieldDelegate {
       
 
                 } else {
-                    // deselected
+                    // this action is deselected
                     
+                     // check if all actions are deselected
                     if actionSheet.allActionsDeselected() {
-                 
+                        
+                            // let's disable the OK button if all actions are deselected
                         actionSheet.okButton!.setDisabledStyle("Disabled", titleColor: actionSheet.settings.okButtonTintColorDisabled)
                     }
                     
-                    
-                    
                 }
                 
-                print("changing stat of first option.  selected: \(action.selected)")
+                print("changing state of first option.  selected: \(action.selected)")
             }))
     
             actionSheet.addAction(DYAlertAction(title: "Option 2", style:.normal, iconImage: UIImage(named: "locationIcon"), setSelected:false, handler: { (action) -> Void in
@@ -182,7 +182,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 
                 var selectedOptionIndex:Int?
                 
-                // we set the multipleSelection option to false, so only one can be selected
+                // we had set the multipleSelection option to false, so only one can be selected
                 for i in 0...actionSheet.alertActions.count-1 {
                     if actionSheet.alertActions[i].selected {
                         selectedOptionIndex = i

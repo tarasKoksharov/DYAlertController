@@ -10,6 +10,8 @@ DYAlertController can be used as a replacement for Apple’s UIAlertController.
 It supports checkmarks, single and multiple selection and icons. DYAlertController also features two styles, alert and actionSheet. Tapping an action and tapping the ok or cancel button will trigger actions you define in the action item’s handler or in the cancel and ok button handlers, similar to UIAlertController.
 Pull the framework and checkout the example project in the subfolder. 
 
+Updated to the latest **Swift 3** syntax!
+
 
 ## Installation
 
@@ -41,7 +43,6 @@ Alternatively, you can pull this framework and copy the DYAlertController folder
 
 As alternative to UIAlertController, DYAlertController has the following additional features:
 
-* updated to the latest **Swift 3** syntax!
 * Add an icon image to the title view right above the title
 * Add an icon image to an action
 * If you add an ok button (which is optional), clicking on an action will not dismiss the alert or action sheet but will toggle a checkmark instead. You can also set the controller to multiple selection. If you don’t add an ok button action, the alert or action sheet will be dismissed when tapping an action
@@ -142,50 +143,60 @@ The button style can be changed in the action handlers. For example:
 
 ```Swift
 
-let actionSheet = DYAlertController(style: .actionSheet, title: "Doing stuff", titleIconImage: nil, message:"Select one option", cancelButtonTitle: "Cancel", multipleSelection: false, customFrameWidth:nil, backgroundEffect:.dim)
+ let actionSheet = DYAlertController(style: .actionSheet, title: "Doing stuff", titleIconImage: titleImage, message:"Select one option", cancelButtonTitle: "Cancel", multipleSelection: false, customFrameWidth:nil, backgroundEffect:.dim)
     
-enum SelectedOption: String {
- case firstOption = "First Option"
- case secondOption = "Second Option"
- case thirdOption = "Third Option"
- case none  = "None"
-}
-  
-var selected:SelectedOption = .firstOption
             
 actionSheet.addAction(DYAlertAction(title: "Option 1", style:.normal, iconImage: UIImage(named: "eyeIcon"), setSelected:true, handler: { (action) -> Void in
     
-	if action.selected {
-	//selected
-		selected = .firstOption
-		// this function call changes the ok button style when the user selects this action: 
-		actionSheet.okButton!.setNormalStyle("OK", titleColor: 			actionSheet.settings.okButtonTintColorDefault)
-	
-	} else {
-	// deselected
-	     
-		if actionSheet.allActionsDeselected() {
-		    selected = .none
-		    actionSheet.okButton!.setDisabledStyle("Disabled", titleColor: 			actionSheet.settings.okButtonTintColorDisabled)
-		 }
-	                    
-	}
-	                
-	  print("changing state of first option.  selected: \(action.selected)")
+    if action.selected {
+
+      actionSheet.okButton!.setNormalStyle("OK", titleColor: actionSheet.settings.okButtonTintColorDefault)
+      
+
+     } else {
+       // this action is deselected
+                    
+       // check if all actions are deselected
+       if actionSheet.allActionsDeselected() {
+                        
+           // let's disable the OK button if all actions are deselected
+          actionSheet.okButton!.setDisabledStyle("Disabled", titleColor: actionSheet.settings.okButtonTintColorDisabled)
+           }
+                    
+     }
+                
+  print("changing state of first option.  selected: \(action.selected)")
+            
 }))
 
 
 // ... add other actions...
 
 
-actionSheet.addOKButtonAction("OK", setDisabled: false) { 
-     print("ok button tapped -  option selected: \(selected.rawValue)")
+actionSheet.addOKButtonAction("OK", setDisabled: false) {
+                
+    var selectedOptionIndex:Int?
+                
+                // we had set the multipleSelection option to false, so only one can be selected
+     for i in 0...actionSheet.alertActions.count-1 {
+         if actionSheet.alertActions[i].selected {
+             selectedOptionIndex = i
+            }
+      }
+            
+      if let _ = selectedOptionIndex {
+                     print("ok button tapped -  option selected: \(actionSheet.alertActions[selectedOptionIndex!].title)")
+       } else {
+                    print("no option was selected!")  
+// to play safe... but actually not possible because ok button set to disabled if none selected
+        }
+                
  }
             
  // ...
 
 ```
-Download the example project for more details and check out the examples as animations below. 
+Download the example project for more details and check out the examples as shown in the gif animations below. 
 
 ### Action sheet examples
 
