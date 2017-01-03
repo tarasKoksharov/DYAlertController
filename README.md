@@ -95,7 +95,7 @@ self.present(alert, animated: true, completion: nil)
 
 ```
 
-![Alert example 1](https://github.com/DominikButz/DYAlertController/blob/master/gitResources/AlertExample1.gif "Alert example 1")
+![Alert example 1](https://github.com/DominikButz/DYAlertController/blob/master/gitResources/AlertExample1.gif =254x444 "Alert example 1")
 
 
 
