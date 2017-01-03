@@ -16,9 +16,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B4487F4D1DE54B680015E08E"
-               BuildableName = "DYAlertControllerUITesting.xctest"
-               BlueprintName = "DYAlertControllerUITesting"
+               BlueprintIdentifier = "B4E544081E1ACB1800CCFDAE"
+               BuildableName = "DYAlertControllerTests.xctest"
+               BlueprintName = "DYAlertControllerTests"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </TestableReference>

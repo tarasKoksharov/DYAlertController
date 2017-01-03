@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0810"
+   LastUpgradeVersion = "0820"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -46,6 +46,16 @@
                BuildableName = "DYAlertControllerTesting.xctest"
                BlueprintName = "DYAlertControllerTesting"
                ReferencedContainer = "container:DYAlertControllerExample3.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B4E5442A1E1AD59E00CCFDAE"
+               BuildableName = "DYAlertControllerTests.xctest"
+               BlueprintName = "DYAlertControllerTests"
+               ReferencedContainer = "container:Pods/Pods.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>

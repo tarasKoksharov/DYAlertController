@@ -217,7 +217,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = Duoyun;
 				TargetAttributes = {
 					B4487F3D1DE547940015E08E = {
@@ -583,6 +583,7 @@
 				B4487F471DE547940015E08E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B4487F611DE54BA70015E08E /* Build configuration list for PBXNativeTarget "DYAlertControllerTesting" */ = {
 			isa = XCConfigurationList;
@@ -591,6 +592,7 @@
 				B4487F631DE54BA70015E08E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B45496C81C9959F300831F90 /* Build configuration list for PBXProject "DYAlertControllerExample3" */ = {
 			isa = XCConfigurationList;

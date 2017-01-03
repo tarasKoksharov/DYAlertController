@@ -52,4 +52,38 @@ class DYAlertControllerExample3UITests: XCTestCase {
         
     }
     
+    func testExample2() {
+        // Use recording to get started writing UI tests.
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        
+        let app = XCUIApplication()
+        app.buttons["Alert Example 1"].tap()
+        
+        let tablesQuery = app.tables
+        tablesQuery.staticTexts["Do stuff 1"].tap()
+        
+        
+        let actionSheetExample1Button = app.buttons["Action Sheet Example 1"]
+        actionSheetExample1Button.tap()
+        
+        let option2StaticText = tablesQuery.staticTexts["Option 2"]
+        option2StaticText.tap()
+        tablesQuery.staticTexts["Option 3 - risky"].tap()
+        
+        let bewareButton = app.buttons["Beware!"]
+        bewareButton.tap()
+        actionSheetExample1Button.tap()
+        
+        let option1StaticText = tablesQuery.staticTexts["Option 1"]
+        option1StaticText.tap()
+        app.children(matching: .window).element(boundBy: 0).children(matching: .other).element(boundBy: 1).tap()
+        app.buttons["Action Sheet Example 2"].tap()
+        option1StaticText.tap()
+        option2StaticText.tap()
+        tablesQuery.staticTexts["Risky"].tap()
+        bewareButton.tap()
+        
+    }
+    
 }

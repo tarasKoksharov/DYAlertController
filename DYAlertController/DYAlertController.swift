@@ -103,7 +103,7 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
     
     @IBOutlet weak var contentViewWidthConstraint: NSLayoutConstraint!
     
-    var contentViewCustomWidth:CGFloat?
+    public var contentViewCustomWidth:CGFloat?
     
     @IBOutlet weak var mainView: UIView!
     
@@ -153,17 +153,17 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
     /// Array holding all custom alert actions.
     open var alertActions:[DYAlertAction] = []
     
-    var titleText:String?
-    var messageText:String?
+    public var titleText:String?
+   public  var messageText:String?
     var titleIconImage:UIImage?
-    var cancelButtonTitle:String?
+    public var cancelButtonTitle:String?
     
-    var okButtonTitle:String?
+   public  var okButtonTitle:String?
     var okButtonDisabled = false
     
     var shouldAllowMultipleSelection = false
 
-    var style:Style = .alert
+    public var style:Style = .alert
     
     var backgroundEffectViewMode:EffectViewMode = .dim
     
@@ -221,7 +221,7 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         //super.init()
         modalPresentationStyle = .custom
-        modalTransitionStyle = .crossDissolve
+        modalTransitionStyle = .coverVertical
         transitioningDelegate = self
         
 

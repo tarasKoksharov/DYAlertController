@@ -14,6 +14,11 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
+		<key>DYAlertControllerTests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
 		<key>DYAlertControllerUITesting.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -40,6 +45,21 @@
 			<true/>
 		</dict>
 		<key>B4487F4D1DE54B680015E08E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B4E544081E1ACB1800CCFDAE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B4E5441B1E1AD0AB00CCFDAE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B4E5442A1E1AD59E00CCFDAE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
