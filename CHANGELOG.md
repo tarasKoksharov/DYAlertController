@@ -1,9 +1,13 @@
 # Change log
 
+## [Version 1.0.6](https://github.com/DominikButz/DYAlertController/releases/tag/1.0.6)
+Released on 2017-01-03.
+- action sheet animation replaced by spring with damping effect 
+
 ## [Version 1.0.5](https://github.com/DominikButz/DYAlertController/releases/tag/1.0.5)
 Released on 2017-01-03.
-- updated testing (experimental)
-- 
+- updated testing 
+
 ## [Version 1.0.4](https://github.com/DominikButz/DYAlertController/releases/tag/1.0.4)
 Released on 2016-11-23.
 - added testing (experimental)

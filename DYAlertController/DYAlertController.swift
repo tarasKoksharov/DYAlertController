@@ -976,22 +976,19 @@ extension DYAlertController: UIViewControllerAnimatedTransitioning {
         self.backgroundView.center.y = 3 * toView.center.y
         self.backgroundView.center.x = toView.center.x
 
-           self.backgroundView.layoutIfNeeded()
+        self.backgroundView.layoutIfNeeded()
 
-        
-        UIView.animate(withDuration: animationDuration(), delay: 0.0, options: .curveEaseIn, animations: { () -> Void in
-    
-
+        UIView.animate(withDuration: animationDuration(), delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: .curveEaseInOut, animations: {
+            () -> Void in
+            
             self.backgroundView.center = toView.center
-            
 
-        
             self.backgroundView.layoutIfNeeded()
-
-              effectView.alpha = 1.0
             
-            }, completion: completion)
+            effectView.alpha = 1.0
 
+            
+        }, completion: completion)
         
     }
     
