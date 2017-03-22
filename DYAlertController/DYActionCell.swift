@@ -43,8 +43,7 @@ class DYActionCell: UITableViewCell {
        // print("set selected called")
 
         if hasAccessoryView {
-            // has ok button!
-
+   
             if selected {
                 self.accessoryType = UITableViewCellAccessoryType.checkmark
                 self.tintColor = self.getColour(self.style, selected:  true)
@@ -69,7 +68,7 @@ class DYActionCell: UITableViewCell {
     }
     
     
-    internal func configureCell(_ actionItem:DYAlertAction, hasAccessoryView:Bool, settings:DYAlertSettings.ActionCellSettings) {
+    internal func configureCell(_ actionItem:DYAlertAction, hasOKButton:Bool, allowsMultipleSelection:Bool, settings:DYAlertSettings.ActionCellSettings) {
         
         print("configure cell called")
         
@@ -78,23 +77,34 @@ class DYActionCell: UITableViewCell {
         
         let iconImage = actionItem.iconImage
         self.actionImageView!.image = iconImage?.withRenderingMode(.alwaysTemplate)
-       self.actionImageView!.contentMode = .scaleAspectFit
+       self.actionImageView!.contentMode = .scaleAspectFill
         
         self.isUserInteractionEnabled = (actionItem.style != .disabled)
-        self.hasAccessoryView = hasAccessoryView
+        self.hasAccessoryView = {
+            if hasOKButton {
+                return true
+            } else {
+                if !allowsMultipleSelection {
+                    return true
+                }
+            }
+            
+            return false
+            
+        }()
         self.style = actionItem.style
         
         self.settings = settings
 
         if hasAccessoryView {
-            //has ok button!
+          
              self.selectionStyle = .none
 
             self.tintColor = self.getColour(self.style, selected:  actionItem.selected)
 
             
         } else {
-            // no ok button, no checkmarks
+           
             self.selectionStyle = .gray
             self.tintColor = self.getColour(self.style, selected: true)
            self.centerViewElements()

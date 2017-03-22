@@ -660,7 +660,9 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
         
         let actionItem = alertActions[(indexPath as NSIndexPath).row]
 
-        cell!.configureCell(actionItem, hasAccessoryView: (okButtonTitle != nil), settings:actionCellSettings)
+
+        
+        cell!.configureCell(actionItem, hasOKButton: (self.okButtonTitle != nil), allowsMultipleSelection: self.shouldAllowMultipleSelection, settings:actionCellSettings)
 
         return cell!
         
