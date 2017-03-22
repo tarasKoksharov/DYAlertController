@@ -277,44 +277,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
             
         }
     
-    @IBAction func actionSheetExample3Tapped(_ sender: UIButton) {
-        
-        let actionSheet = DYAlertController(style: .actionSheet, title: "Title", titleIconImage: UIImage(named:"shareIcon")!, message: nil, cancelButtonTitle: "Cancel", multipleSelection: false, customFrameWidth: self.view.frame.size.width - 80.0, backgroundEffect: .blur)
-        
-        
-        
-        let firstAction = DYAlertAction(title: "Option 1", style: ActionStyle.normal, iconImage: UIImage(named:"editIcon"), setSelected: true) { action -> Void in
-            
-            
-            print("option 1 selected")
-            
-        }
-        
-        let secondAction = DYAlertAction(title: "Option 2", style: .normal, iconImage: UIImage(named:"locationIcon"), setSelected: false) { action -> Void in
-            
-             print("option 2 selected")
-            
-        }
-        
-        let thirdAction = DYAlertAction(title: "Option 3", style: .normal, iconImage: UIImage(named:"eyeIcon"), setSelected:false) { action -> Void in
-            
-         
-             print("option 3 selected")
-            
-        }
-        
-
-        actionSheet.addAction(firstAction)
-        actionSheet.addAction(secondAction)
-        actionSheet.addAction(thirdAction)
-
-        self.present(actionSheet, animated: true, completion: nil)
-        
-
-    }
-    
-    
-    
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
         print("began editing!")
