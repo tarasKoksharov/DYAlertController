@@ -24,7 +24,7 @@ platform :ios, '8.0'
 use_frameworks!
 
 target '[Your app project title]' do
-pod 'DYAlertController', '~> [current version - see header]'
+pod 'DYAlertController', '~> [version]'
 end
 
 ```
@@ -39,7 +39,7 @@ Alternatively, you can pull this framework and copy the DYAlertController folder
 
  
 
-##Features
+## Features
 
 As alternative to UIAlertController, DYAlertController has the following additional features:
 
@@ -60,7 +60,7 @@ As alternative to UIAlertController, DYAlertController has the following additio
 The usage is similar to UIAlertController. See the following examples.
 
 
-###Code example: Creating an alert
+### Code example: Creating an alert
 
 ```Swift
 let titleImage = UIImage(named: "shareIcon")
@@ -257,7 +257,7 @@ Released on 2016-11-17.
 
 - add several text fields
 
-##[Version 0.6](https://github.com/DominikButz/DYAlertController/releases/tag/0.6)
+## [Version 0.6](https://github.com/DominikButz/DYAlertController/releases/tag/0.6)
 Released on 2016-11-16
 Switched to Swift 3
 
