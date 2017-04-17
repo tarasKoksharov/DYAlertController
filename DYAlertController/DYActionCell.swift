@@ -71,7 +71,7 @@ class DYActionCell: UITableViewCell {
     
     internal func configureCell(_ actionItem:DYAlertAction, hasAccessoryView:Bool, settings:DYAlertSettings.ActionCellSettings) {
         
-        print("configure cell called")
+       // print("configure cell called")
         
        self.actionTitleLabel.text = actionItem.title
        self.actionTitleLabel.font = settings.actionCellFont
@@ -87,14 +87,14 @@ class DYActionCell: UITableViewCell {
         self.settings = settings
 
         if hasAccessoryView {
-            //has ok button!
+          //has checkmark
              self.selectionStyle = .none
 
             self.tintColor = self.getColour(self.style, selected:  actionItem.selected)
 
             
         } else {
-            // no ok button, no checkmarks
+            //  no checkmark
             self.selectionStyle = .gray
             self.tintColor = self.getColour(self.style, selected: true)
            self.centerViewElements()

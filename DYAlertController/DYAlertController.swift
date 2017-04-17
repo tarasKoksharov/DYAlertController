@@ -94,6 +94,11 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
         case blur, dim
     }
     
+    
+    public enum  SelectionType {
+        case single, multiple, none
+    }
+    
 
     @IBOutlet weak internal var backgroundView: TapView!
     
@@ -160,8 +165,9 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
     
    public  var okButtonTitle:String?
     var okButtonDisabled = false
+    var okButtonDestructive = false
     
-    var shouldAllowMultipleSelection = false
+    var selectionType: SelectionType = .none
 
     public var style:Style = .alert
     
@@ -191,10 +197,10 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
     ///   - titleIconImage: add an optional icon (UIImage)
     ///   - message: Add a message below the title.
     ///   - cancelButtonTitle: Custiomize the title of the cancel button.
-    ///   - multipleSelection: Setting this Boolean to true will allow setting checkmarks to several actions. Only works if you add an OK button action (see addOKButtonAction).
+    ///   - checkmarks: .single works with and without OK button. none only without OK button. multiple requires an OK button!
     ///   - customFrameWidth: by default set to 267. Set a custom width, e.g. if your app is supposed to run on larger screens or your actions have very short titles.
     ///   - backgroundEffect: .dim or .blur
-    public convenience init(style:Style, title:String?, titleIconImage:UIImage?, message:String?, cancelButtonTitle:String,  multipleSelection:Bool, customFrameWidth:CGFloat?, backgroundEffect: EffectViewMode) {
+    public convenience init(style:Style, title:String?, titleIconImage:UIImage?, message:String?, cancelButtonTitle:String,  checkmarks:SelectionType, customFrameWidth:CGFloat?, backgroundEffect: EffectViewMode) {
         
    //   type(of: self).init()
         
@@ -206,7 +212,7 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
         self.titleIconImage = titleIconImage
         self.cancelButtonTitle = cancelButtonTitle
         
-        self.shouldAllowMultipleSelection = multipleSelection
+        self.selectionType = checkmarks
         
         self.contentViewCustomWidth = customFrameWidth
         
@@ -238,6 +244,22 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
 
     override open func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+
+        if self.okButtonTitle == nil && self.selectionType == .multiple {
+            assertionFailure("If multiple checkmarks are allowed,  you have to add an OK button action! ")
+        }
+        
+        if self.okButtonTitle == nil && self.textFields.count > 0 {
+                
+                assertionFailure("Text fields require an ok button action!")
+         
+        }
+        
+        if self.okButtonTitle != nil && self.selectionType == .none {
+            assertionFailure("An OK button action is not possible if there are no checkmarks! Set checkmarks to other than none")
+        }
         
         layoutSubviews()
 
@@ -337,9 +359,10 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
         tableView.dataSource = self
         tableView.register(UINib(nibName: "DYActionCell", bundle: Bundle(for: DYActionCell.self)), forCellReuseIdentifier: "DYActionCell")
         
-        if let _ = okButtonTitle {
-            tableView.allowsMultipleSelection = self.shouldAllowMultipleSelection
-        }
+        
+        tableView.allowsMultipleSelection = self.selectionType == .multiple
+    
+        
         tableView.separatorStyle = .singleLineEtched
         tableView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     
@@ -459,11 +482,19 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
             okButton?.setTitle(okButtonTitle!, for: UIControlState())
             okButton?.setTitleColor(settings.okButtonTintColorDefault, for: UIControlState())
             
+            
+            if okButtonDestructive {
+                 okButton?.setDestructiveStyle(okButtonTitle!, titleColor:self.settings.okButtonTintColorDestructive)
+             
+            }
+            
             if okButtonDisabled {
                 okButton?.setTitle(okButtonTitle!, for: .disabled)
                 okButton?.setTitleColor(settings.okButtonTintColorDisabled, for: .disabled)
                 okButton?.isEnabled = false
             }
+            
+            
             
             
             if style == .alert {
@@ -568,7 +599,7 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
     }
     
     
-    /// Checks iff all actions are selected.
+    /// Checks if all actions are selected.
     ///
     /// - Returns: a Boolean.
     public func allActionsSelected()->Bool {
@@ -589,20 +620,62 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
         return true
     }
     
+    /// Checks if any selected action is destructive
+    ///
+    /// - Returns: a Boolean.
+    public func isAnySelectedActionDestructive()->Bool {
+        
+        if self.allActionsDeselected() {
+            return false
+        }
+        
+        for action in alertActions {
+            if action.selected && action.style == .destructive {
+                return true
+            }
+        }
+        
+        return false
+    }
+    
+    
     /**
-     Add an OK button including a completion closure.
+     If your OK button shall react to changes of your actions' selected state, call this function from within the closure of each action.  Function can be overriden to impletment a different behaviour. You need to add an OK button action, otherwise your app will crash!
+     */
+   open func changeOKButtonStateIfNeeded() {
+        
+        if self.allActionsDeselected() {
+            
+            self.okButton!.setDisabledStyle("Disabled", titleColor: self.settings.okButtonTintColorDisabled)
+            
+        } else if  self.isAnySelectedActionDestructive() {
+            
+            self.okButton!.setDestructiveStyle("Beware!", titleColor: self.settings.okButtonTintColorDestructive)
+        } else {
+            
+            self.okButton!.setNormalStyle("OK", titleColor: self.settings.okButtonTintColorDefault)
+        }
+    }
+    
+    /**
+     Add an OK button including a completion closure. Only supported for checkmarks single or multiple. Your app will crash at runtime if you set checkmarks none in the initializer!
 
      - Parameters:
         - title: Add a title that will appear as button title
      
         - setDisabled: set the button initially disabled. Can be changed in the completion closure of your custom actions
+        
+        - setDestructive: set the intial style of the button destructive. Can be changed in the completion closure of your custom actions.
      
         - okbuttonAction: completion closure -  add your own code to determine what should happen after the user tapped the OK button
  */
-    public func addOKButtonAction(_ title:String, setDisabled:Bool, okbuttonAction:(()->Void)?) {
+    public func addOKButtonAction(_ title:String, setDisabled:Bool, setDestructive: Bool, okbuttonAction:(()->Void)?) {
      
+
+        
         self.okButtonTitle = title
         self.okButtonDisabled = setDisabled
+        self.okButtonDestructive = setDestructive
         self.handleOKAction = okbuttonAction
 
     }
@@ -613,14 +686,16 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
     /// - Parameter textField: a UITextField instance you have to create yourself.
     public func addTextField(textField: UITextField)  {
         
-        if style == .actionSheet {
+        if style == .actionSheet  {
           assertionFailure("Action sheet does not support text fields. Change style to .alert instead!")
 
         }
         
+
+        
        self.textFields.append(textField)
         
-        print("counting text fields: \(self.textFields.count)")
+        //print("counting text fields: \(self.textFields.count)")
     }
     
     //MARK: Table view data source and delegate
@@ -628,17 +703,21 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
     
     fileprivate func setCellSelectedIfNeeded() {
         
-        if let _ =  self.okButtonTitle{
-            
+
+            var selectedItemsCount = 0
+        
             var indexCounter = -1
             for actionItem in alertActions {
                 indexCounter += 1
                 if actionItem.selected == true {
+                    assert(self.selectionType != .none, "Items cannot be set selected if you set checkmarks to none!")
+                    selectedItemsCount += 1
+                    assert((self.selectionType == .single && selectedItemsCount == 1) || self.selectionType == .multiple, "There cannot be more than one pre-seleted item with checkmarks set to single!")
                     tableView.selectRow(at: IndexPath(row: indexCounter, section: 0), animated: false, scrollPosition: UITableViewScrollPosition.none)
                     
                 }
             }
-        }
+      
     }
     
     public func numberOfSections(in tableView: UITableView) -> Int {
@@ -660,7 +739,10 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
         
         let actionItem = alertActions[(indexPath as NSIndexPath).row]
 
-        cell!.configureCell(actionItem, hasAccessoryView: (okButtonTitle != nil), settings:actionCellSettings)
+        
+        let hasAccessoryView:Bool = self.selectionType == . single || self.selectionType == .multiple
+        
+        cell!.configureCell(actionItem, hasAccessoryView: hasAccessoryView , settings:actionCellSettings)
 
         return cell!
         
@@ -671,16 +753,21 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
   
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        print("did select...")
+        //print("did select...")
         
         let action = alertActions[(indexPath as NSIndexPath).row]
-
-        if self.okButtonTitle == nil {
+        
+        if self.selectionType == .none {
+            // no ok button possible
             tableView.deselectRow(at: indexPath, animated: true)
             self.dismiss(animated: true, completion: nil)
             action.selected = true
-    
-        }  else {
+            
+        }
+        
+        else if self.selectionType == .multiple || (self.selectionType == .single && self.okButtonTitle != nil) {
+            
+            // there must be an ok button, no dimissal on tapping action
             
             action.selected = action.selected ? false : true
             
@@ -689,22 +776,33 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
             } else {
                 tableView.deselectRow(at: indexPath, animated: true)
             }
-            
-   
-        }
 
+            
+            
+        } else {
+            // single selection  and no OK button!
+            
+           action.selected = true
+            
+            tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
+            
+             self.dismiss(animated: true, completion: nil)
+
+        }
+        
         
         if action.handler != nil {
             action.handler!(action)
             
         }
+    
  
     }
     
 
   public  func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
 
-        if let _ = self.okButtonTitle {
+        if  self.selectionType != .none {
 
             let action = alertActions[(indexPath as NSIndexPath).row]
 

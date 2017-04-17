@@ -10,7 +10,7 @@ DYAlertController can be used as a replacement for Apple’s UIAlertController.
 It supports checkmarks, single and multiple selection and icons. DYAlertController also features two styles, alert and actionSheet. Tapping an action and tapping the ok or cancel button will trigger actions you define in the action item’s handler or in the cancel and ok button handlers, similar to UIAlertController.
 Pull the framework and checkout the example project in the subfolder. 
 
-Updated to the latest **Swift 3** syntax!
+**New**: Version 2.0 supports single checkmarks without OK button. For that purpose, the initialiser had to be updated. If you update from an earlier version, you need to update the DYAlertController initializer. See the change log below for details. 
 
 
 ## Installation
@@ -19,7 +19,7 @@ Updated to the latest **Swift 3** syntax!
 Install DYAlertController through Cocoapods. Enter the following information into your Podfile (see current version in header):
 
 ```Ruby
-platform :ios, '10.0'
+platform :ios, '8.0'
 
 use_frameworks!
 
@@ -35,7 +35,7 @@ Make sure to import DYAlertController into your View Controller subclass:
 ```
 **Important**: The Xcode compiler might show an error after you open your project .xcworkspace file including DYAlertController for the first time (something like "No such module DYAlertController"). I have had this issue with a lot of other Cocoapods which I tried to install before. Simply run your code and the error should disappear. 
 
-Alternatively, you can pull this framework and copy the DYAlertController folder (in the pods folder) from the example project into your project.
+Alternatively, you can pull this framework and copy the DYAlertController folder   into your project.
 
  
 
@@ -45,9 +45,10 @@ As alternative to UIAlertController, DYAlertController has the following additio
 
 * Add an icon image to the title view right above the title
 * Add an icon image to an action
-* If you add an ok button (which is optional), clicking on an action will not dismiss the alert or action sheet but will toggle a checkmark instead. You can also set the controller to multiple selection. If you don’t add an ok button action, the alert or action sheet will be dismissed when tapping an action
+* If you add an ok button (which is optional for checkmarks .none and .single), tapping on an action will not dismiss the alert or action sheet but will toggle a checkmark instead. You can also set the controller to multiple checkmarks. 
+* While multiple checkmarks are not possible without an OK button action, the single checkmarks option supports this (latest version only!).
 * change the ok button style (normal, destructive, disabled) in your action item handlers
-* Add several text fields
+* Add one or several text fields
 * Choose from two background effect view styles, blur and dim
 * Set a custom width for the alert or action sheet (its height will be set automatically depending on the content view’s subviews)
 * Customise colours, fonts, corner radius etc.
@@ -56,30 +57,30 @@ As alternative to UIAlertController, DYAlertController has the following additio
 
 ## Usage
 
-The usage is similar to UIAlertController. See the following example.
+The usage is similar to UIAlertController. See the following examples.
 
 
 ###Code example: Creating an alert
 
 ```Swift
 let titleImage = UIImage(named: "shareIcon")
-let alert = DYAlertController(style: .alert, title: "Doing stuff", titleIconImage: titleImage, message:"Select one option", cancelButtonTitle: "Cancel", multipleSelection: false, customFrameWidth:200, backgroundEffect: DYAlertController.EffectViewMode.blur)
+let alert = DYAlertController(style: .alert, title: "Doing stuff", titleIconImage: titleImage, message:"Select one option", cancelButtonTitle: "Cancel", checkmarks: .none, customFrameWidth:200, backgroundEffect: DYAlertController.EffectViewMode.blur)
 
     
-alert.addAction(DYAlertAction(title: "Do stuff 1", style:.normal, iconImage: nil, setSelected:false, handler: { (alertAction) -> Void in
+alert.addAction(DYAlertAction(title: "Do stuff 1", style:.normal, iconImage: nil, setSelected: false, handler: { (alertAction) -> Void in
     
   print("executing first action! selected: \(alertAction.selected)")
                 
 }))
     
-alert.addAction(DYAlertAction(title: "Do stuff 2", style:.normal, iconImage: nil, setSelected:false, handler: { (alertAction) -> Void in
+alert.addAction(DYAlertAction(title: "Do stuff 2", style:.normal, iconImage: nil, setSelected: false, handler: { (alertAction) -> Void in
     
   print("executing 2nd action! selected: \(alertAction.selected)")
     
 }))
     
     
-alert.addAction(DYAlertAction(title: "Beware!", style:.destructive, iconImage: nil, setSelected:true, handler: { (alertAction) -> Void in
+alert.addAction(DYAlertAction(title: "Beware!", style:.destructive, iconImage: nil, setSelected: true, handler: { (alertAction) -> Void in
  
     print("executing 3rd action! selected: \(alertAction.selected)")
 }))
@@ -135,50 +136,38 @@ Make sure to only add text fields to an alert, not to an action sheet - just lik
 Add an ok button action as follows:
 
 ```Swift
-alert.addOKButtonAction("OK", setDisabled: false) { 
+alert.addOKButtonAction("OK", setDisabled: false, setDestructive: false) { 
    print("ok button tapped!")
 }
 ```
-You can set the ok button to disabled state initially (e.g. if the user should change the selection first before he can tap the ok button. 
-The button style can be changed in the action handlers. For example:
+You can set the ok button to disabled or destructive state initially (e.g. if the user should change the selection first before he can tap the ok button). 
+The button style can be changed in the action handlers. For that purpose, call the changeOKButtonStateIfNeeded() function in every action item closure. *This function implements a default behaviour of the ok button state change*: (1)if all options are deselected, the ok button is disabled; (2) if one or several of the selected actions are destructive, the ok button is set to destructive style; (3) if neither 1 nor 2 are true, then the state is set to normal. Check out the functions default implementation to help you override it if needed. 
+
+Example:
 
 ```Swift
 
- let actionSheet = DYAlertController(style: .actionSheet, title: "Doing stuff", titleIconImage: titleImage, message:"Select one option", cancelButtonTitle: "Cancel", multipleSelection: false, customFrameWidth:nil, backgroundEffect:.dim)
+ let actionSheet = DYAlertController(style: .actionSheet, title: "Doing stuff", titleIconImage: titleImage, message:"Select one option", cancelButtonTitle: "Cancel",  checkmarks: .single, customFrameWidth: nil, backgroundEffect:.dim)
     
             
-actionSheet.addAction(DYAlertAction(title: "Option 1", style:.normal, iconImage: UIImage(named: "eyeIcon"), setSelected:true, handler: { (action) -> Void in
+actionSheet.addAction(DYAlertAction(title: "Option 1", style:.normal, iconImage: UIImage(named: "eyeIcon"), setSelected: true, handler: { (action) -> Void in
     
-    if action.selected {
-
-      actionSheet.okButton!.setNormalStyle("OK", titleColor: actionSheet.settings.okButtonTintColorDefault)
-      
-
-     } else {
-       // this action is deselected
-                    
-       // check if all actions are deselected
-       if actionSheet.allActionsDeselected() {
-                        
-           // let's disable the OK button if all actions are deselected
-          actionSheet.okButton!.setDisabledStyle("Disabled", titleColor: actionSheet.settings.okButtonTintColorDisabled)
-           }
-                    
-     }
+   actionSheet.changeOKButtonStateIfNeeded()  // see description above
                 
-  print("changing state of first option.  selected: \(action.selected)")
-            
+   print("action \(action.title) selected? : \(action.selected)")
+      
 }))
 
 
-// ... add other actions...
+// ... add other actions here... 
 
 
 actionSheet.addOKButtonAction("OK", setDisabled: false) {
                 
     var selectedOptionIndex:Int?
                 
-                // we had set the multipleSelection option to false, so only one can be selected
+     // we had set checkmarks to single, so only one can be selected
+                
      for i in 0...actionSheet.alertActions.count-1 {
          if actionSheet.alertActions[i].selected {
              selectedOptionIndex = i
@@ -189,7 +178,7 @@ actionSheet.addOKButtonAction("OK", setDisabled: false) {
                      print("ok button tapped -  option selected: \(actionSheet.alertActions[selectedOptionIndex!].title)")
        } else {
                     print("no option was selected!")  
-// to play safe... but actually not possible because ok button set to disabled if none selected
+// to play safe... but actually not possible because ok button set to disabled if no action selected
         }
                 
  }
@@ -197,16 +186,18 @@ actionSheet.addOKButtonAction("OK", setDisabled: false) {
  // ...
 
 ```
-Download the example project for more details and check out the examples as shown in the gif animations below. 
+Download the example project for more details and check out the examples as shown in the gif animations below.
+
+
 
 ### Action sheet examples
 
-Action sheet with simple selection:
+Action sheet with single checkmarks:
 
-![Action Sheet example 1](https://github.com/DominikButz/DYAlertController/blob/master/gitResources/ActionSheetExample1.gif "ActionSheet example 1")
+![Action Sheet example 1](https://github.com/DominikButz/DYAlertController/blob/master/gitResources/ActionSheetExample3.gif "ActionSheet example 3")
 
 
-Action sheet with multiple selection:
+Action sheet with multiple checkmarks:
 
 ![Action Sheet example 2](https://github.com/DominikButz/DYAlertController/blob/master/gitResources/ActionSheetExample2.gif "ActionSheet example 2")
 
@@ -224,6 +215,51 @@ alert.settings.titleTextColor = UIColor.black
 ```
 
 These changes only overwrite the settings properties of your current DYAlertViewController instance. Check out the DYAlertSettings.swift file. 
+
+
+## Change Log
+
+## [Version 2.0](https://github.com/DominikButz/DYAlertController/releases/tag/2.0)
+Released on 2017-04-18.
+**Caution**: initalizer and okButton action changed, this version is not compatible with previous version.
+- Initialisation has now a checkmarks enum: .none, .single or .multiple
+- ok button can now be set to destructive as initial state 
+- added a default implementation of a "reactive" ok button - call changeOKbuttonStateIfNeeded() in the closure of every action. See details in the description above.
+ 
+## [Version 1.0.6](https://github.com/DominikButz/DYAlertController/releases/tag/1.0.6)
+Released on 2017-01-03.
+- action sheet animation replaced by spring with damping effect 
+
+## [Version 1.0.5](https://github.com/DominikButz/DYAlertController/releases/tag/1.0.5)
+Released on 2017-01-03.
+- updated testing 
+
+## [Version 1.0.4](https://github.com/DominikButz/DYAlertController/releases/tag/1.0.4)
+Released on 2016-11-23.
+- added testing (experimental)
+
+## [Version 1.0.3](https://github.com/DominikButz/DYAlertController/releases/tag/1.0.3)
+Released on 2016-11-22.
+- adding quick help documentation (DYAlertSettings)
+
+## [Version 1.0.2](https://github.com/DominikButz/DYAlertController/releases/tag/1.0.2)
+Released on 2016-11-21.
+- adding quick help documentation
+
+
+## [Version 1.0.1](https://github.com/DominikButz/DYAlertController/releases/tag/1.0.1)
+Released on 2016-11-18.
+- fixing 'jump up' bug when orientation changes during presentation.
+
+
+## [Version 1.0](https://github.com/DominikButz/DYAlertController/releases/tag/1.0)
+Released on 2016-11-17.
+
+- add several text fields
+
+##[Version 0.6](https://github.com/DominikButz/DYAlertController/releases/tag/0.6)
+Released on 2016-11-16
+Switched to Swift 3
 
 ## License
 

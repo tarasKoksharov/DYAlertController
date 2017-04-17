@@ -39,7 +39,7 @@ class DYAlertControllerTests: XCTestCase {
     
     func testCreateAlert() {
         
-        let controller = DYAlertController(style: .alert, title: "Test Title", titleIconImage: nil, message: "Test message", cancelButtonTitle: "Cancel", multipleSelection: false, customFrameWidth: nil, backgroundEffect: .blur)
+        let controller = DYAlertController(style: .alert, title: "Test Title", titleIconImage: nil, message: "Test message", cancelButtonTitle: "Cancel", checkmarks: .none, customFrameWidth: nil, backgroundEffect: .blur)
         
         XCTAssertEqual(controller.style,DYAlertController.Style.alert, "The style was not initialized correctly")
         
@@ -52,7 +52,7 @@ class DYAlertControllerTests: XCTestCase {
     
 
     func testCreateActionSheet() {
-        let controller = DYAlertController(style: .actionSheet, title: "Test Title", titleIconImage: nil, message: "Test message", cancelButtonTitle: "Cancel", multipleSelection: false, customFrameWidth: nil, backgroundEffect: .blur)
+        let controller = DYAlertController(style: .actionSheet, title: "Test Title", titleIconImage: nil, message: "Test message", cancelButtonTitle: "Cancel", checkmarks: .none, customFrameWidth: nil, backgroundEffect: .blur)
         
         XCTAssertEqual(controller.style,DYAlertController.Style.actionSheet, "The style was not initialized correctly")
         
@@ -61,7 +61,7 @@ class DYAlertControllerTests: XCTestCase {
     
     func testTitleAndMessage() {
         
-        let controller = DYAlertController(style: .alert, title: "Test Title", titleIconImage: nil, message: "Test message", cancelButtonTitle: "Cancel", multipleSelection: false, customFrameWidth: nil, backgroundEffect: .blur)
+        let controller = DYAlertController(style: .alert, title: "Test Title", titleIconImage: nil, message: "Test message", cancelButtonTitle: "Cancel", checkmarks: .none, customFrameWidth: nil, backgroundEffect: .blur)
         
 
         XCTAssertEqual(controller.titleText,"Test Title", "no title or title string incorrect")
@@ -72,7 +72,7 @@ class DYAlertControllerTests: XCTestCase {
     
     func testFrameWidth() {
         
-        let controller = DYAlertController(style: .actionSheet, title: "Test Title", titleIconImage: nil, message: "Test message", cancelButtonTitle: "Cancel", multipleSelection: false, customFrameWidth: 300.0, backgroundEffect: .blur)
+        let controller = DYAlertController(style: .actionSheet, title: "Test Title", titleIconImage: nil, message: "Test message", cancelButtonTitle: "Cancel", checkmarks: .none, customFrameWidth: 300.0, backgroundEffect: .blur)
         
         XCTAssertEqual(controller.contentViewCustomWidth, 300.0, "content view width unexpected")
         
@@ -81,7 +81,7 @@ class DYAlertControllerTests: XCTestCase {
     func testAddActions() {
         
         
-        let controller = DYAlertController(style: .alert, title: "Test Title", titleIconImage: nil, message: "Test message", cancelButtonTitle: "Cancel", multipleSelection: false, customFrameWidth: nil, backgroundEffect: .blur)
+        let controller = DYAlertController(style: .alert, title: "Test Title", titleIconImage: nil, message: "Test message", cancelButtonTitle: "Cancel", checkmarks: .none, customFrameWidth: nil, backgroundEffect: .blur)
         
         controller.addAction(DYAlertAction(title: "action1", style: .normal, iconImage: nil, setSelected: false, handler: { (alertAction) -> Void in
             
@@ -136,14 +136,14 @@ class DYAlertControllerTests: XCTestCase {
     
     func testAddOKButtonTitle() {
         
-        let controller = DYAlertController(style: .alert, title: "Test Title", titleIconImage: nil, message: "Test message", cancelButtonTitle: "Cancel", multipleSelection: false, customFrameWidth: nil, backgroundEffect: .blur)
+        let controller = DYAlertController(style: .alert, title: "Test Title", titleIconImage: nil, message: "Test message", cancelButtonTitle: "Cancel", checkmarks: .single, customFrameWidth: nil, backgroundEffect: .blur)
         
         controller.addAction(DYAlertAction(title: "action1", style: .normal, iconImage: nil, setSelected: false, handler: { (alertAction) -> Void in
             
             print("test1")
         }))
         
-        controller.addOKButtonAction("OK", setDisabled: false, okbuttonAction: {(action) -> Void in
+        controller.addOKButtonAction("OK", setDisabled: false,  setDestructive: false, okbuttonAction: {(action) -> Void in
         
                 print("ok button action triggered!")
             
@@ -162,7 +162,7 @@ class DYAlertControllerTests: XCTestCase {
     
     func testCancelButtonTitle() {
         
-        let controller = DYAlertController(style: .alert, title: "Test Title", titleIconImage: nil, message: "Test message", cancelButtonTitle: "Cancel", multipleSelection: false, customFrameWidth: nil, backgroundEffect: .blur)
+        let controller = DYAlertController(style: .alert, title: "Test Title", titleIconImage: nil, message: "Test message", cancelButtonTitle: "Cancel", checkmarks: .none, customFrameWidth: nil, backgroundEffect: .blur)
         
         controller.addAction(DYAlertAction(title: "action1", style: .normal, iconImage: nil, setSelected: false, handler: { (alertAction) -> Void in
             
@@ -185,9 +185,9 @@ class DYAlertControllerTests: XCTestCase {
     func testAddTextFields() {
         
         
-        let controller = DYAlertController(style: .alert, title: "Test Title", titleIconImage: nil, message: "Test message", cancelButtonTitle: "Cancel", multipleSelection: false, customFrameWidth: nil, backgroundEffect: .blur)
+        let controller = DYAlertController(style: .alert, title: "Test Title", titleIconImage: nil, message: "Test message", cancelButtonTitle: "Cancel", checkmarks: .none, customFrameWidth: nil, backgroundEffect: .blur)
         
-        controller.addOKButtonAction("OK", setDisabled: false, okbuttonAction: {(action) -> Void in
+        controller.addOKButtonAction("OK", setDisabled: false , setDestructive: false, okbuttonAction: {(action) -> Void in
             
             print("ok button action triggered!")
             

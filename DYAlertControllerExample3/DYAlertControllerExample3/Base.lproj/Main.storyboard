@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -25,45 +25,57 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j2m-Ng-dt3">
-                                <rect key="frame" x="103" y="20" width="106" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Alert Example 1"/>
-                                <connections>
-                                    <action selector="alertExample1Tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Sgl-41-XyU"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nFT-J4-1fV">
-                                <rect key="frame" x="101" y="91" width="161" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Action Sheet Example 1"/>
-                                <connections>
-                                    <action selector="actionSheetExample1Tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="k0f-fC-oRw"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wyc-oF-HIt">
-                                <rect key="frame" x="103" y="129" width="163" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Action Sheet Example 2"/>
-                                <connections>
-                                    <action selector="actionSheetExample2Tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NtV-VC-6fr"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rho-V4-KK0">
-                                <rect key="frame" x="101" y="53" width="167" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Alert Example text fields"/>
-                                <connections>
-                                    <action selector="alertExample2Tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WOH-Hk-fNb"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="unW-GG-bIK">
+                                <rect key="frame" x="35.5" y="20" width="304" height="166"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j2m-Ng-dt3">
+                                        <rect key="frame" x="79" y="0.0" width="146" height="30"/>
+                                        <state key="normal" title="Alert: no checkmarks"/>
+                                        <connections>
+                                            <action selector="alertExample1Tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Sgl-41-XyU"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rho-V4-KK0">
+                                        <rect key="frame" x="97.5" y="34" width="109" height="30"/>
+                                        <state key="normal" title="Alert: text fields"/>
+                                        <connections>
+                                            <action selector="alertExample2Tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WOH-Hk-fNb"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nFT-J4-1fV">
+                                        <rect key="frame" x="0.0" y="68" width="304" height="30"/>
+                                        <state key="normal" title="Action Sheet: single checkmark &amp; OK button"/>
+                                        <connections>
+                                            <action selector="actionSheetExample1Tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="k0f-fC-oRw"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wyc-oF-HIt">
+                                        <rect key="frame" x="33.5" y="102" width="237" height="30"/>
+                                        <state key="normal" title="Action Sheet: multiple checkmarks"/>
+                                        <connections>
+                                            <action selector="actionSheetExample2Tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NtV-VC-6fr"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xCn-rb-BjU">
+                                        <rect key="frame" x="44" y="136" width="216" height="30"/>
+                                        <state key="normal" title="Action Sheet: single checkmark"/>
+                                        <connections>
+                                            <action selector="launchActionSheetWithSingleCheckmark:" destination="BYZ-38-t0r" eventType="touchUpInside" id="h7V-T5-IDI"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="unW-GG-bIK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="31f-3H-lxu"/>
+                            <constraint firstItem="unW-GG-bIK" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Kdb-ea-lP5"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="240" y="317"/>
+            <point key="canvasLocation" x="239.19999999999999" y="316.19190404797604"/>
         </scene>
     </scenes>
     <resources>

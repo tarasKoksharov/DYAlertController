@@ -27,7 +27,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     
             let titleImage = UIImage(named: "shareIcon")
-            let alert = DYAlertController(style: .alert, title: "Doing stuff", titleIconImage: titleImage, message:"Select one option", cancelButtonTitle: "Cancel", multipleSelection: false, customFrameWidth:nil, backgroundEffect: DYAlertController.EffectViewMode.blur)
+            let alert = DYAlertController(style: .alert, title: "Doing stuff", titleIconImage: titleImage, message:"Select one option", cancelButtonTitle: "Cancel", checkmarks: .none,  customFrameWidth:nil, backgroundEffect: DYAlertController.EffectViewMode.blur)
 
         
             alert.addAction(DYAlertAction(title: "Do stuff 1", style:.normal, iconImage: nil, setSelected:false, handler: { (alertAction) -> Void in
@@ -65,9 +65,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
         @IBAction func alertExample2Tapped(_ sender: UIButton) {
     
             let titleImage = UIImage(named: "shareIcon")
-            let alert = DYAlertController(style: .alert, title: "Login", titleIconImage: titleImage, message: "Enter your login data", cancelButtonTitle: "Cancel", multipleSelection: false, customFrameWidth:180.0, backgroundEffect: DYAlertController.EffectViewMode.dim)
+            let alert = DYAlertController(style: .alert, title: "Login", titleIconImage: titleImage, message: "Enter your login data", cancelButtonTitle: "Cancel", checkmarks: .single, customFrameWidth:self.view.frame.width - 80.0, backgroundEffect: DYAlertController.EffectViewMode.dim)
     
-            
+
             
             let textfield1 = UITextField()
             textfield1.placeholder = "username"
@@ -88,13 +88,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
             alert.addTextField(textField: textfield1)
             alert.addTextField(textField: textfield2)
             alert.addTextField(textField: textfield3)
+            
+
     
             alert.handleCancelAction = {
     
                 print("cancel tapped")
             }
     
-            alert.addOKButtonAction("OK", setDisabled: false) {
+           
+            alert.addOKButtonAction("OK", setDisabled: false, setDestructive: false) {
                 
                 
                  print("ok button with title \(alert.okButton?.titleLabel?.text) tapped")
@@ -113,47 +116,24 @@ class ViewController: UIViewController, UITextFieldDelegate {
         @IBAction func actionSheetExample1Tapped(_ sender: UIButton) {
     
             let titleImage = UIImage(named: "shareIcon")
-            let actionSheet = DYAlertController(style: .actionSheet, title: "Doing stuff", titleIconImage: titleImage, message:"Select one option", cancelButtonTitle: "Cancel", multipleSelection: false, customFrameWidth:nil, backgroundEffect:.dim)
+            let actionSheet = DYAlertController(style: .actionSheet, title: "Doing stuff", titleIconImage: titleImage, message:"Select one option", cancelButtonTitle: "Cancel", checkmarks: .single, customFrameWidth:nil, backgroundEffect:.dim)
     
-            
+     
             actionSheet.addAction(DYAlertAction(title: "Option 1", style:.normal, iconImage: UIImage(named: "eyeIcon"), setSelected:true, handler: { (action) -> Void in
     
-                if action.selected {
-
-                    actionSheet.okButton!.setNormalStyle("OK", titleColor: actionSheet.settings.okButtonTintColorDefault)
-      
-
-                } else {
-                    // this action is deselected
-                    
-                     // check if all actions are deselected
-                    if actionSheet.allActionsDeselected() {
-                        
-                            // let's disable the OK button if all actions are deselected
-                        actionSheet.okButton!.setDisabledStyle("Disabled", titleColor: actionSheet.settings.okButtonTintColorDisabled)
-                    }
-                    
-                }
+                actionSheet.changeOKButtonStateIfNeeded()
                 
-                print("changing state of first option.  selected: \(action.selected)")
+                print("action \(action.title) selected? : \(action.selected)")
+
+                
             }))
     
             actionSheet.addAction(DYAlertAction(title: "Option 2", style:.normal, iconImage: UIImage(named: "locationIcon"), setSelected:false, handler: { (action) -> Void in
     
-                if action.selected {
+
+                actionSheet.changeOKButtonStateIfNeeded()
                 
-                    actionSheet.okButton!.setNormalStyle("OK", titleColor: actionSheet.settings.okButtonTintColorDefault)
-                } else {
-                    // deselected
-                    if actionSheet.allActionsDeselected() {
-           
-                        actionSheet.okButton!.setDisabledStyle("Disabled", titleColor: actionSheet.settings.okButtonTintColorDisabled)
-                    }
-                    
-                }
-                
-               print("changing state of 2nd option. selected: \(action.selected)")
-                
+                print("action \(action.title) selected? : \(action.selected)")
                 
     
             }))
@@ -161,28 +141,18 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
             actionSheet.addAction(DYAlertAction(title: "Option 3 - risky", style: .destructive, iconImage: UIImage(named: "eyeIcon"), setSelected:false, handler: { (action) -> Void in
                 
-                if action.selected {
-          
-                    actionSheet.okButton!.setDestructiveStyle("Beware!", titleColor: actionSheet.settings.okButtonTintColorDestructive)
-                } else {
-                    // deselected
-                    if actionSheet.allActionsDeselected() {
-            
-                        actionSheet.okButton!.setDisabledStyle("Disabled", titleColor: actionSheet.settings.okButtonTintColorDisabled)
-                    }
-                    
-                }
-    
-                        print("changing state of 3rd option. selected: \(action.selected)")
+                actionSheet.changeOKButtonStateIfNeeded()
+                
+                print("action \(action.title) selected? : \(action.selected)")
     
             }))
     
 
-            actionSheet.addOKButtonAction("OK", setDisabled: false) {
+            actionSheet.addOKButtonAction("OK", setDisabled: false, setDestructive: false) {
                 
                 var selectedOptionIndex:Int?
                 
-                // we had set the multipleSelection option to false, so only one can be selected
+                // checkmarks set to single, so only one action can be selected
                 for i in 0...actionSheet.alertActions.count-1 {
                     if actionSheet.alertActions[i].selected {
                         selectedOptionIndex = i
@@ -210,56 +180,35 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     
         @IBAction func actionSheetExample2Tapped(_ sender: UIButton) {
-    
-    
-            let actionSheet = DYAlertController(style: .actionSheet, title: "Doing stuff", titleIconImage: nil, message:"Select one or several options", cancelButtonTitle: "Cancel", multipleSelection: true, customFrameWidth:200.0, backgroundEffect: .blur)
+            // multiple checkmarks
+   
+            let actionSheet = DYAlertController(style: .actionSheet, title: "Doing stuff", titleIconImage: nil, message:"Select one or several options", cancelButtonTitle: "Cancel", checkmarks: .multiple, customFrameWidth:200.0, backgroundEffect: .blur)
     
     
             actionSheet.addAction(DYAlertAction(title: "Option 1", style:.normal, iconImage: UIImage(named: "editIcon"), setSelected:false, handler: { (action) -> Void in
                 
-                if action.selected {
-                    actionSheet.okButton!.setNormalStyle("OK", titleColor: actionSheet.settings.okButtonTintColorDefault)
-
-                } else {
+                actionSheet.changeOKButtonStateIfNeeded()
                 
-                    if actionSheet.allActionsDeselected() {
-          
-                        actionSheet.okButton!.setDisabledStyle("Disabled", titleColor: actionSheet.settings.okButtonTintColorDisabled)
-                    }
-                }
-
+                print("action \(action.title) selected? : \(action.selected)")
+                
 
             }))
     
             actionSheet.addAction(DYAlertAction(title: "Option 2", style:.normal, iconImage: UIImage(named: "locationIcon"), setSelected:false, handler: { (action) -> Void in
     
-                print("changing state of 2nd option. selected: \(action.selected), activating OK button")
-                if action.selected {
-                  actionSheet.okButton!.setNormalStyle("OK", titleColor: actionSheet.settings.okButtonTintColorDefault)
-             
-                } else {
-                   if actionSheet.allActionsDeselected() {
-                        actionSheet.okButton!.setDisabledStyle("Disabled", titleColor: actionSheet.settings.okButtonTintColorDisabled)
-                    }
-                }
+                actionSheet.changeOKButtonStateIfNeeded()
+                
+               print("action \(action.title) selected? : \(action.selected)")
                 
             }))
     
     
-            actionSheet.addAction(DYAlertAction(title: "Risky", style:.destructive, iconImage: UIImage(named: "eyeIcon"), setSelected:false, handler: { (action) -> Void in
+            actionSheet.addAction(DYAlertAction(title: "Risky", style:.destructive, iconImage: UIImage(named: "eyeIcon"), setSelected:true, handler: { (action) -> Void in
                 
-                if action.selected {
-                    actionSheet.okButton!.setDestructiveStyle("Beware!", titleColor:actionSheet.settings.okButtonTintColorDestructive)
-                    
-                } else {
-                     if actionSheet.allActionsDeselected() {
-                        actionSheet.okButton!.setDisabledStyle("Disabled", titleColor: actionSheet.settings.okButtonTintColorDisabled)
-                     } else {
-                        actionSheet.okButton!.setNormalStyle("OK", titleColor: actionSheet.settings.okButtonTintColorDefault)
-                    }
-                }
-             
+                actionSheet.changeOKButtonStateIfNeeded()
                 
+               print("action \(action.title) selected? : \(action.selected)")
+            
             }))
             
             actionSheet.handleCancelAction = {
@@ -267,8 +216,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
                print("cancel tapped")
             }
             
-            actionSheet.addOKButtonAction("OK", setDisabled: true) {
+            // set the initial title to "Beware! because the risky option is initially selected. set the style to destructive
+            actionSheet.addOKButtonAction("Beware!", setDisabled: false, setDestructive: true) {
                       // can't be tapped when sheet starts up because of state 'disabled' but can be  changed through user selection - see actions above
+                
+                    print("OK tapped")
             }
 
             
@@ -276,6 +228,53 @@ class ViewController: UIViewController, UITextFieldDelegate {
             self.present(actionSheet, animated: true, completion: nil)
             
         }
+    
+    
+    @IBAction func launchActionSheetWithSingleCheckmark(_ sender: UIButton) {
+        // example without OK button action!
+
+        let actionSheet = DYAlertController(style: .actionSheet, title: "Doing stuff", titleIconImage: nil, message:"Select one option", cancelButtonTitle: "Cancel", checkmarks: .single, customFrameWidth:nil, backgroundEffect:.dim)
+        
+        
+        actionSheet.addAction(DYAlertAction(title: "Option 1", style:.normal, iconImage: UIImage(named: "eyeIcon"), setSelected:false, handler: { (action) -> Void in
+
+            
+            print("changing state of first option.  selected: \(action.selected)")
+        }))
+        
+        actionSheet.addAction(DYAlertAction(title: "Option 2", style:.normal, iconImage: UIImage(named: "locationIcon"), setSelected:false, handler: { (action) -> Void in
+            
+            
+            
+            print("changing state of 2nd option. selected: \(action.selected)")
+            
+            
+            
+        }))
+        
+        
+        actionSheet.addAction(DYAlertAction(title: "Option 3 - risky", style: .destructive, iconImage: UIImage(named: "eyeIcon"), setSelected:false, handler: { (action) -> Void in
+            
+           
+            
+            print("changing state of 3rd option. selected: \(action.selected)")
+            
+        }))
+
+        
+        actionSheet.handleCancelAction = {
+            
+            print("cancel tapped")
+        }
+        
+        
+        
+        self.present(actionSheet, animated: true, completion: nil)
+
+        
+        
+    }
+    
     
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -285,6 +284,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
             print("editing username field!")
         }
     }
+    
+    
+
 
 
 }
