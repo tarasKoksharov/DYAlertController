@@ -141,7 +141,7 @@ alert.addOKButtonAction("OK", setDisabled: false, setDestructive: false) {
 }
 ```
 You can set the ok button to disabled or destructive state initially (e.g. if the user should change the selection first before he can tap the ok button). 
-The button style can be changed in the action handlers. For that purpose, call the changeOKButtonStateIfNeeded() function in every action item closure. *This function implements a default behaviour of the ok button state change*: (1)if all options are deselected, the ok button is disabled; (2) if one or several of the selected actions are destructive, the ok button is set to destructive style; (3) if neither 1 nor 2 are true, then the state is set to normal. Check out the functions default implementation to help you override it if needed. 
+The button style can be changed in the action handlers. For that purpose, call the changeOKButtonStateIfNeeded() function in every action item closure. **This function implements a default behaviour of the ok button state change**: (1)if all options are deselected, the ok button is disabled; (2) if one or several of the selected actions are destructive, the ok button is set to destructive style; (3) if neither 1 nor 2 are true, then the state is set to normal. Check out the functions default implementation to help you override it if needed. 
 
 Example:
 
@@ -219,45 +219,45 @@ These changes only overwrite the settings properties of your current DYAlertView
 
 ## Change Log
 
-## [Version 2.0](https://github.com/DominikButz/DYAlertController/releases/tag/2.0)
+### [Version 2.0](https://github.com/DominikButz/DYAlertController/releases/tag/2.0)
 Released on 2017-04-18.
 **Caution**: initalizer and okButton action changed, this version is not compatible with previous version.
 - Initialisation has now a checkmarks enum: .none, .single or .multiple
 - ok button can now be set to destructive as initial state 
 - added a default implementation of a "reactive" ok button - call changeOKbuttonStateIfNeeded() in the closure of every action. See details in the description above.
  
-## [Version 1.0.6](https://github.com/DominikButz/DYAlertController/releases/tag/1.0.6)
+### [Version 1.0.6](https://github.com/DominikButz/DYAlertController/releases/tag/1.0.6)
 Released on 2017-01-03.
 - action sheet animation replaced by spring with damping effect 
 
-## [Version 1.0.5](https://github.com/DominikButz/DYAlertController/releases/tag/1.0.5)
+### [Version 1.0.5](https://github.com/DominikButz/DYAlertController/releases/tag/1.0.5)
 Released on 2017-01-03.
 - updated testing 
 
-## [Version 1.0.4](https://github.com/DominikButz/DYAlertController/releases/tag/1.0.4)
+### [Version 1.0.4](https://github.com/DominikButz/DYAlertController/releases/tag/1.0.4)
 Released on 2016-11-23.
 - added testing (experimental)
 
-## [Version 1.0.3](https://github.com/DominikButz/DYAlertController/releases/tag/1.0.3)
+### [Version 1.0.3](https://github.com/DominikButz/DYAlertController/releases/tag/1.0.3)
 Released on 2016-11-22.
 - adding quick help documentation (DYAlertSettings)
 
-## [Version 1.0.2](https://github.com/DominikButz/DYAlertController/releases/tag/1.0.2)
+### [Version 1.0.2](https://github.com/DominikButz/DYAlertController/releases/tag/1.0.2)
 Released on 2016-11-21.
 - adding quick help documentation
 
 
-## [Version 1.0.1](https://github.com/DominikButz/DYAlertController/releases/tag/1.0.1)
+### [Version 1.0.1](https://github.com/DominikButz/DYAlertController/releases/tag/1.0.1)
 Released on 2016-11-18.
 - fixing 'jump up' bug when orientation changes during presentation.
 
 
-## [Version 1.0](https://github.com/DominikButz/DYAlertController/releases/tag/1.0)
+### [Version 1.0](https://github.com/DominikButz/DYAlertController/releases/tag/1.0)
 Released on 2016-11-17.
 
 - add several text fields
 
-## [Version 0.6](https://github.com/DominikButz/DYAlertController/releases/tag/0.6)
+### [Version 0.6](https://github.com/DominikButz/DYAlertController/releases/tag/0.6)
 Released on 2016-11-16
 Switched to Swift 3
 
