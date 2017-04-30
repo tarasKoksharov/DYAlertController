@@ -19,7 +19,7 @@ class DYActionCell: UITableViewCell {
     var hasAccessoryView = false
     
     var style = ActionStyle.normal
-    
+
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -82,6 +82,7 @@ class DYActionCell: UITableViewCell {
         
         self.isUserInteractionEnabled = (actionItem.style != .disabled)
         self.hasAccessoryView = hasAccessoryView
+        print("has accessory view? \(hasAccessoryView)")
         self.style = actionItem.style
         
         self.settings = settings
@@ -97,11 +98,11 @@ class DYActionCell: UITableViewCell {
             //  no checkmark
             self.selectionStyle = .gray
             self.tintColor = self.getColour(self.style, selected: true)
-           self.centerViewElements()
-
+  
+           self.moveViewElementsIfNeeded()
         }
         
-             self.actionTitleLabel.textColor = self.tintColor
+        self.actionTitleLabel.textColor = self.tintColor
   
     
     }
@@ -131,27 +132,35 @@ class DYActionCell: UITableViewCell {
     }
     
 
-    fileprivate func centerViewElements() {
+    
+    open func moveViewElementsIfNeeded() {
+        // only called  if checkmarks turned off
+        
+         if let _ = actionImageView?.image {
+
+            self.contentView.constraints[0].isActive = false  // imageview leading
+            
+            let imageViewTrailing = NSLayoutConstraint(item: self.contentView, attribute: NSLayoutAttribute.trailing, relatedBy: NSLayoutRelation.equal, toItem: self.actionImageView!, attribute: NSLayoutAttribute.trailing, multiplier: 1.0, constant: 10.0)
+            self.contentView.addConstraint(imageViewTrailing)
+
+             self.contentView.constraints[1].constant = 5.0  // acitontitlelabel leading
  
-        if let _ = actionImageView?.image {
-
-            self.contentView.constraints[2].constant = 5.0
+         }  else {
             
-            let labelWidth = self.actionTitleLabel.frame.size.width
-
-          self.contentView.constraints[0].constant =  self.contentView.frame.size.width / 2.0 - labelWidth / 2.0 - self.contentView.constraints[2].constant - actionImageView!.frame.size.width
-            
-
-        }   else {
             actionImageView?.removeFromSuperview()
+            self.contentView.constraints[1].isActive = false  // acitontitlelabel leading
+
+            let centerLabelConstraint = NSLayoutConstraint(item: self.contentView, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: actionTitleLabel, attribute: NSLayoutAttribute.centerX, multiplier: 1.0, constant: 0.0)
+            
+            self.contentView.addConstraint(centerLabelConstraint)
+
+            
         }
         
-
-        let centerLabelConstraint = NSLayoutConstraint(item: self.contentView, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: actionTitleLabel, attribute: NSLayoutAttribute.centerX, multiplier: 1.0, constant: 0.0)
-  
-        self.contentView.addConstraint(centerLabelConstraint)
-
-
+        
     }
+    
+    
+    
 
 }

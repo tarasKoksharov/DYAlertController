@@ -245,25 +245,30 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
     override open func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        self.checkOKButtonIncompatibilities()
 
-        if self.okButtonTitle == nil && self.selectionType == .multiple {
-            assertionFailure("If multiple checkmarks are allowed,  you have to add an OK button action! ")
-        }
-        
-        if self.okButtonTitle == nil && self.textFields.count > 0 {
-                
-                assertionFailure("Text fields require an ok button action!")
-         
-        }
-        
-        if self.okButtonTitle != nil && self.selectionType == .none {
-            assertionFailure("An OK button action is not possible if there are no checkmarks! Set checkmarks to other than none")
-        }
         
         layoutSubviews()
 
 
+    }
+    
+    fileprivate func checkOKButtonIncompatibilities() {
+    
+    
+        if self.okButtonTitle == nil && self.selectionType == .multiple {
+        assertionFailure("If multiple checkmarks are allowed,  you have to add an OK button action! ")
+        }
+        
+        if self.okButtonTitle == nil && self.textFields.count > 0 {
+        
+        assertionFailure("Text fields require an ok button action!")
+        
+        }
+        
+        if self.okButtonTitle != nil && self.selectionType == .none && self.alertActions.count > 0 {
+        assertionFailure("An OK button action without checkmarks is only possible if there are no action items. set checkmarks to single or multiple")
+        }
     }
     
     
@@ -299,6 +304,8 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
 
         
     }
+    
+    
     
     
 

@@ -219,6 +219,11 @@ These changes only overwrite the settings properties of your current DYAlertView
 
 ## Change Log
 
+### [Version 2.0.1](https://github.com/DominikButz/DYAlertController/releases/tag/2.0.1)
+Released on 2017-04-30.
+- Bug fix: image views now show in action cells if checkmarks set to none. 
+- Image views shift to the right end of the cell when checkmarks set to none.
+
 ### [Version 2.0](https://github.com/DominikButz/DYAlertController/releases/tag/2.0)
 Released on 2017-04-18.
 **Caution**: initalizer and okButton action changed, this version is not compatible with previous version.

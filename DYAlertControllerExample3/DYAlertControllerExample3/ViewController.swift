@@ -100,7 +100,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             alert.addOKButtonAction("OK", setDisabled: false, setDestructive: false) {
                 
                 
-                 print("ok button with title \(alert.okButton?.titleLabel?.text) tapped")
+                 print("ok button with title \(alert.okButton!.titleLabel!.text) tapped")
                 print("uername: \(alert.textFields[0].text!)")
                 print("password: \(alert.textFields[1].text!)")
                 print("hostname:\(alert.textFields[2].text!)")
