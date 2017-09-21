@@ -17,6 +17,7 @@ public struct DYAlertSettings {
         public var messageTextColor = UIColor.gray
         public var titleTextFont =  UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)
         public var messageTextFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.footnote)
+        public var titleIconTintColor = UIColor.blue
         public var titleViewBackgroundColor = UIColor.clear
     
 //MARK: text field settings

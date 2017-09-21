@@ -118,6 +118,7 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
     
     @IBOutlet weak var titleView: UIView!
     @IBOutlet weak var titleViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tableViewToMainViewBottomConstraint: NSLayoutConstraint!
 
     @IBOutlet weak var titleImageView: UIImageView?
     @IBOutlet weak var titleLabel: UILabel?
@@ -365,11 +366,9 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "DYActionCell", bundle: Bundle(for: DYActionCell.self)), forCellReuseIdentifier: "DYActionCell")
-        
-        
+
         tableView.allowsMultipleSelection = self.selectionType == .multiple
     
-        
         tableView.separatorStyle = .singleLineEtched
         tableView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     
@@ -384,27 +383,29 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
     
     
     fileprivate func adjustTableViewHeight() {
-        
+
         var height:CGFloat = 0.0
-        
+
         if self.textFields.count > 0 {
             print("there are text fields, adjusting TV height")
             height = height + (CGFloat(self.textFields.count) * self.textFields[0].frame.size.height + 10.0)
-        
+
             if alertActions.count == 0 {
                 height = height + 30.0
             } else {
-                
+
                 height = height + 20.0
             }
+            
+            self.tableViewToMainViewBottomConstraint.constant = 1.0
         }
 
-        
+
         if alertActions.count > 0 {
-            
+
            height = height + self.getCellHeight() * CGFloat(alertActions.count)
         }
-    
+
         self.tableViewHeightConstraint.constant = height
     }
     
@@ -420,6 +421,7 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
 
         if let _ = titleIconImage {
             titleImageView!.image = self.titleIconImage
+            titleImageView!.tintColor = settings.titleIconTintColor
             titleImageView!.contentMode = .scaleAspectFit
             titleViewHeight += titleImageView!.frame.size.height + padding
             viewElementsCounter += 1
@@ -677,9 +679,7 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
         - okbuttonAction: completion closure -  add your own code to determine what should happen after the user tapped the OK button
  */
     public func addOKButtonAction(_ title:String, setDisabled:Bool, setDestructive: Bool, okbuttonAction:(()->Void)?) {
-     
 
-        
         self.okButtonTitle = title
         self.okButtonDisabled = setDisabled
         self.okButtonDestructive = setDestructive
@@ -733,9 +733,7 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
     
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         self.adjustTableViewHeight()
-
         return alertActions.count
     }
     
@@ -830,11 +828,11 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
         
     }
     
-    
+//
     fileprivate func getCellHeight()->CGFloat {
-        
+
         let heightLabelFrame = CGRect(x: 0, y: 0, width: 100.0, height: 44.0)
-        
+
         let heightLabel = UILabel(frame: heightLabelFrame)
         heightLabel.font = actionCellSettings.actionCellFont
         heightLabel.text = "Height"
@@ -862,7 +860,7 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
 
     //MARK: notifications
     
-    func keyboardWillShow(_ notification: Notification) {
+    @objc func keyboardWillShow(_ notification: Notification) {
 
         let info = (notification as NSNotification).userInfo!
         let value: AnyObject = info[UIKeyboardFrameEndUserInfoKey]! as AnyObject
@@ -885,7 +883,7 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
     
 
     
-    func keyboardWillHide(_ notification:Notification) {
+    @objc func keyboardWillHide(_ notification:Notification) {
         
 
         if self.isPresenting {

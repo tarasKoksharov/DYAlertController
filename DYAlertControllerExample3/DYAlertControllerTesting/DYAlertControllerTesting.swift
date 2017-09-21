@@ -33,9 +33,9 @@ class DYAlertControllerTesting: XCTestCase {
     
     func testCreateAlert() {
         
-        let controller = DYAlertController(style: .alert, title: "Test Title", titleIconImage: nil, message: "Test message", cancelButtonTitle: "Cancel", multipleSelection: false, customFrameWidth: nil, backgroundEffect: .blur)
-        
-                XCTAssertEqual(controller.style,DYAlertController.Style.alert, "The style was not initialized correctly")
+        let controller = DYAlertController(style: .alert, title: "Test Title", titleIconImage: nil, message: "Test message", cancelButtonTitle: "Cancel", checkmarks: .none, customFrameWidth: nil, backgroundEffect: .blur)
+
+        XCTAssertEqual(controller.style,DYAlertController.Style.alert, "The style was not initialized correctly")
     }
     
 

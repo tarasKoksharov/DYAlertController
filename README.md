@@ -10,7 +10,7 @@ DYAlertController can be used as a replacement for Apple’s UIAlertController.
 It supports checkmarks, single and multiple selection and icons. DYAlertController also features two styles, alert and actionSheet. Tapping an action and tapping the ok or cancel button will trigger actions you define in the action item’s handler or in the cancel and ok button handlers, similar to UIAlertController.
 Pull the framework and checkout the example project in the subfolder. 
 
-**New**: Version 2.0 supports single checkmarks without OK button. For that purpose, the initialiser had to be updated. If you update from an earlier version, you need to update the DYAlertController initializer. See the change log below for details. 
+**New**: Version 2.0 and later supports single checkmarks without OK button. For that purpose, the initialiser had to be updated. If you update from an earlier version, you need to update the DYAlertController initializer. See the change log below for details. 
 
 
 ## Installation
@@ -218,6 +218,11 @@ These changes only overwrite the settings properties of your current DYAlertView
 
 
 ## Change Log
+
+### [Version 2.0.2](https://github.com/DominikButz/DYAlertController/releases/tag/2.0.2)
+Released on 2017-09-21.
+Label alignment bug and table view constraint bug fixed. Update settings to Swift 4.0. No major version change because hardly any code had to be changed for swift 4.0.
+
 
 ### [Version 2.0.1](https://github.com/DominikButz/DYAlertController/releases/tag/2.0.1)
 Released on 2017-04-30.

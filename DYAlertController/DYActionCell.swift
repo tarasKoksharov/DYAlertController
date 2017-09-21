@@ -14,6 +14,9 @@ class DYActionCell: UITableViewCell {
     
     @IBOutlet weak var actionImageView: UIImageView?
     
+    @IBOutlet weak var actionImageViewLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var actionTitleLeadingConstraint: NSLayoutConstraint!
+    
     var settings:DYAlertSettings.ActionCellSettings!
  
     var hasAccessoryView = false
@@ -43,12 +46,12 @@ class DYActionCell: UITableViewCell {
        // print("set selected called")
 
         if hasAccessoryView {
-            // has ok button!
 
             if selected {
                 self.accessoryType = UITableViewCellAccessoryType.checkmark
                 self.tintColor = self.getColour(self.style, selected:  true)
-      
+
+            
             } else {
                 self.accessoryType = .none
                 self.tintColor = self.getColour(self.style, selected: false)
@@ -92,6 +95,7 @@ class DYActionCell: UITableViewCell {
              self.selectionStyle = .none
 
             self.tintColor = self.getColour(self.style, selected:  actionItem.selected)
+        
 
             
         } else {
@@ -138,18 +142,21 @@ class DYActionCell: UITableViewCell {
         
          if let _ = actionImageView?.image {
 
-            self.contentView.constraints[0].isActive = false  // imageview leading
+           // replace self.contentView.constraints[0].isActive = false  // imageview leading
+            self.actionImageViewLeadingConstraint.isActive = false
             
             let imageViewTrailing = NSLayoutConstraint(item: self.contentView, attribute: NSLayoutAttribute.trailing, relatedBy: NSLayoutRelation.equal, toItem: self.actionImageView!, attribute: NSLayoutAttribute.trailing, multiplier: 1.0, constant: 10.0)
             self.contentView.addConstraint(imageViewTrailing)
 
-             self.contentView.constraints[1].constant = 5.0  // acitontitlelabel leading
+         // replace    self.contentView.constraints[1].constant = 5.0  // acitontitlelabel leading
+            self.actionTitleLeadingConstraint.constant = 5.0
  
          }  else {
             
             actionImageView?.removeFromSuperview()
-            self.contentView.constraints[1].isActive = false  // acitontitlelabel leading
-
+          // replace self.contentView.constraints[1].isActive = false  // acitontitlelabel leading
+            self.actionTitleLeadingConstraint.isActive = false
+            
             let centerLabelConstraint = NSLayoutConstraint(item: self.contentView, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: actionTitleLabel, attribute: NSLayoutAttribute.centerX, multiplier: 1.0, constant: 0.0)
             
             self.contentView.addConstraint(centerLabelConstraint)
