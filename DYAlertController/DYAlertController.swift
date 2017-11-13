@@ -358,6 +358,7 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
         mainView.backgroundColor = settings.mainViewBackgroundColor
         if style == .actionSheet  {
             bottomSeparatorLine.removeFromSuperview()
+            self.tableViewToMainViewBottomConstraint.constant = 0
         }
         if alertActions.isEmpty {
             topSeparatorLine.removeFromSuperview()
@@ -502,10 +503,7 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
                 okButton?.setTitleColor(settings.okButtonTintColorDisabled, for: .disabled)
                 okButton?.isEnabled = false
             }
-            
-            
-            
-            
+
             if style == .alert {
                 cancelButtonWidthConstraint.constant = contentViewWidthConstraint.constant / 2.0
             } else { // Action Sheet
@@ -525,8 +523,8 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
         
         if self.style == .alert {
             
-            cancelButtonToMainViewConstraint.constant = 0
-            okButtonToMainViewConstraint?.constant = 0
+            cancelButtonToMainViewConstraint.constant = 1
+            okButtonToMainViewConstraint?.constant = 1
             
             contentView.backgroundColor = UIColor.white
             contentView.clipsToBounds = true
@@ -534,10 +532,8 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
         } else {
             // Action sheet!
             okButton?.layer.cornerRadius = settings.buttonCornerRadius
-            okButtonHeightConstraint?.constant = 30.0
-            
+
             cancelButton.layer.cornerRadius = settings.buttonCornerRadius
-            cancelButtonHeightConstraint.constant = 30.0
 
            mainView.layer.cornerRadius = settings.contentViewCornerRadius
             
@@ -844,7 +840,7 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
     
     
     @IBAction func cancelButtonTapped(_ sender: UIButton) {
-       // print("cancel button tapped")
+        
         handleCancelAction?()
         dismiss(animated: true, completion: nil)
     }
@@ -908,14 +904,15 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
 
 extension DYAlertController: UIViewControllerTransitioningDelegate {
 
-   public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-
+    public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+   
         self.isPresenting = true
         
         return self
     }
     
     public  func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+
         self.isPresenting = false
         
         return self
@@ -976,16 +973,19 @@ extension DYAlertController: UIViewControllerAnimatedTransitioning {
 //        }
     
         guard let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) else {
+ 
             return transitionContext.completeTransition(false)
         }
         
         guard let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from) else {
+
             return transitionContext.completeTransition(false)
         }
         
         if isPresenting == true {
-            
+
             if style == .alert {
+                
                 self.presentAlertAnimation(transitionContext.containerView, fromView: fromVC.view, toView: toVC.view, completion: { (_) -> Void in
                      transitionContext.completeTransition(true)
                 })
@@ -1003,10 +1003,11 @@ extension DYAlertController: UIViewControllerAnimatedTransitioning {
 
             
         } else {
-            
+          
             if style == .alert {
-                
+        
                 self.dismissAlertAnimation(fromVC.view, completion: { (_) -> Void in
+                 //   print("dismissing")
                     transitionContext.completeTransition(true)
                 })
                 

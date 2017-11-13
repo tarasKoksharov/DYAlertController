@@ -219,6 +219,10 @@ These changes only overwrite the settings properties of your current DYAlertView
 
 ## Change Log
 
+### [Version 2.0.3](https://github.com/DominikButz/DYAlertController/releases/tag/2.0.3)
+Released on 2017-11-13.
+Minor UI improvements.
+
 ### [Version 2.0.2](https://github.com/DominikButz/DYAlertController/releases/tag/2.0.2)
 Released on 2017-09-21.
 Label alignment bug and table view constraint bug fixed. Update settings to Swift 4.0. No major version change because hardly any code had to be changed for swift 4.0.
