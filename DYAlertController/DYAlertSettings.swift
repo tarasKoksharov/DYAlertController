@@ -50,7 +50,7 @@ public struct DYAlertSettings {
     
     /// Custom animation duration for DYAlertController.style.alert and DYAlertController.style.actionSheet style. Will be returned by animationDuration().
         public var actionSheetAnimationDuration = 0.5
-        public var alertAnimationDuration = 0.0
+        public var alertAnimationDuration = 0.5
 
     //MARK: action cell settings
     
