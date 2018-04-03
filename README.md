@@ -219,6 +219,11 @@ These changes only overwrite the settings properties of your current DYAlertView
 
 ## Change Log
 
+
+### [Version 2.1](https://github.com/DominikButz/DYAlertController/releases/tag/2.1)
+Released on 2018-04-03
+- Handler branch merge (from Volker Thieme's pull request): ok Button and cancel button handlers now called after the DYAlertController has been dismissed. Additionally, two new overridable settings: actionSheetAnimationDuration and alertAnimationDuration. 
+- minor changes to UILabels and Constraints.
 ### [Version 2.0.3](https://github.com/DominikButz/DYAlertController/releases/tag/2.0.3)
 Released on 2017-11-13.
 Minor UI improvements.

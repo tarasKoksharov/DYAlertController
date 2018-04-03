@@ -1,6 +1,5 @@
 //
 //  DYAlert.swift
-//  SimpleAlertTesting
 //
 //  Created by Dominik Butz on 23/02/16.
 //  Copyright © 2016 Duoyun. All rights reserved.
