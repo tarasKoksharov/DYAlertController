@@ -840,16 +840,15 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
     
     
     @IBAction func cancelButtonTapped(_ sender: UIButton) {
-        
-        handleCancelAction?()
-        dismiss(animated: true, completion: nil)
+        // handleCancelAction should be called, when the alert has been dismissed
+        dismiss(animated: true, completion: { self.handleCancelAction?() })
     }
     
     
     @IBAction func okButtonTapped(_ sender: UIButton) {
 
-        handleOKAction?()
-        dismiss(animated: true, completion: nil)
+        // handleOKAction should be called, when the alert has been dismissed
+        dismiss(animated: true, completion: { self.handleOKAction?() })
     }
     
 
@@ -924,7 +923,12 @@ extension DYAlertController: UIViewControllerTransitioningDelegate {
 extension DYAlertController: UIViewControllerAnimatedTransitioning {
     
     fileprivate func animationDuration()->TimeInterval {
-        return 0.5
+        switch self.style {
+        case .alert:
+            return settings.alertAnimationDuration
+        case .actionSheet:
+            return settings.actionSheetAnimationDuration
+        }
     }
     
     fileprivate func createDimView(_ frame: CGRect) -> UIView {

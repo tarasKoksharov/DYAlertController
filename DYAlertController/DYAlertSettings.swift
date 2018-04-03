@@ -48,7 +48,11 @@ public struct DYAlertSettings {
         public var blurViewStyle: UIBlurEffectStyle = .dark
         public var dimViewColor = UIColor.black.withAlphaComponent(0.6)
     
-//MARK: action cell settings
+    /// Custom animation duration for DYAlertController.style.alert and DYAlertController.style.actionSheet style. Will be returned by animationDuration().
+        public var actionSheetAnimationDuration = 0.5
+        public var alertAnimationDuration = 0.5
+
+    //MARK: action cell settings
     
     /// access and override the properties of action cells, like so: alert.actionCellSettings.defaultTintColor = UIColor.green
     public struct ActionCellSettings {
@@ -59,6 +63,8 @@ public struct DYAlertSettings {
         public var actionCellFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
     }
     
+    
+
     
 }
 
