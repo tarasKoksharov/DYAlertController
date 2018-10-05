@@ -23,11 +23,10 @@ class DYActionCell: UITableViewCell {
     
     var style = ActionStyle.normal
 
-
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
+
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -48,7 +47,7 @@ class DYActionCell: UITableViewCell {
         if hasAccessoryView {
 
             if selected {
-                self.accessoryType = UITableViewCellAccessoryType.checkmark
+                self.accessoryType = UITableViewCell.AccessoryType.checkmark
                 self.tintColor = self.getColour(self.style, selected:  true)
 
             
@@ -79,6 +78,7 @@ class DYActionCell: UITableViewCell {
        self.actionTitleLabel.text = actionItem.title
        self.actionTitleLabel.font = settings.actionCellFont
         
+        
         let iconImage = actionItem.iconImage
         self.actionImageView!.image = iconImage?.withRenderingMode(.alwaysTemplate)
        self.actionImageView!.contentMode = .scaleAspectFit
@@ -95,9 +95,7 @@ class DYActionCell: UITableViewCell {
              self.selectionStyle = .none
 
             self.tintColor = self.getColour(self.style, selected:  actionItem.selected)
-        
-
-            
+    
         } else {
             //  no checkmark
             self.selectionStyle = .gray
@@ -145,7 +143,7 @@ class DYActionCell: UITableViewCell {
            // replace self.contentView.constraints[0].isActive = false  // imageview leading
             self.actionImageViewLeadingConstraint.isActive = false
             
-            let imageViewTrailing = NSLayoutConstraint(item: self.contentView, attribute: NSLayoutAttribute.trailing, relatedBy: NSLayoutRelation.equal, toItem: self.actionImageView!, attribute: NSLayoutAttribute.trailing, multiplier: 1.0, constant: 10.0)
+            let imageViewTrailing = NSLayoutConstraint(item: self.contentView, attribute: NSLayoutConstraint.Attribute.trailing, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.actionImageView!, attribute: NSLayoutConstraint.Attribute.trailing, multiplier: 1.0, constant: 10.0)
             self.contentView.addConstraint(imageViewTrailing)
 
          // replace    self.contentView.constraints[1].constant = 5.0  // acitontitlelabel leading
@@ -157,7 +155,8 @@ class DYActionCell: UITableViewCell {
           // replace self.contentView.constraints[1].isActive = false  // acitontitlelabel leading
             self.actionTitleLeadingConstraint.isActive = false
             
-            let centerLabelConstraint = NSLayoutConstraint(item: self.contentView, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: actionTitleLabel, attribute: NSLayoutAttribute.centerX, multiplier: 1.0, constant: 0.0)
+            let centerLabelConstraint = NSLayoutConstraint(item: self.contentView, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: actionTitleLabel, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1.0, constant: 0.0)
+            
             
             self.contentView.addConstraint(centerLabelConstraint)
 

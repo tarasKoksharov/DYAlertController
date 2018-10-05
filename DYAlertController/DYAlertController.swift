@@ -278,7 +278,7 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
         
         if titleText != nil && titleIconImage == nil && messageText == nil {
             
-            let titleLabelYPositionConstraint = NSLayoutConstraint(item: titleView, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: titleLabel, attribute: NSLayoutAttribute.centerY, multiplier: 1.0, constant: 0.0)
+            let titleLabelYPositionConstraint = NSLayoutConstraint(item: titleView, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: titleLabel, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1.0, constant: 0.0)
             
             titleView.addConstraint(titleLabelYPositionConstraint)
         }
@@ -324,8 +324,9 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
        
         if self.textFields.count > 0 {
                     layoutTextFields()
-                    NotificationCenter.default.addObserver(self, selector: #selector(DYAlertController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-                    NotificationCenter.default.addObserver(self, selector: #selector(DYAlertController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+
+            NotificationCenter.default.addObserver(self, selector: #selector(DYAlertController.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(DYAlertController.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
 
             }
         
@@ -481,16 +482,16 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
         
         cancelButton.backgroundColor = settings.cancelButtonBackgroundColor
         
-        cancelButton.setTitleColor(settings.cancelButtonTintColorDefault, for: UIControlState())
-        cancelButton.setTitle(cancelButtonTitle, for: UIControlState())
+        cancelButton.setTitleColor(settings.cancelButtonTintColorDefault, for: UIControl.State())
+        cancelButton.setTitle(cancelButtonTitle, for: UIControl.State())
         
         
         if let _ = okButtonTitle {
             
             okButton?.backgroundColor = settings.okButtonBackgroundColor
             
-            okButton?.setTitle(okButtonTitle!, for: UIControlState())
-            okButton?.setTitleColor(settings.okButtonTintColorDefault, for: UIControlState())
+            okButton?.setTitle(okButtonTitle!, for: UIControl.State())
+            okButton?.setTitleColor(settings.okButtonTintColorDefault, for: UIControl.State())
             
             
             if okButtonDestructive {
@@ -519,7 +520,7 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
   
         }
         
-        cancelButton.setTitle(cancelButtonTitle, for: UIControlState())
+        cancelButton.setTitle(cancelButtonTitle, for: UIControl.State())
         
         if self.style == .alert {
             
@@ -705,7 +706,6 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
     
     
     fileprivate func setCellSelectedIfNeeded() {
-        
 
             var selectedItemsCount = 0
         
@@ -716,7 +716,7 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
                     assert(self.selectionType != .none, "Items cannot be set selected if you set checkmarks to none!")
                     selectedItemsCount += 1
                     assert((self.selectionType == .single && selectedItemsCount == 1) || self.selectionType == .multiple, "There cannot be more than one pre-seleted item with checkmarks set to single!")
-                    tableView.selectRow(at: IndexPath(row: indexCounter, section: 0), animated: false, scrollPosition: UITableViewScrollPosition.none)
+                    tableView.selectRow(at: IndexPath(row: indexCounter, section: 0), animated: false, scrollPosition: UITableView.ScrollPosition.none)
                     
                 }
             }
@@ -740,7 +740,6 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
         
         let actionItem = alertActions[(indexPath as NSIndexPath).row]
 
-        
         let hasAccessoryView:Bool = self.selectionType == . single || self.selectionType == .multiple
         
         cell!.configureCell(actionItem, hasAccessoryView: hasAccessoryView , settings:actionCellSettings)
@@ -831,8 +830,10 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
 
         let heightLabel = UILabel(frame: heightLabelFrame)
         heightLabel.font = actionCellSettings.actionCellFont
+        
         heightLabel.text = "Height"
         heightLabel.sizeToFit()
+        
         return max(30.0, heightLabel.frame.size.height * 1.8)
     }
     
@@ -858,7 +859,7 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
     @objc func keyboardWillShow(_ notification: Notification) {
 
         let info = (notification as NSNotification).userInfo!
-        let value: AnyObject = info[UIKeyboardFrameEndUserInfoKey]! as AnyObject
+        let value: AnyObject = info[UIResponder.keyboardFrameEndUserInfoKey]! as AnyObject
     
         let rawFrame = value.cgRectValue
         

@@ -14,15 +14,15 @@ public struct DYAlertSettings {
 //MARK: title view settings
         public var titleTextColor = UIColor.darkGray
         public var messageTextColor = UIColor.gray
-        public var titleTextFont =  UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)
-        public var messageTextFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.footnote)
+    public var titleTextFont =  UIFont.preferredFont(forTextStyle: UIFont.TextStyle.headline)
+    public var messageTextFont = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.footnote)
         public var titleIconTintColor = UIColor.blue
         public var titleViewBackgroundColor = UIColor.clear
     
 //MARK: text field settings
         public var textFieldBackgroundColor = UIColor.paleGrayColor()
         public var textFieldTextColor = UIColor.white
-        public var textFieldFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+    public var textFieldFont = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
         public var textFieldTextAlignment = NSTextAlignment.center
 
     
@@ -35,7 +35,7 @@ public struct DYAlertSettings {
         public var cancelButtonTintColorDefault = UIColor.defaultBlueTintColor()
         public var cancelButtonBackgroundColor = UIColor.white
     
-        public var buttonFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+    public var buttonFont = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
         public var buttonCornerRadius:CGFloat = 5.0
 
     
@@ -44,7 +44,7 @@ public struct DYAlertSettings {
         public var mainViewBackgroundColor = UIColor.white
 
     //MARK: effect view settings
-        public var blurViewStyle: UIBlurEffectStyle = .dark
+    public var blurViewStyle: UIBlurEffect.Style = .dark
         public var dimViewColor = UIColor.black.withAlphaComponent(0.6)
     
     /// Custom animation duration for DYAlertController.style.alert and DYAlertController.style.actionSheet style. Will be returned by animationDuration().
@@ -59,7 +59,7 @@ public struct DYAlertSettings {
         public var defaultTintColor = UIColor.defaultBlueTintColor()
         public var destructiveTintColor = UIColor.red
         public var disabledTintColor = UIColor.paleGrayColor()
-        public var actionCellFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+        public var actionCellFont = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
     }
     
     
@@ -103,8 +103,8 @@ public extension UIButton {
     }
     
     fileprivate func setNormalState(_ title:String, titleColor:UIColor) {
-        self.setTitleColor(titleColor, for: UIControlState())
-        self.setTitle(title, for: UIControlState())
+        self.setTitleColor(titleColor, for: UIControl.State())
+        self.setTitle(title, for: UIControl.State())
         self.isEnabled = true
         
     }
