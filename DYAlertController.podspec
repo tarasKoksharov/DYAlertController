@@ -5,6 +5,7 @@ s.platform = :ios
 s.ios.deployment_target = '8.0'
 s.name = "DYAlertController"
 s.summary = "Replacement for UIAlertController with many customizable features"
+s.swift_version = '4.2'
 s.requires_arc = true
 
 # 2
