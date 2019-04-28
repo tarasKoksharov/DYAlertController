@@ -219,6 +219,9 @@ These changes only overwrite the settings properties of your current DYAlertView
 
 ## Change Log
 
+### [Version 3.0.1](https://github.com/DominikButz/DYAlertController/releases/tag/3.0.1)
+Minor settings update. No syntax change to update to Swift 5.0.
+
 ### [Version 3.0](https://github.com/DominikButz/DYAlertController/releases/tag/3.0)
 Update to Swift 4.2 syntax. The changes are only "under the hood" -  almost exclusively constants that were renamed in Swift 4.2, e.g. NSNotification.Name.UIResponder.keyboardWillShowNotification was renamed to UIResponder.keyboardWillShowNotification. No changes in the public functions and setting names of this framework. 
 ### [Version 2.1](https://github.com/DominikButz/DYAlertController/releases/tag/2.1)

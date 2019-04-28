@@ -75,7 +75,7 @@ public extension UIButton {
     /// - Parameters:
     ///   - title: set the new title.
     ///   - titleColor: set the normal style title color.
-    public func setNormalStyle(_ title:String, titleColor:UIColor) {
+    func setNormalStyle(_ title:String, titleColor:UIColor) {
         
         self.setNormalState(title, titleColor: titleColor)
     }
@@ -85,7 +85,7 @@ public extension UIButton {
     /// - Parameters:
     ///   - title: set the new title.
     ///   - titleColor: set the destructive style title color.
-    public func setDestructiveStyle(_ title:String, titleColor:UIColor) {
+    func setDestructiveStyle(_ title:String, titleColor:UIColor) {
         
         self.setNormalState(title, titleColor: titleColor)
     }
@@ -95,7 +95,7 @@ public extension UIButton {
     /// - Parameters:
     ///   - title: set the new title.
     ///   - titleColor: set the disabled style title color.
-    public func setDisabledStyle(_ title:String, titleColor:UIColor) {
+    func setDisabledStyle(_ title:String, titleColor:UIColor) {
         
         self.setTitleColor(titleColor, for: .disabled)
         self.setTitle(title, for: .disabled)
@@ -117,7 +117,7 @@ public extension UIColor {
     /// default iOS blue color
     ///
     /// - Returns: the default Apple iOS blue color. UIColor(red: 0/255.0, green: 122.0/255.0, blue: 255.0/255.0, alpha: 1)
-    public class func defaultBlueTintColor()->UIColor {
+    class func defaultBlueTintColor()->UIColor {
         
         return UIColor(red: 0/255.0, green: 122.0/255.0, blue: 255.0/255.0, alpha: 1)
     }
@@ -125,7 +125,7 @@ public extension UIColor {
     /// custom light gray color. 
     ///
     /// - Returns: UIColor.lightGray.withAlphaComponent(0.6)
-    public class func paleGrayColor()->UIColor{
+    class func paleGrayColor()->UIColor{
         
         return UIColor.lightGray.withAlphaComponent(0.6)
     }

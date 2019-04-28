@@ -143,12 +143,12 @@ class DYAlertControllerTests: XCTestCase {
             print("test1")
         }))
         
-        controller.addOKButtonAction("OK", setDisabled: false,  setDestructive: false, okbuttonAction: {(action) -> Void in
+        controller.addOKButtonAction("OK", setDisabled: false, setDestructive: false) {
+              print("ok button action triggered!")
+        }
         
-                print("ok button action triggered!")
-            
-        })
-        
+
+
         if let okButtonTitle = controller.okButtonTitle  {
             
             XCTAssertEqual(okButtonTitle, "OK", "ok button title wrong or has no title!")
@@ -187,11 +187,11 @@ class DYAlertControllerTests: XCTestCase {
         
         let controller = DYAlertController(style: .alert, title: "Test Title", titleIconImage: nil, message: "Test message", cancelButtonTitle: "Cancel", checkmarks: .none, customFrameWidth: nil, backgroundEffect: .blur)
         
-        controller.addOKButtonAction("OK", setDisabled: false , setDestructive: false, okbuttonAction: {(action) -> Void in
-            
-            print("ok button action triggered!")
-            
-        })
+        controller.addOKButtonAction("OK", setDisabled: false, setDestructive: false) {
+               print("ok button action triggered!")
+        }
+        
+
         
         let textfield1 = UITextField()
         let textfield2 = UITextField()

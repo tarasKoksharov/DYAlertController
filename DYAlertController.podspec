@@ -5,11 +5,11 @@ s.platform = :ios
 s.ios.deployment_target = '8.0'
 s.name = "DYAlertController"
 s.summary = "Replacement for UIAlertController with many customizable features"
-s.swift_version = '4.2'
+s.swift_version = '5.0'
 s.requires_arc = true
 
 # 2
-s.version = "3.0"
+s.version = "3.0.1"
 
 # 3
 s.license = { :type => "MIT", :file => "LICENSE" }

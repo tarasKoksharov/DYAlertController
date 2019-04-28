@@ -1,0 +1,5 @@
+version: "Apple Swift version 5.0.1 (swiftlang-1001.0.82.4 clang-1001.0.46.5)"
+options: "121e20bd6f61aa2eddf69179188fdd97"
+build_time: [1556433200, 153409000]
+inputs:
+  "/Users/Dominik/Documents/Programmieren/Libraries/DYAlertController/DYAlertControllerExample3/Pods/DYAlertControllerTests/DYAlertControllerTests.swift": [1556433135, 511846406]

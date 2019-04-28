@@ -1,0 +1,6 @@
+version: "Apple Swift version 5.0.1 (swiftlang-1001.0.82.4 clang-1001.0.46.5)"
+options: "004bcd43ce8b0fe6a4be1b09a29f673f"
+build_time: [1556433147, 344646000]
+inputs:
+  "/Users/Dominik/Documents/Programmieren/Libraries/DYAlertController/DYAlertControllerExample3/DYAlertControllerExample3/ViewController.swift": [1538705604, 0]
+  "/Users/Dominik/Documents/Programmieren/Libraries/DYAlertController/DYAlertControllerExample3/DYAlertControllerExample3/AppDelegate.swift": [1538705720, 0]

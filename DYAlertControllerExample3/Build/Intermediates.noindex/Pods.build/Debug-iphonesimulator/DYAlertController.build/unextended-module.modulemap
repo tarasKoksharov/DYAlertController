@@ -1,0 +1,10 @@
+framework module DYAlertController {
+  umbrella header "DYAlertController-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module DYAlertController.__Swift {
+    exclude header "DYAlertController-Swift.h"
+}

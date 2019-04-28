@@ -1,0 +1,11 @@
+framework module DYAlertController {
+  umbrella header "DYAlertController-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module DYAlertController.Swift {
+    header "DYAlertController-Swift.h"
+    requires objc
+}
