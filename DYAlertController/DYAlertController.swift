@@ -277,8 +277,8 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
         super.viewWillAppear(animated)
         
         if titleText != nil && titleIconImage == nil && messageText == nil {
-            
-            let titleLabelYPositionConstraint = NSLayoutConstraint(item: titleView, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: titleLabel, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1.0, constant: 0.0)
+        
+            let titleLabelYPositionConstraint = NSLayoutConstraint(item: titleView!, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: titleLabel, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1.0, constant: 0.0)
             
             titleView.addConstraint(titleLabelYPositionConstraint)
         }
