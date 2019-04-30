@@ -1,6 +1,6 @@
 [![CocoaPods](https://img.shields.io/cocoapods/v/DYAlertController.svg?style=flat)](http://cocoadocs.org/docsets/DYAlertController)
 [![license](https://img.shields.io/github/license/DominikButz/DYAlertController.svg?style=flat)](http://cocoadocs.org/docsets/DYAlertController)
-[![CocoaPods](https://img.shields.io/cocoapods/dt/DYAlertController.svg)]()
+[![Platform](https://img.shields.io/cocoapods/p/DYAlertController.svg?style=flat)](http://cocoapods.org/pods/DYAlertController)
 
 
 
@@ -96,7 +96,7 @@ self.present(alert, animated: true, completion: nil)
 
 ```
 
-![Alert example 1](https://github.com/DominikButz/DYAlertController/blob/master/gitResources/AlertExample1.gif "Alert example 1")
+![Alert example 1](https://raw.githubusercontent.com/DominikButz/DYAlertController/master/gitResources/AlertExample1.gif  "Alert example 1")
 
 
 
@@ -129,7 +129,7 @@ self.present(alert, animated: true, completion: nil)
 You can get the text input like so: alert.textFields[0].text etc. 
 Make sure to only add text fields to an alert, not to an action sheet - just like UIAlertController, **your app will crash at runtime if you try to add a text field to an action sheet**.
 
-![Alert example 2](https://github.com/DominikButz/DYAlertController/blob/master/gitResources/AlertExample2.gif "Alert example 2")
+![Alert example 2](https://raw.githubusercontent.com/DominikButz/DYAlertController/master/gitResources/AlertExample2.gif  "Alert example 2")
 
 ### Adding an ok button action
 
@@ -194,12 +194,12 @@ Download the example project for more details and check out the examples as show
 
 Action sheet with single checkmarks:
 
-![Action Sheet example 1](https://github.com/DominikButz/DYAlertController/blob/master/gitResources/ActionSheetExample3.gif "ActionSheet example 3")
+![Action Sheet example 1](https://raw.githubusercontent.com/DominikButz/DYAlertController/master/gitResources/ActionSheetExample3.gif  "ActionSheet example 3")
 
 
 Action sheet with multiple checkmarks:
 
-![Action Sheet example 2](https://github.com/DominikButz/DYAlertController/blob/master/gitResources/ActionSheetExample2.gif "ActionSheet example 2")
+![Action Sheet example 2](https://raw.githubusercontent.com/DominikButz/DYAlertController/master/gitResources/ActionSheetExample2.gif  "ActionSheet example 2")
 
 ### Customising
 If you intend to create several alerts or action sheets with the same fonts and colours in your app you can simply change the default settings in the DYAlertSettings struct. Alternatively, you can change single properties in code by changing the properties in the struct instances. For example:
