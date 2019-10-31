@@ -325,8 +325,8 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
         if self.textFields.count > 0 {
                     layoutTextFields()
 
-            NotificationCenter.default.addObserver(self, selector: #selector(DYAlertController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-            NotificationCenter.default.addObserver(self, selector: #selector(DYAlertController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(DYAlertController.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(DYAlertController.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
             }
     }
     
@@ -856,7 +856,7 @@ open class DYAlertController: UIViewController, UITableViewDelegate, UITableView
     @objc func keyboardWillShow(_ notification: Notification) {
 
         let info = (notification as NSNotification).userInfo!
-        let value: AnyObject = info[UIKeyboardFrameEndUserInfoKey]! as AnyObject
+        let value: AnyObject = info[UIResponder.keyboardFrameEndUserInfoKey]! as AnyObject
     
         let rawFrame = value.cgRectValue
         
